@@ -1,22 +1,12 @@
-using Codice.Client.GameUI.Trees;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ColorComponentsEnum;
 using Random = UnityEngine.Random;
-
+   
 public class RandomColorService : IRandomColorService
 {
-
-    enum ColorComponents
-    {
-        None,
-        R,
-        G,
-        B 
-    }
-    
-    Dictionary<ColorComponents,float> _colorComponents = new Dictionary<ColorComponents, float>
+    private Dictionary<ColorComponents,float> _colorComponents = new Dictionary<ColorComponents, float>
     {
         { ColorComponents.R, 0f },
         { ColorComponents.G, 0f },
@@ -32,6 +22,4 @@ public class RandomColorService : IRandomColorService
         
         return new Color(_colorComponents[ColorComponents.R], _colorComponents[ColorComponents.G], _colorComponents[ColorComponents.B]);
     }
-
-
 }
