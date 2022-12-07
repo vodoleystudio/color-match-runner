@@ -1,25 +1,36 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using static ColorComponentsEnum;
 using Random = UnityEngine.Random;
-   
+
+
 public class RandomColorService : IRandomColorService
 {
-    private Dictionary<ColorComponents,float> _colorComponents = new Dictionary<ColorComponents, float>
-    {
-        { ColorComponents.R, 0f },
-        { ColorComponents.G, 0f },
-        { ColorComponents.B, 0f },  
-    };
-
     public Color GetRandomColor()
     {
-        foreach (var item in (ColorComponents[])Enum.GetValues(typeof(ColorComponents)))
+        return new Color(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
+    }
+
+    public Color GetSimilarColor(Color color)
+    {
+        var values = Enum.GetValues(typeof(ColorComponents)).Cast<ColorComponents>().ToList();
+        values.Remove(ColorComponents.None);
+        var colorComponent = values[Random.Range(0, values.Count)];
+
+        switch (colorComponent)
         {
-            _colorComponents[item] = Random.Range(0, 1f);
+            case ColorComponents.R:
+                return new Color(Random.Range(0, 1f), color.g, color.b);
+                
+            case ColorComponents.G:
+                return new Color(color.r, Random.Range(0, 1f), color.b);
+                
+            case ColorComponents.B:
+                return new Color(color.r, color.g, Random.Range(0, 1f));
+                
+            default:
+                throw new Exception();
         }
-        
-        return new Color(_colorComponents[ColorComponents.R], _colorComponents[ColorComponents.G], _colorComponents[ColorComponents.B]);
     }
 }
