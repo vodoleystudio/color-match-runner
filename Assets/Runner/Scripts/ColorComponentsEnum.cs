@@ -1,3 +1,5 @@
+public class ColorComponentsEnum
+{
     public enum ColorComponents
     {
         None,
@@ -5,5 +7,6 @@
         G,
         B
     }
+}
 
    
