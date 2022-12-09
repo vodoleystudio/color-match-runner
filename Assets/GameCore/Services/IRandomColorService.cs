@@ -5,6 +5,6 @@ namespace GameCore.Services
     public interface IRandomColorService
     {
         Color GetRandomColor();
-        Color GetSimilarColor(Color color, float TheDifrentBtwThwColors);
+        Color GetSimilarColor(Color color , float diffrenceThreshold);
     }
 }
