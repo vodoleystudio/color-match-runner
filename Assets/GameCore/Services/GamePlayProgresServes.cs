@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace GameCore.Services
 {
-    public class GamePlayProgresServes
+    public class GamePlayProgresServes :IGamePlayProgresService
     {
         // Start is called before the first frame update
         void Start()
