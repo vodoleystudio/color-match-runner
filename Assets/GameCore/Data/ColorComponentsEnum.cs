@@ -1,4 +1,4 @@
-public class ColorComponentsEnum
+namespace GameCore.Data
 {
     public enum ColorComponents
     {
@@ -8,5 +8,3 @@ public class ColorComponentsEnum
         B
     }
 }
-
-   
