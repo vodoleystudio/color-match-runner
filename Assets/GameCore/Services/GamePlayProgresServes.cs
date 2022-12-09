@@ -6,15 +6,16 @@ namespace GameCore.Services
 {
     public class GamePlayProgresServes : IGamePlayProgresService
     {
-        private IRandomColorService _randomCOlorService = new RandomColorService();
+        private IRandomColorService _randomColorService = new RandomColorService();
 
-        public GateData GetListOfSimilarsColors(float diffrenceTrheshold)
+        public BlockData GetSimilarsColors(float diffrenceTrheshold)
         {
-            var gateData = new GateData();
-            gateData.GateColors.Add(_randomCOlorService.GetRandomColor());
-            gateData.GateColors.Add(_randomCOlorService.GetSimilarColor(gateData.GateColors[0] , diffrenceTrheshold));
+            var gateData = new BlockData();
+            var randomColor = _randomColorService.GetRandomColor();
+            gateData.GateColors.Add(randomColor);
+            gateData.GateColors.Add(_randomColorService.GetSimilarColor(randomColor, diffrenceTrheshold));
 
-            gateData.corectColor = gateData.GateColors[Random.Range(0, gateData.GateColors.Count)];
+            gateData.CorrectColor = gateData.GateColors[Random.Range(0, gateData.GateColors.Count)];
             
             return gateData;    
         }

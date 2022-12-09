@@ -5,16 +5,12 @@ using System;
 
 namespace GameCore.Data
 {
-    public class GateData
+    public class BlockData
     {
         public Guid ID = new Guid();
-
         public List<Color> GateColors;
-
-        public Color corectColor;
-
-        public float Score =1f;
-
+        public Color CorrectColor;
+        public float Score = 1f;
     }
 }
 

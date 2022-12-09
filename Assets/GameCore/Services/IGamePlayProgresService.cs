@@ -8,7 +8,7 @@ namespace GameCore.Services
 {
     public interface IGamePlayProgresService
     {
-        GateData GetListOfSimilarsColors(float diffrenceTrheshold);    
+        BlockData GetSimilarsColors(float diffrenceTrheshold);    
     }
 }
 
