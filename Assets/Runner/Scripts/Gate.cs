@@ -83,11 +83,11 @@ namespace HyperCasual.Runner
             switch (m_GateType)
             {
                 case GateType.ChangeSpeed:
-                    PlayerController.Instance.AdjustSpeed(m_Value);
+                    //PlayerController.Instance.AdjustSpeed(m_Value);
                 break;
 
                 case GateType.ChangeSize:
-                    PlayerController.Instance.AdjustScale(m_Value);
+                    //PlayerController.Instance.AdjustScale(m_Value);
                 break;
             }
 
