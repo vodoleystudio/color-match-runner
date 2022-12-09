@@ -8,7 +8,7 @@ namespace GameCore.Services
     {
         private IRandomColorService _randomColorService = new RandomColorService();
 
-        public BlockData GetSimilarsColors(float diffrenceTrheshold)
+        public BlockData GetBlockData(float diffrenceTrheshold)
         {
             var gateData = new BlockData();
             var randomColor = _randomColorService.GetRandomColor();
