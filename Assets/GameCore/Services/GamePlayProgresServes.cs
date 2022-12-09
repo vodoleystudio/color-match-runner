@@ -1,17 +1,22 @@
+using System.Collections.Generic;
+using UnityEngine;
+using GameCore.Data; 
+
 namespace GameCore.Services
 {
-    public class GamePlayProgresServes :IGamePlayProgresService
+    public class GamePlayProgresServes : IGamePlayProgresService
     {
-        // Start is called before the first frame update
-        void Start()
+        private IRandomColorService _randomCOlorService = new RandomColorService();
+
+        public GateData GetListOfSimilarsColors(float diffrenceTrheshold)
         {
+            var gateData = new GateData();
+            gateData.GateColors.Add(_randomCOlorService.GetRandomColor());
+            gateData.GateColors.Add(_randomCOlorService.GetSimilarColor(gateData.GateColors[0] , diffrenceTrheshold));
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            gateData.corectColor = gateData.GateColors[Random.Range(0, gateData.GateColors.Count)];
+            
+            return gateData;    
         }
     }
 }
