@@ -8,7 +8,7 @@ namespace GameCore.Services
 {
     public interface IGamePlayProgresService
     {
-        BlockData GetBlockData(float DiffrenceTrheshold);    
+        BlockData GetBlockData(float maxTrheshold , float minThreshold);    
     }
 }
 
