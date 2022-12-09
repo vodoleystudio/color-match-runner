@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4807591157659393222}
   - component: {fileID: 5928528988436547237}
   - component: {fileID: 3422265874995436607}
-  - component: {fileID: 4877652770548064436}
+  - component: {fileID: 2175084422900541605}
   m_Layer: 0
   m_Name: Floor_Color
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 314387739941697089}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 8, y: 14.000038, z: 0.10000062}
+  m_LocalScale: {x: 8, y: 14.00016, z: 0.10000157}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 225ea0b31d7d44c949599f1637525837, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,19 +98,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4877652770548064436
+--- !u!114 &2175084422900541605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 314387739941697089}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a890f040ce644b659b25022abb86938, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ec9bc3844d1d844787c8070078bcbf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_SnapToGrid: 1
-  m_GateType: 1
-  m_Value: 0.5
-  m_Text: {fileID: 0}

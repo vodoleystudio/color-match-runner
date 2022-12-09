@@ -195,6 +195,11 @@ namespace HyperCasual.Runner
             m_TargetScale = m_DefaultScale;
         }
 
+        public void SetColor(Color color)
+        {
+            m_SkinnedMeshRenderer.material.color = color;
+        }
+
         /// <summary>
         /// Returns the player's transform component
         /// </summary>

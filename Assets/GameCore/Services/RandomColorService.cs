@@ -16,8 +16,13 @@ namespace GameCore.Services
             return new Color(Random.Range(MinColorValue, MaxColorValue), Random.Range(MinColorValue, MaxColorValue), Random.Range(MinColorValue, MaxColorValue));
         }
 
-        public Color GetSimilarColor(Color color, float diffrenceThreshold)
+        public Color GetSimilarColor(Color color, float diffrenceThreshold = MaxColorValue)
         {
+            if (Mathf.Approximately(diffrenceThreshold, MinColorValue))
+            {
+                return new Color(color.r, color.g, color.b);
+            }
+
             var values = Enum.GetValues(typeof(ColorComponents)).Cast<ColorComponents>().ToList();
             values.Remove(ColorComponents.None);
             var colorComponent = values[Random.Range(0, values.Count)];

@@ -6,9 +6,9 @@ using GameCore.Data;
 
 namespace GameCore.Services
 {
-    public interface IGamePlayProgresService
+    public interface IGamePlayProgressService
     {
-        BlockData GetBlockData(float diffrenceTrheshold);    
+        BlockData GenerateBlockData(float diffrenceTrheshold);    
     }
 }
 

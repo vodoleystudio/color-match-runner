@@ -1,14 +1,13 @@
-using System.Collections.Generic;
 using UnityEngine;
 using GameCore.Data; 
 
 namespace GameCore.Services
 {
-    public class GamePlayProgresServes : IGamePlayProgresService
+    public class GamePlayProgressService : IGamePlayProgressService
     {
         private IRandomColorService _randomColorService = new RandomColorService();
 
-        public BlockData GetBlockData(float diffrenceTrheshold)
+        public BlockData GenerateBlockData(float diffrenceTrheshold)
         {
             var gateData = new BlockData();
             var randomColor = _randomColorService.GetRandomColor();
@@ -17,7 +16,7 @@ namespace GameCore.Services
 
             gateData.CorrectColor = gateData.GateColors[Random.Range(0, gateData.GateColors.Count)];
             
-            return gateData;    
+            return gateData;
         }
     }
 }
