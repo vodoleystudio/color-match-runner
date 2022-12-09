@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using HyperCasual.Core;
 using UnityEngine;
+using GameCore.Services;
+using System.Linq;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -42,7 +44,8 @@ namespace HyperCasual.Runner
         GameObject m_CurrentTerrainGO;
         GameObject m_LevelMarkersGO;
 
-        List<Spawnable> m_ActiveSpawnables = new List<Spawnable>();
+        static LevelManager s_LevelManager;
+        static IGamePlayProgressService s_GamePlayProgressService = new GamePlayProgressService();
 
 #if UNITY_EDITOR
         bool m_LevelEditorMode;
@@ -128,8 +131,8 @@ namespace HyperCasual.Runner
             }
 
             levelGameObject = new GameObject("LevelManager");
-            LevelManager levelManager = levelGameObject.AddComponent<LevelManager>();
-            levelManager.LevelDefinition = levelDefinition;
+            s_LevelManager = levelGameObject.AddComponent<LevelManager>();
+            s_LevelManager.LevelDefinition = levelDefinition;
 
             Transform levelParent = levelGameObject.transform;
 
@@ -170,9 +173,24 @@ namespace HyperCasual.Runner
                 Spawnable spawnable = go.GetComponent<Spawnable>();
                 if (spawnable != null)
                 {
-                    spawnable.SetBaseColor(spawnableObject.BaseColor);
+                    if (spawnable is Block block)
+                    {
+                        var blockData = s_GamePlayProgressService.GenerateBlockData(0.1f);
+
+                        block.Floor.SetBaseColor(blockData.CorrectColor);
+                        for (int j = 0; j < blockData.GateColors.Count; j++)
+                        {
+                            block.Gates[j].SetBaseColor(blockData.GateColors[j]);
+                        }
+                        block.Score = blockData.Score;
+                    }
+                    else
+                    {
+                        spawnable.SetBaseColor(spawnableObject.BaseColor);
+                    }
+
                     spawnable.SetScale(scale);
-                    levelManager.AddSpawnable(spawnable);
+                    s_LevelManager.AddSpawnable(spawnable);
                 }
 
                 if (go != null)
@@ -200,6 +218,28 @@ namespace HyperCasual.Runner
             }
 
             m_CurrentLevel = null;
+        }
+
+        public void UpdateProgress(Entity entity)
+        {
+            if (entity is Block block)
+            {
+                var usedGates = block.Gates.FindAll(g => g.IsUsed);
+
+                if (usedGates.Count == 1)
+                {
+                    var color = usedGates.First().BaseColor;
+                    if (block.Floor.BaseColor.Equals(color))
+                    {
+                        Debug.Log("add score");
+                        PlayerController.Instance.SetColor(color);
+                    }
+                }
+                else
+                {
+                    Debug.Log("remove score");
+                }
+            }
         }
 
         void StartGame()
