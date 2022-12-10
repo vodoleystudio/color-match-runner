@@ -134,6 +134,8 @@ namespace HyperCasual.Runner
             s_LevelManager = levelGameObject.AddComponent<LevelManager>();
             s_LevelManager.LevelDefinition = levelDefinition;
 
+            s_GamePlayProgressService.Reset();
+
             Transform levelParent = levelGameObject.transform;
 
             for (int i = 0; i < levelDefinition.Spawnables.Length; i++)
@@ -175,7 +177,7 @@ namespace HyperCasual.Runner
                 {
                     if (spawnable is Block block)
                     {
-                        var blockData = s_GamePlayProgressService.GenerateBlockData(0.1f);
+                        var blockData = s_GamePlayProgressService.GenerateBlockData();
 
                         block.Floor.SetBaseColor(blockData.CorrectColor);
                         for (int j = 0; j < blockData.GateColors.Count; j++)
@@ -233,12 +235,11 @@ namespace HyperCasual.Runner
                     {
                         Debug.Log("add score");
                         PlayerController.Instance.SetColor(color);
+                        return;
                     }
                 }
-                else
-                {
-                    Debug.Log("remove score");
-                }
+                    
+                Debug.Log("remove score");
             }
         }
 

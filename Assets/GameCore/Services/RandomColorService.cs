@@ -16,69 +16,63 @@ namespace GameCore.Services
             return new Color(Random.Range(MinColorValue, MaxColorValue), Random.Range(MinColorValue, MaxColorValue), Random.Range(MinColorValue, MaxColorValue));
         }
 
-        public Color GetSimilarColor(Color color, float maxThreshold, float minThershold)
+        public Color GetRandomSimilarColor(Color color, float minThreshold, float maxThreshold)
         {
             var values = Enum.GetValues(typeof(ColorComponents)).Cast<ColorComponents>().ToList();
             values.Remove(ColorComponents.None);
             var colorComponent = values[Random.Range(0, values.Count)];
 
-            switch (colorComponent)
+            return colorComponent switch
             {
-                case ColorComponents.R:
-                    return new Color(GetChangedComponentValue(minThershold ,maxThreshold, color.r), color.g, color.b); 
-
-                case ColorComponents.G:
-                    return new Color(color.r, GetChangedComponentValue(minThershold,maxThreshold, color.g), color.b);
-
-                case ColorComponents.B:
-                    return new Color(color.r, color.g, GetChangedComponentValue(minThershold,maxThreshold, color.b));
-
-                default:
-                    throw new Exception();
-            }
+                ColorComponents.R => new Color(GetChangedComponentValue(color.r, minThreshold, maxThreshold), color.g, color.b),
+                ColorComponents.G => new Color(color.r, GetChangedComponentValue(color.g, minThreshold, maxThreshold), color.b),
+                ColorComponents.B => new Color(color.r, color.g, GetChangedComponentValue(color.b, minThreshold, maxThreshold)),
+                _ => throw new Exception(),
+            };
         }
 
-        private float GetChangedComponentValue(float minThreshold ,float maxThreshold , float colorComponent)
+        private float GetChangedComponentValue(float colorComponent, float minThreshold, float maxThreshold)
         {
-            maxThreshold = Math.Clamp(maxThreshold, MinColorValue, MaxColorValue);
+            maxThreshold = Math.Clamp(maxThreshold, MinColorValue, MaxColorValue); // TODO : should be in some way near minThreshold = Math.Clamp
 
-            var halfRange = maxThreshold / 2f;
-            var rnd = Random.Range(0, 2);
+            var halfRange = maxThreshold / 2f; // TODO : do half range to minThreshold as well or do for both full value
+            var rnd = Random.Range(0, 2); // TODO : create utils function that returns true/false randomly and change 'rnd' to be clear boolean name
 
-            minThreshold = Math.Clamp(minThreshold, MinColorValue, halfRange - 0.01f);
+            minThreshold = Math.Clamp(minThreshold, MinColorValue, halfRange); // TODO : should be in some way near maxThreshold = Math.Clamp
 
             if (minThreshold > halfRange)
             {
                 throw new Exception("maxThreshold should be bigger twice than minThreshold");
             }
 
+            // TODO : check for duplicated code
             if ((colorComponent + halfRange <= MaxColorValue) && (colorComponent - halfRange >= MinColorValue))
             {               
                 if (rnd == 1)
                 {
-                    return Random.Range( colorComponent - halfRange, colorComponent - minThreshold);
+                    return Random.Range(colorComponent - halfRange, colorComponent - minThreshold);
                 }
                 else
                 {
-                    return Random.Range(colorComponent + minThreshold, colorComponent  + halfRange);
+                    return Random.Range(colorComponent + minThreshold, colorComponent + halfRange);
                 }
             }
             else if (colorComponent - halfRange < MinColorValue)
             {
-                if ((colorComponent - minThreshold < MinColorValue) )
+                if (colorComponent - minThreshold < MinColorValue)
                 {
                     return Random.Range(colorComponent + minThreshold, colorComponent + halfRange);
                 }
-                else if (rnd == 1 )
+                else if (rnd == 1)
                 {
                     return  Random.Range(MinColorValue, colorComponent - minThreshold);
                 }
                 else
                 {
-                   return Random.Range(colorComponent + minThreshold, colorComponent + halfRange);
+                    return Random.Range(colorComponent + minThreshold, colorComponent + halfRange);
                 }
             }
-            else if ((colorComponent + halfRange > MaxColorValue))
+            else if (colorComponent + halfRange > MaxColorValue)
             {
                 if (colorComponent + minThreshold > MaxColorValue)
                 {
@@ -95,7 +89,7 @@ namespace GameCore.Services
             }
             else
             {
-                throw new Exception();
+                throw new Exception("suitable component value not found");
             }
         }
     }
