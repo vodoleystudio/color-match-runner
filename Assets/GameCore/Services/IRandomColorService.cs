@@ -7,6 +7,5 @@ namespace GameCore.Services
         Color GetRandomColor();
         Color GetSimilarColor(Color color, float minThreshold, float maxThreshold);
         Color GetSimilarColor(Color color, float offset);
-
     }
 }

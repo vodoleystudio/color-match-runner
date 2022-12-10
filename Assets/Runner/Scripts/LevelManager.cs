@@ -53,7 +53,7 @@ namespace HyperCasual.Runner
         {
             for (int i = 0, c = m_ActiveSpawnables.Count; i < c; i++)
             {
-                m_ActiveSpawnables[i].ResetSpawnable();
+                m_ActiveSpawnables[i].ResetData();
             }
         }
 

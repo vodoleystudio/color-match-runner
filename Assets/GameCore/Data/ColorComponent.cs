@@ -1,6 +1,6 @@
 namespace GameCore.Data
 {
-    public enum ColorComponents
+    public enum ColorComponent
     {
         None,
         R,

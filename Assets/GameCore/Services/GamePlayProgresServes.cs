@@ -9,12 +9,13 @@ namespace GameCore.Services
 
         private const float MinColorUnitResolution = 1/256f; // 0.00390625
         private const float MaxOffset = 127 * MinColorUnitResolution;
-        private const float OffesetStep = 10f; 
-        private float _offest;
+        private const float OffsetStep = 3f * MinColorUnitResolution;
+
+        private float _offset;
 
         public void Reset()
         {
-            _offest = MaxOffset;
+            _offset = MaxOffset;
         }
 
         public BlockData GenerateBlockData()
@@ -22,17 +23,18 @@ namespace GameCore.Services
             var gateData = new BlockData();
             var randomColor = _randomColorService.GetRandomColor();
             gateData.GateColors.Add(randomColor);
-            gateData.GateColors.Add(_randomColorService.GetSimilarColor(randomColor ,_offest));
+            gateData.GateColors.Add(_randomColorService.GetSimilarColor(randomColor, _offset));
             gateData.CorrectColor = gateData.GateColors[Random.Range(0, gateData.GateColors.Count)];
 
-            UpdateTresholds();
+            Update();
             
             return gateData;
         }
 
-        private void UpdateTresholds()
+        private void Update()
         {
-            _offest -= MinColorUnitResolution * OffesetStep;
+            _offset -= OffsetStep;
+            _offset = Mathf.Clamp(_offset, OffsetStep, MaxOffset);
         }
     }
 }

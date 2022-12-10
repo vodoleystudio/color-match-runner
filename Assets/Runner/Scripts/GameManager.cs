@@ -138,6 +138,11 @@ namespace HyperCasual.Runner
 
             Transform levelParent = levelGameObject.transform;
 
+            if (Application.isPlaying)
+            {
+                levelDefinition.Spawnables.Reverse();
+            }
+
             for (int i = 0; i < levelDefinition.Spawnables.Length; i++)
             {
                 LevelDefinition.SpawnableObject spawnableObject = levelDefinition.Spawnables[i];
@@ -233,13 +238,12 @@ namespace HyperCasual.Runner
                     var color = usedGates.First().BaseColor;
                     if (block.Floor.BaseColor.Equals(color))
                     {
-                        Debug.Log("add score");
                         PlayerController.Instance.SetColor(color);
                         return;
                     }
                 }
-                    
-                Debug.Log("remove score");
+
+                Lose();
             }
         }
 

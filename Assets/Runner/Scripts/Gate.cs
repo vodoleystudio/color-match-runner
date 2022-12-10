@@ -21,5 +21,10 @@ namespace HyperCasual.Runner
                 IsUsed = true;  
             }
         }
+
+        public override void ResetData()
+        {
+            IsUsed = false;
+        }
     }
 }

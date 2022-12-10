@@ -28,7 +28,7 @@ namespace HyperCasual.Runner
         /// Reset the gate to its initial state. Called when a level
         /// is restarted by the GameManager.
         /// </summary>
-        public override void ResetSpawnable()
+        public override void ResetData()
         {
             m_Collected = false;
             
