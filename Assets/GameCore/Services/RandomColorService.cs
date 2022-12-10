@@ -15,23 +15,70 @@ namespace GameCore.Services
         {
             return new Color(Random.Range(MinColorValue, MaxColorValue), Random.Range(MinColorValue, MaxColorValue), Random.Range(MinColorValue, MaxColorValue));
         }
-
-        public Color GetRandomSimilarColor(Color color, float minThreshold, float maxThreshold)
+        private ColorComponents GetRandomComponent()
         {
             var values = Enum.GetValues(typeof(ColorComponents)).Cast<ColorComponents>().ToList();
             values.Remove(ColorComponents.None);
             var colorComponent = values[Random.Range(0, values.Count)];
+            return colorComponent;
+        }
 
+        public Color GetSimilarColor(Color color, float minThreshold, float maxThreshold)
+        {
+            var colorComponent = GetRandomComponent();
             return colorComponent switch
             {
-                ColorComponents.R => new Color(GetChangedComponentValue(color.r, minThreshold, maxThreshold), color.g, color.b),
-                ColorComponents.G => new Color(color.r, GetChangedComponentValue(color.g, minThreshold, maxThreshold), color.b),
-                ColorComponents.B => new Color(color.r, color.g, GetChangedComponentValue(color.b, minThreshold, maxThreshold)),
+                ColorComponents.R => new Color(GetChangedComponentValueBasedOnRandom(color.r, minThreshold, maxThreshold), color.g, color.b),
+                ColorComponents.G => new Color(color.r, GetChangedComponentValueBasedOnRandom(color.g, minThreshold, maxThreshold), color.b),
+                ColorComponents.B => new Color(color.r, color.g, GetChangedComponentValueBasedOnRandom(color.b, minThreshold, maxThreshold)),
                 _ => throw new Exception(),
             };
         }
 
-        private float GetChangedComponentValue(float colorComponent, float minThreshold, float maxThreshold)
+        public Color GetSimilarColor(Color color, float offset)
+        {
+            var colorComponent = GetRandomComponent();
+            return colorComponent switch
+            {
+                ColorComponents.R => new Color(GetChangedColorComponentValueBasedOnOffset (color.r , offset), color.g, color.b),
+                ColorComponents.G => new Color(color.r, GetChangedColorComponentValueBasedOnOffset(color.g, offset) , color.b),
+                ColorComponents.B => new Color(color.r, color.g, GetChangedColorComponentValueBasedOnOffset(color.b, offset)),
+                _ => throw new Exception(),
+            };
+        }
+
+        private float GetChangedColorComponentValueBasedOnOffset(float colorComponentValue, float offset)
+        {
+            var colorPlusOffset = colorComponentValue + offset;
+            var colorMinusOffset = colorComponentValue - offset;
+
+            if ((colorMinusOffset >= MinColorValue) && (colorPlusOffset <= MaxColorValue))
+            {
+                var rightOrLeft = Utils.RnadomBolean();
+                if (rightOrLeft)
+                {
+                    return colorMinusOffset;
+                }
+                else
+                {
+                    return colorPlusOffset;
+                }
+            }
+            else if (colorMinusOffset < MinColorValue)
+            {
+                return colorPlusOffset;
+            }
+            else if (colorPlusOffset > MaxColorValue)
+            {
+                return colorMinusOffset;
+            }
+            else
+            {
+                throw new Exception("suitable component value not found");
+            }
+        }
+
+        private float GetChangedComponentValueBasedOnRandom(float colorComponent, float minThreshold, float maxThreshold)
         {
             maxThreshold = Math.Clamp(maxThreshold, MinColorValue, MaxColorValue); // TODO : should be in some way near minThreshold = Math.Clamp
 
