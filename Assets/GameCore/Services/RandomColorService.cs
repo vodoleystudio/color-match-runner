@@ -15,34 +15,44 @@ namespace GameCore.Services
         {
             return new Color(Random.Range(MinColorValue, MaxColorValue), Random.Range(MinColorValue, MaxColorValue), Random.Range(MinColorValue, MaxColorValue));
         }
-        private ColorComponents GetRandomComponent()
+        private ColorComponent GetRandomComponent()
         {
-            var values = Enum.GetValues(typeof(ColorComponents)).Cast<ColorComponents>().ToList();
-            values.Remove(ColorComponents.None);
+            var values = Enum.GetValues(typeof(ColorComponent)).Cast<ColorComponent>().ToList();
+            values.Remove(ColorComponent.None);
             var colorComponent = values[Random.Range(0, values.Count)];
             return colorComponent;
         }
 
-        public Color GetSimilarColor(Color color, float minThreshold, float maxThreshold)
+        public Color GetSimilarRandomColor(Color color, float minThreshold, float maxThreshold)
         {
             var colorComponent = GetRandomComponent();
+            return GetSimilarRandomColor(color, colorComponent, minThreshold, maxThreshold);
+        }
+
+        public Color GetSimilarRandomColor(Color color, float offset)
+        {
+            var colorComponent = GetRandomComponent();
+            return GetSimilarRandomColor(color, colorComponent, offset);
+        }
+
+        public Color GetSimilarRandomColor(Color color, ColorComponent colorComponent, float minThreshold = MinColorValue, float maxThreshold = MaxColorValue)
+        {
             return colorComponent switch
             {
-                ColorComponents.R => new Color(GetChangedComponentValueBasedOnRandom(color.r, minThreshold, maxThreshold), color.g, color.b),
-                ColorComponents.G => new Color(color.r, GetChangedComponentValueBasedOnRandom(color.g, minThreshold, maxThreshold), color.b),
-                ColorComponents.B => new Color(color.r, color.g, GetChangedComponentValueBasedOnRandom(color.b, minThreshold, maxThreshold)),
+                ColorComponent.R => new Color(GetChangedComponentValueBasedOnRandom(color.r, minThreshold, maxThreshold), color.g, color.b),
+                ColorComponent.G => new Color(color.r, GetChangedComponentValueBasedOnRandom(color.g, minThreshold, maxThreshold), color.b),
+                ColorComponent.B => new Color(color.r, color.g, GetChangedComponentValueBasedOnRandom(color.b, minThreshold, maxThreshold)),
                 _ => throw new Exception(),
             };
         }
 
-        public Color GetSimilarColor(Color color, float offset)
+        public Color GetSimilarRandomColor(Color color, ColorComponent colorComponent, float offset)
         {
-            var colorComponent = GetRandomComponent();
             return colorComponent switch
             {
-                ColorComponents.R => new Color(GetChangedColorComponentValueBasedOnOffset (color.r , offset), color.g, color.b),
-                ColorComponents.G => new Color(color.r, GetChangedColorComponentValueBasedOnOffset(color.g, offset) , color.b),
-                ColorComponents.B => new Color(color.r, color.g, GetChangedColorComponentValueBasedOnOffset(color.b, offset)),
+                ColorComponent.R => new Color(GetChangedColorComponentValueBasedOnOffset(color.r, offset), color.g, color.b),
+                ColorComponent.G => new Color(color.r, GetChangedColorComponentValueBasedOnOffset(color.g, offset), color.b),
+                ColorComponent.B => new Color(color.r, color.g, GetChangedColorComponentValueBasedOnOffset(color.b, offset)),
                 _ => throw new Exception(),
             };
         }
@@ -52,7 +62,7 @@ namespace GameCore.Services
             var colorPlusOffset = colorComponentValue + offset;
             var colorMinusOffset = colorComponentValue - offset;
 
-            if ((colorMinusOffset >= MinColorValue) && (colorPlusOffset <= MaxColorValue))
+            if (colorMinusOffset >= MinColorValue && colorPlusOffset <= MaxColorValue)
             {
                 var rightOrLeft = Utils.RnadomBolean();
                 if (rightOrLeft)

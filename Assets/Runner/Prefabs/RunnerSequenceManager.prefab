@@ -53,10 +53,12 @@ MonoBehaviour:
   - {fileID: 6720992300918251345, guid: f5969163fd24f4df09df4753595040b4, type: 3}
   - {fileID: 3229315799627885161, guid: 323f9a17906324f1dbb032dccf6e6865, type: 3}
   - {fileID: 2034186197529953695, guid: d44d1b9822199404c9f82515a188ec6a, type: 3}
+  - {fileID: 3042209500128892972, guid: 4ab9a9ae0a5bf0949a1492b1318334bc, type: 3}
+  - {fileID: 2690285659780882880, guid: c93e1a8ad0750b94189e2aaaa90f279c, type: 3}
   m_Levels:
   - {fileID: 11400000, guid: 416e4702edca80046846ce3fec643a48, type: 2}
   m_LevelManagers:
-  - {fileID: 168254820557207646, guid: 6dc42ad68cc8044df837a14ff82a63dc, type: 3}
+  - {fileID: 1149431042505363540, guid: 48b124d8811e909448c87ee90c8834bf, type: 3}
   - {fileID: 9183922748988270725, guid: cdf45adc9574e4d54bb0716214b8f1c6, type: 3}
   - {fileID: 7732658091594729695, guid: 67412f9863af24cf0a73c3bae209c29c, type: 3}
   m_ContinueEvent: {fileID: 11400000, guid: b892538bd49f3487bbedf5106c094739, type: 2}

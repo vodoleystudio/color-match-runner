@@ -118,7 +118,7 @@ namespace HyperCasual.Runner
         /// This method can be overriden in classes that extend Spawnable
         /// to hold any logic needed to reset that object to its default state.
         /// </summary>
-        public virtual void ResetSpawnable() { }
+        public virtual void ResetData() { }
 
         protected virtual void OnEnable()
         {

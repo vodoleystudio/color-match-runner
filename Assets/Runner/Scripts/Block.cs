@@ -20,15 +20,11 @@ namespace HyperCasual.Runner
         RectTransform m_Text;
         [SerializeField]
         List<Gate> m_Gates;
-        [SerializeField]
-        Floor m_Floor;
 
         bool m_Applied;
         Vector3 m_TextInitialScale;
 
         public List<Gate> Gates => m_Gates;
-        public Floor Floor => m_Floor;
-        public int Score { get; set; }
 
         public bool HasGate(Gate gate)
         {
@@ -60,9 +56,13 @@ namespace HyperCasual.Runner
         /// Reset the gate to its initial state. Called when a level
         /// is restarted by the GameManager.
         /// </summary>
-        public override void ResetSpawnable()
+        public override void ResetData()
         {
             m_Applied = false;
+            foreach (Gate gate in m_Gates)
+            {
+                gate.ResetData();
+            }
         }
 
         protected override void Awake()
@@ -80,7 +80,6 @@ namespace HyperCasual.Runner
             if (col.CompareTag(k_PlayerTag) && !m_Applied)
             {
                 m_Applied = true;
-                GameManager.Instance.UpdateProgress(this);
             }
         }
     }

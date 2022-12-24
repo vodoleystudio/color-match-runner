@@ -8,7 +8,7 @@ namespace GameCore.Data
     {
         public List<Color> GateColors = new();
         public Color CorrectColor;
-        public int Score = 1;
+        public float MixValue = 0.8f;
     }
 }
 

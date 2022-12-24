@@ -13,7 +13,8 @@ namespace HyperCasual.Runner
     public class PlayerController : MonoBehaviour
     {
         /// <summary> Returns the PlayerController. </summary>
-        public static PlayerController Instance => s_Instance;
+        public static PlayerController Instance => s_Instance; 
+
         static PlayerController s_Instance;
 
         [SerializeField]
@@ -136,6 +137,7 @@ namespace HyperCasual.Runner
             }
 
             ResetSpeed();
+            m_Animator.SetInteger("animation", 12);
         }
 
         /// <summary>
@@ -177,6 +179,13 @@ namespace HyperCasual.Runner
             m_TargetSpeed = GetDefaultSpeed();
         }
 
+        public void Stop()
+        {
+            Debug.LogError("123");
+            m_Animator.SetInteger("animation", 1);
+            m_TargetSpeed = 0.0f;
+        }
+
         /// <summary>
         /// Adjust the player's current scale
         /// </summary>
@@ -198,6 +207,13 @@ namespace HyperCasual.Runner
         public void SetColor(Color color)
         {
             m_SkinnedMeshRenderer.material.color = color;
+            m_SkinnedMeshRenderer.material.SetColor("_1st_ShadeColor", color);
+            m_SkinnedMeshRenderer.material.SetColor("_BaseColor", color);
+        }
+
+        public Color GetColor()
+        {
+            return m_SkinnedMeshRenderer.material.color;
         }
 
         /// <summary>
@@ -312,7 +328,7 @@ namespace HyperCasual.Runner
                 float distanceTravelledSinceLastFrame = (m_Transform.position - m_LastPosition).magnitude;
                 float distancePerSecond = distanceTravelledSinceLastFrame / deltaTime;
 
-                m_Animator.SetFloat(s_Speed, distancePerSecond);
+                //m_Animator.SetFloat(s_Speed, distancePerSecond);
             }
 
             if (m_Transform.position != m_LastPosition)
