@@ -90,7 +90,11 @@ namespace HyperCasual.Runner
         /// </summary>
         public void ResetLevel()
         {
-            PlayerController.Instance.ResetPlayer();
+            if (PlayerController.Instance != null)
+            {
+                PlayerController.Instance.ResetPlayer();
+            }
+
             CameraManager.Instance.ResetCamera();
 
             if (LevelManager.Instance != null)
@@ -138,6 +142,7 @@ namespace HyperCasual.Runner
 
             Transform levelParent = levelGameObject.transform;
 
+            var targetColor = Color.white;
             if (Application.isPlaying)
             {
                 levelDefinition.Spawnables.Reverse();
@@ -184,12 +189,13 @@ namespace HyperCasual.Runner
                     {
                         var blockData = s_GamePlayProgressService.GenerateBlockData();
 
-                        block.Floor.SetBaseColor(blockData.CorrectColor);
                         for (int j = 0; j < blockData.GateColors.Count; j++)
                         {
                             block.Gates[j].SetBaseColor(blockData.GateColors[j]);
+                            block.Gates[j].MixValue = blockData.MixValue;
                         }
-                        block.Score = blockData.Score;
+
+                        targetColor = Color.Lerp(blockData.CorrectColor, targetColor, blockData.MixValue);
                     }
                     else
                     {
@@ -204,6 +210,12 @@ namespace HyperCasual.Runner
                 {
                     go.transform.SetParent(levelParent);
                 }
+            }
+
+            var target = s_LevelManager.ActiveSpawnables.FirstOrDefault(s => s is TargetBase);
+            if (target != null)
+            {
+                target.SetBaseColor(targetColor);
             }
         }
 
@@ -225,26 +237,6 @@ namespace HyperCasual.Runner
             }
 
             m_CurrentLevel = null;
-        }
-
-        public void UpdateProgress(Entity entity)
-        {
-            if (entity is Block block)
-            {
-                var usedGates = block.Gates.FindAll(g => g.IsUsed);
-
-                if (usedGates.Count == 1)
-                {
-                    var color = usedGates.First().BaseColor;
-                    if (block.Floor.BaseColor.Equals(color))
-                    {
-                        PlayerController.Instance.SetColor(color);
-                        return;
-                    }
-                }
-
-                Lose();
-            }
         }
 
         void StartGame()
@@ -292,6 +284,12 @@ namespace HyperCasual.Runner
             {
                 GameObject go = GameObject.Instantiate(end, new Vector3(end.transform.position.x, end.transform.position.y, levelDefinition.LevelLength), Quaternion.identity);
                 go.transform.SetParent(levelMarkersGameObject.transform);
+
+                var target = s_LevelManager.ActiveSpawnables.FirstOrDefault(s => s is TargetBase);
+                if (target != null)
+                {
+                    target.transform.SetParent(go.transform);
+                }
             }
         }
 

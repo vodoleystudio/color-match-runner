@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using HyperCasual.Core;
+using DG.Tweening;
+using GameCore.UI;
 using UnityEngine;
 
 namespace HyperCasual.Runner
@@ -18,7 +17,13 @@ namespace HyperCasual.Runner
         {
             if (col.CompareTag(k_PlayerTag))
             {
-                GameManager.Instance.Win();
+                //GameManager.Instance.Win();
+                MiniCamera.Instance.Hide();
+                if (PlayerController.Instance != null) 
+                {
+                    PlayerController.Instance.Stop();
+                }
+                //CameraManager.Instance.transform.DORotate(new Vector3(0f, 360f, 0f), 10f, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
             }
         }
     }

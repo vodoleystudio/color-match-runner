@@ -7,11 +7,12 @@ TagManager:
   - HighObstacle
   - LowObstacle
   - LevelParent
+  - Target
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Camera2
   - Water
   - UI
   - 

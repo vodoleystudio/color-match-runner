@@ -37,6 +37,7 @@ namespace HyperCasual.Runner
         LevelDefinition m_LevelDefinition;
 
         List<Spawnable> m_ActiveSpawnables = new List<Spawnable>();
+        public List<Spawnable> ActiveSpawnables => m_ActiveSpawnables;
 
         /// <summary>
         /// Call this method to add a Spawnable to the list of active Spawnables.

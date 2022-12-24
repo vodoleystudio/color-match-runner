@@ -78,7 +78,10 @@ namespace HyperCasual.Runner
             if (m_GoldEventListener.m_Event is ItemPickedEvent goldPickedEvent)
             {
                 m_TempGold += goldPickedEvent.Count;
-                m_Hud.GoldValue = m_TempGold;
+                if (m_Hud != null)
+                {
+                    m_Hud.GoldValue = m_TempGold;
+                }
             }
             else
             {
@@ -126,7 +129,7 @@ namespace HyperCasual.Runner
 
         void Update()
         {
-            if (m_Hud.gameObject.activeSelf)
+            if (m_Hud != null && m_Hud.gameObject.activeSelf)
             {
                 m_TempXp += PlayerController.Instance.Speed * Time.deltaTime;
                 m_Hud.XpValue = m_TempXp;

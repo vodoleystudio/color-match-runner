@@ -20,15 +20,11 @@ namespace HyperCasual.Runner
         RectTransform m_Text;
         [SerializeField]
         List<Gate> m_Gates;
-        [SerializeField]
-        Floor m_Floor;
 
         bool m_Applied;
         Vector3 m_TextInitialScale;
 
         public List<Gate> Gates => m_Gates;
-        public Floor Floor => m_Floor;
-        public int Score { get; set; }
 
         public bool HasGate(Gate gate)
         {
@@ -84,7 +80,6 @@ namespace HyperCasual.Runner
             if (col.CompareTag(k_PlayerTag) && !m_Applied)
             {
                 m_Applied = true;
-                GameManager.Instance.UpdateProgress(this);
             }
         }
     }
