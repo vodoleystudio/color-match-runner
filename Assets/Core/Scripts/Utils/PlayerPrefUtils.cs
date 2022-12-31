@@ -26,7 +26,7 @@ namespace HyperCasual.Core
         /// Serializes a class to JSON string data and stores it on PlayerPrefs
         /// </summary>
         /// <param name="key">PlayerPrefs key name</param>
-        /// <param name="data">Instance of the class to serialize</param>
+        /// <param name="data">_instance of the class to serialize</param>
         /// <typeparam name="T">The class type to serialize</typeparam>
         public static void Write<T>(string key, T data) where T : new()
         {

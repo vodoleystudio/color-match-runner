@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using GameCore.Services;
+using GameCore.Data;
 
 namespace HyperCasual.Runner
 {
@@ -13,7 +15,9 @@ namespace HyperCasual.Runner
     public class PlayerController : MonoBehaviour
     {
         /// <summary> Returns the PlayerController. </summary>
-        public static PlayerController Instance => s_Instance; 
+        public static PlayerController Instance => s_Instance;
+
+        private IAnimationEntatyService _animationEntatyService = new AnimationEntatyService();
 
         static PlayerController s_Instance;
 
@@ -137,7 +141,7 @@ namespace HyperCasual.Runner
             }
 
             ResetSpeed();
-            m_Animator.SetInteger("animation", 12);
+            
         }
 
         /// <summary>
@@ -182,7 +186,7 @@ namespace HyperCasual.Runner
         public void Stop()
         {
             Debug.LogError("123");
-            m_Animator.SetInteger("animation", 1);
+            _animationEntatyService.Play(AnimationType.Run , m_Animator); ;
             m_TargetSpeed = 0.0f;
         }
 

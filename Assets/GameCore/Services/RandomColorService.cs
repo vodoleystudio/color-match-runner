@@ -1,6 +1,7 @@
 using GameCore.Data;
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using Random = UnityEngine.Random;
    
@@ -8,19 +9,17 @@ namespace GameCore.Services
 {
     public class RandomColorService : IRandomColorService
     {
+
+        public static readonly RandomColorService _instance = new RandomColorService();
+   
         private const float MinColorValue = 0f;
         private const float MaxColorValue = 1f;
 
+        private RandomColorService() { }
+        public static RandomColorService Instance => _instance;
         public Color GetRandomColor()
         {
             return new Color(Random.Range(MinColorValue, MaxColorValue), Random.Range(MinColorValue, MaxColorValue), Random.Range(MinColorValue, MaxColorValue));
-        }
-        private ColorComponent GetRandomComponent()
-        {
-            var values = Enum.GetValues(typeof(ColorComponent)).Cast<ColorComponent>().ToList();
-            values.Remove(ColorComponent.None);
-            var colorComponent = values[Random.Range(0, values.Count)];
-            return colorComponent;
         }
 
         public Color GetSimilarRandomColor(Color color, float minThreshold, float maxThreshold)
@@ -55,6 +54,14 @@ namespace GameCore.Services
                 ColorComponent.B => new Color(color.r, color.g, GetChangedColorComponentValueBasedOnOffset(color.b, offset)),
                 _ => throw new Exception(),
             };
+        }
+
+        private ColorComponent GetRandomComponent()
+        {
+            var values = Enum.GetValues(typeof(ColorComponent)).Cast<ColorComponent>().ToList();
+            values.Remove(ColorComponent.None);
+            var colorComponent = values[Random.Range(0, values.Count)];
+            return colorComponent;
         }
 
         private float GetChangedColorComponentValueBasedOnOffset(float colorComponentValue, float offset)

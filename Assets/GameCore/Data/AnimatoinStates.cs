@@ -1,0 +1,30 @@
+namespace GameCore.Data
+{
+    public enum AnimationType
+    {
+        None,
+        Idle,
+        Yes,
+        No,
+        Eat,
+        Roar,
+        Jump,
+        Die,
+        Rest,
+        Walk,
+        walk_L,
+        Walk_R,
+        Run,
+        Run_L,
+        Run_R,
+        Fire,
+        Sick,
+        Fly,
+        Fly_L,
+        Fly_R,
+        Fly_Up,
+        Fly_Down,
+        Fly_Fire,
+        Anim_Dra_Demage
+    }
+}
