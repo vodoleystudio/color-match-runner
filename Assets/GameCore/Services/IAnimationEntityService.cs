@@ -4,7 +4,7 @@ using GameCore.Data;
 
 namespace GameCore.Services
 {
-    public interface IAnimationEntatyService
+    public interface IAnimationEntityService
     {
         void Play(AnimationType animationType , Animator animator);
     }

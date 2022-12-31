@@ -17,8 +17,6 @@ namespace HyperCasual.Runner
         /// <summary> Returns the PlayerController. </summary>
         public static PlayerController Instance => s_Instance;
 
-        private IAnimationEntatyService _animationEntatyService = new AnimationEntatyService();
-
         static PlayerController s_Instance;
 
         [SerializeField]
@@ -186,7 +184,7 @@ namespace HyperCasual.Runner
         public void Stop()
         {
             Debug.LogError("123");
-            _animationEntatyService.Play(AnimationType.Run , m_Animator); ;
+            AnimationEntityService.Instance.Play(AnimationType.Idle , m_Animator); ;
             m_TargetSpeed = 0.0f;
         }
 
