@@ -12,11 +12,11 @@ namespace GameCore.Services
         public void Play(AnimationType animationType , Animator animator)
         {
             var animationName = "animation";
-            if (animationType != AnimationType.None)
+            if (animationType == AnimationType.None)
             {
-                animator.SetInteger(animationName, (int)animationType);
+                return;
             }
-            return;
+            animator.SetInteger(animationName, (int)animationType);
         }
 
         private AnimationEntityService() { }
