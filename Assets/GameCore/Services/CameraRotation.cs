@@ -7,7 +7,7 @@ public class CameraRotation : MonoBehaviour
     [SerializeField]
     private Transform _transform;
     [SerializeField]
-    public float RotaionSpeedOnYAcses;
+    public float RotaionSpeedOnYAxses;
     [SerializeField]
     public float RotationOfXAngel;
 
@@ -15,12 +15,12 @@ public class CameraRotation : MonoBehaviour
     {
         RotateBaseOnSpaceWorld(RotationOfXAngel, 0f, 0f);
     }
-    public void FixedUpdate()
+    public void Update()
     {
-        RotateBaseOnSpaceWorld(0f, RotaionSpeedOnYAcses, 0f);
+        RotateBaseOnSpaceWorld(0f, RotaionSpeedOnYAxses, 0f);
     }
-    private void RotateBaseOnSpaceWorld(float xAcsis , float yAcsis , float zAcsis)
+    private void RotateBaseOnSpaceWorld(float xAxsis, float yAxsis, float zAxsis)
     {
-        _transform.Rotate(xAcsis, yAcsis, zAcsis, Space.World);
+        _transform.Rotate(xAxsis, yAxsis, zAxsis, Space.World);
     }
 }

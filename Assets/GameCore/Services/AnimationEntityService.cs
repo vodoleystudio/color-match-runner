@@ -9,7 +9,7 @@ namespace GameCore.Services
 
         public static AnimationEntityService Instance => _instance;
 
-        public void Play(AnimationType animationType , Animator animator)
+        public void Play(AnimationType animationType, Animator animator)
         {
             var animationName = "animation";
             if (animationType == AnimationType.None)
