@@ -1,12 +1,11 @@
 using UnityEngine;
-using GameCore.Data; 
+using GameCore.Data;
+using UnityEngine.UIElements;
 
 namespace GameCore.Services
 {
     public class GamePlayProgressService : IGamePlayProgressService
-    {
-        private IRandomColorService _randomColorService = new RandomColorService();
-
+    {   
         private const float MinColorUnitResolution = 1/256f; // 0.00390625
         private const float MaxOffset = 127 * MinColorUnitResolution;
         private const float OffsetStep = 3f * MinColorUnitResolution;
@@ -27,7 +26,7 @@ namespace GameCore.Services
             var gateData = new BlockData();
             if (_color == EmptyColor)
             {
-                _color = _randomColorService.GetRandomColor();
+                _color = RandomColorService.Instance.GetRandomColor();
             }
 
             var randomColor = _color;

@@ -17,13 +17,13 @@ namespace HyperCasual.Runner
         {
             if (col.CompareTag(k_PlayerTag))
             {
-                //GameManager.Instance.Win();
+                //GameManager._instance.Win();
                 MiniCamera.Instance.Hide();
                 if (PlayerController.Instance != null) 
                 {
                     PlayerController.Instance.Stop();
                 }
-                //CameraManager.Instance.transform.DORotate(new Vector3(0f, 360f, 0f), 10f, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
+                //CameraManager._instance.transform.DORotate(new Vector3(0f, 360f, 0f), 10f, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
             }
         }
     }
