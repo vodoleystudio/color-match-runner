@@ -107,6 +107,11 @@ namespace HyperCasual.Runner
             SetCameraPositionAndOrientation(false);
         }
 
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
+
         Vector3 GetCameraOffset()
         {
             return m_PresetOffsets[(int)m_CameraAnglePreset] + m_Offset;

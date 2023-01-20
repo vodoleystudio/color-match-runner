@@ -22,6 +22,8 @@ namespace HyperCasual.Runner
         [SerializeField]
         Animator m_Animator;
 
+        public Animator Animator => m_Animator;
+
         [SerializeField]
         SkinnedMeshRenderer m_SkinnedMeshRenderer;
 
@@ -186,6 +188,13 @@ namespace HyperCasual.Runner
             Debug.LogError("123");
             AnimationEntityService.Instance.Play(AnimationType.Idle, m_Animator); ;
             m_TargetSpeed = 0.0f;
+            CancelMovement();
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            m_XPos = position.x;
+            m_ZPos = position.z;
         }
 
         /// <summary>
