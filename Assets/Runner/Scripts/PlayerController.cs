@@ -4,6 +4,8 @@ using UnityEditor;
 using UnityEngine;
 using GameCore.Services;
 using GameCore.Data;
+using DG.Tweening;
+using System;
 
 namespace HyperCasual.Runner
 {
@@ -123,6 +125,17 @@ namespace HyperCasual.Runner
         /// <summary>
         /// Set up all necessary values for the PlayerController.
         /// </summary>
+        /// 
+        public void MoveTo(Animator animator, AnimationType animationType, Transform playerTransform, Transform endPositionTransform, float animationTime, Action onComplete = null)
+        {
+            AnimationEntityService.Instance.Play(animationType, animator);
+            playerTransform.DOMove(endPositionTransform.position, animationTime).OnComplete(() =>
+            {
+                AnimationEntityService.Instance.Play(AnimationType.Idle, animator);
+                onComplete?.Invoke();
+                SetPosition(transform.position);
+            });
+        }
         public void Initialize()
         {
             m_Transform = transform;

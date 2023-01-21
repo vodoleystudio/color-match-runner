@@ -2,6 +2,7 @@ using GameCore.Services;
 using GameCore.Data;
 using GameCore.UI;
 using UnityEngine;
+using DG.Tweening;
 
 namespace HyperCasual.Runner
 {
@@ -13,7 +14,8 @@ namespace HyperCasual.Runner
     public class FinishLine : Spawnable
     {
         const string k_PlayerTag = "Player";
-        const float _animationTime = 2f;
+        const float k_AnimationTime = 2f;
+        const float k_MovmentSpeed = 3f;
 
         [SerializeField]
         Transform _endPositionTransform;
@@ -28,11 +30,13 @@ namespace HyperCasual.Runner
                 if (PlayerController.Instance != null) 
                 {
                     PlayerController.Instance.Stop();
-                    AnimationEntityService.Instance.MoveTo(PlayerController.Instance.Animator, AnimationType.Jump, PlayerController.Instance.Transform, _endPositionTransform, _animationTime, () =>
+                    PlayerController.Instance.MoveTo(PlayerController.Instance.Animator, AnimationType.Jump, PlayerController.Instance.Transform, _endPositionTransform, k_AnimationTime, () =>
                     {
                         PlayerController.Instance.SetPosition(_endPositionTransform.position);
                         CameraManager.Instance.Hide();
+                        EndAnimationSequance.Instance.SetEndCameraPosition(CameraManager.Instance.GetCameraTransform(), EndAnimationSequance.Instance.GetEndSceneCameraTransform());
                         EndAnimationSequance.Instance.ActivateCamera();
+                        
                     });
                 }
                 //CameraManager._instance.transform.DORotate(new Vector3(0f, 360f, 0f), 10f, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);

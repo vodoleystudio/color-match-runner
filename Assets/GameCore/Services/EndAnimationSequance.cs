@@ -1,4 +1,3 @@
-using DG.Tweening;
 using UnityEngine;
 
 public class EndAnimationSequance : MonoBehaviour
@@ -10,13 +9,19 @@ public class EndAnimationSequance : MonoBehaviour
     private Camera m_MainCamera;
     [SerializeField]
     private Camera m_EndSceneCamera;
+    public Transform GetEndSceneCameraTransform() => m_EndSceneCamera.transform;
 
+    [SerializeField]
+    private float m_MaxRotationOfXAngel;
     [SerializeField]
     private Transform m_ParentTransform;
     [SerializeField]
-    public float m_RotaionSpeedOnYAxses;
-    [SerializeField]
-    public float m_RotationOfXAngel;
+    public float m_Speed;
+
+    private Vector3 XandYRotation = new Vector3(1f, 1f, 0f);
+    private Vector3 YRotation = new Vector3(0f, 1f, 0f);
+
+    public Transform GetParentObjectTransform() => m_ParentTransform;
 
     public bool IsCameraActive()
     {
@@ -36,8 +41,22 @@ public class EndAnimationSequance : MonoBehaviour
     private void Awake()
     {
         SetupInstance();
-        HideCamera();
+        HideCamera();      
     }
+
+    private void Update()
+    {
+        if (IsCameraActive() && transform.rotation.eulerAngles.x < m_MaxRotationOfXAngel)
+        {
+            RotateBaseOnSpaceWorld(m_ParentTransform, XandYRotation, m_Speed);
+        }
+        else if (IsCameraActive())
+        {
+            RotateBaseOnSpaceWorld(m_ParentTransform, YRotation, m_Speed);
+        }
+        //I don't now why but for some reason the z axis changes when i rotate the object so every frame i set it to zero 
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
+    }  
 
     private void SetupInstance()
     {
@@ -50,27 +69,15 @@ public class EndAnimationSequance : MonoBehaviour
         s_Instance = this;
     }
 
-    private void Start()
+    private void RotateBaseOnSpaceWorld(Transform transform ,Vector3 direction ,float speed)
     {
-        RotateCameraBaseOnSpaceWorld(m_RotationOfXAngel, 0f, 0f);
+        transform.Rotate(direction * speed, Space.World);
     }
 
-    public void Update()
+    public void SetEndCameraPosition(Transform mainCamera ,Transform endSceneCamera)
     {
-        if (IsCameraActive())
-        {
-            RotateCameraBaseOnSpaceWorld(0f, m_RotaionSpeedOnYAxses, 0f);
-        }
-    }
-
-    private void RotateCameraBaseOnSpaceWorld(float xAxsis, float yAxsis, float zAxsis)
-    {
-        m_ParentTransform.Rotate(xAxsis, yAxsis, zAxsis, Space.World);
-    }
-
-    public void MoveCamera(Transform targettPosition, Transform endPosition, Transform cameraTransform, float time)
-    {
-        cameraTransform.DOMove(endPosition.position, time);
-        cameraTransform.LookAt(targettPosition.position);
+        endSceneCamera.transform.position = mainCamera.position;
+        endSceneCamera.transform.rotation = mainCamera.rotation;
+        endSceneCamera.transform.SetParent(gameObject.transform);
     }
 }

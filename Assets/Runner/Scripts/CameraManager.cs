@@ -1,3 +1,4 @@
+using PlasticGui.WorkspaceWindow;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -102,6 +103,9 @@ namespace HyperCasual.Runner
         /// Reset the camera to its starting position relative
         /// to the player.
         /// </summary>
+        
+        public Transform GetCameraTransform() => m_Transform;
+
         public void ResetCamera()
         {
             SetCameraPositionAndOrientation(false);
