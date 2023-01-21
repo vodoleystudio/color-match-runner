@@ -290,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SnapToGrid: 1
+  _endPositionTransform: {fileID: 0}
 --- !u!1 &6267929805731345667
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +414,7 @@ PrefabInstance:
     - target: {fileID: 5580896082165009576, guid: c4a463eb64c099e44b7dc170a96ac286,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5580896082165009576, guid: c4a463eb64c099e44b7dc170a96ac286,
         type: 3}
