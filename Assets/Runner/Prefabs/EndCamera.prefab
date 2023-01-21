@@ -45,11 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3467124c0e6e04bbfcb42f7a5480b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MainCamera: {fileID: 0}
   m_EndSceneCamera: {fileID: 3296620367162525868}
   m_MaxRotationOfXAngel: 180
-  m_ParentTransform: {fileID: 3296620365916133734}
-  m_Speed: 0.33
+  m_Speed: 0.25
 --- !u!1 &3296620367162525864
 GameObject:
   m_ObjectHideFlags: 0

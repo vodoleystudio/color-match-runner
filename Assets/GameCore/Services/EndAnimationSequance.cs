@@ -6,22 +6,20 @@ public class EndAnimationSequance : MonoBehaviour
     private static EndAnimationSequance s_Instance;
 
     [SerializeField]
-    private Camera m_MainCamera;
-    [SerializeField]
     private Camera m_EndSceneCamera;
+
     public Transform GetEndSceneCameraTransform() => m_EndSceneCamera.transform;
 
     [SerializeField]
     private float m_MaxRotationOfXAngel;
-    [SerializeField]
-    private Transform m_ParentTransform;
+
     [SerializeField]
     public float m_Speed;
 
     private Vector3 XandYRotation = new Vector3(1f, 1f, 0f);
     private Vector3 YRotation = new Vector3(0f, 1f, 0f);
 
-    public Transform GetParentObjectTransform() => m_ParentTransform;
+    public Transform GetParentObjectTransform() => transform;
 
     public bool IsCameraActive()
     {
@@ -41,22 +39,22 @@ public class EndAnimationSequance : MonoBehaviour
     private void Awake()
     {
         SetupInstance();
-        HideCamera();      
+        HideCamera();
     }
 
     private void Update()
     {
         if (IsCameraActive() && transform.rotation.eulerAngles.x < m_MaxRotationOfXAngel)
         {
-            RotateBaseOnSpaceWorld(m_ParentTransform, XandYRotation, m_Speed);
+            RotateBaseOnSpaceWorld(transform, XandYRotation, m_Speed);
         }
         else if (IsCameraActive())
         {
-            RotateBaseOnSpaceWorld(m_ParentTransform, YRotation, m_Speed);
+            RotateBaseOnSpaceWorld(transform, YRotation, m_Speed);
         }
-        //I don't now why but for some reason the z axis changes when i rotate the object so every frame i set it to zero 
+        //I don't now why but for some reason the z axis changes when i rotate the object so every frame i set it to zero
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
-    }  
+    }
 
     private void SetupInstance()
     {
@@ -69,12 +67,12 @@ public class EndAnimationSequance : MonoBehaviour
         s_Instance = this;
     }
 
-    private void RotateBaseOnSpaceWorld(Transform transform ,Vector3 direction ,float speed)
+    private void RotateBaseOnSpaceWorld(Transform transform, Vector3 direction, float speed)
     {
         transform.Rotate(direction * speed, Space.World);
     }
 
-    public void SetEndCameraPosition(Transform mainCamera ,Transform endSceneCamera)
+    public void SetEndCameraPosition(Transform mainCamera, Transform endSceneCamera)
     {
         endSceneCamera.transform.position = mainCamera.position;
         endSceneCamera.transform.rotation = mainCamera.rotation;
