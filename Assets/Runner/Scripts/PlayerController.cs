@@ -198,8 +198,8 @@ namespace HyperCasual.Runner
 
         public void Stop()
         {
-            Debug.LogError("123");
-            AnimationEntityService.Instance.Play(AnimationType.Idle, m_Animator); ;
+            Debug.LogError("Stop");
+            AnimationEntityService.Instance.Play(AnimationType.Idle, m_Animator);
             m_TargetSpeed = 0.0f;
             CancelMovement();
         }

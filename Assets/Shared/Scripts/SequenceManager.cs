@@ -181,6 +181,7 @@ namespace HyperCasual.Gameplay
         {
             ShowUI<MainMenu>();
             AudioManager.Instance.PlayMusic(SoundID.MenuMusic);
+            FindObjectOfType<UIGameOnSimulator>(true).gameObject.SetActive(true);
         }
 
         void OnWinScreenDisplayed(IState currentLevel)
@@ -207,6 +208,7 @@ namespace HyperCasual.Gameplay
             m_CurrentLevel = current;
             ShowUI<Hud>();
             AudioManager.Instance.StopMusic();
+            FindObjectOfType<UIGameOnSimulator>().gameObject.SetActive(false);
         }
     }
 }
