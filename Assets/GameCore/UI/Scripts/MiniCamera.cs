@@ -7,24 +7,23 @@ namespace GameCore.UI
     public class MiniCamera : MonoBehaviour
     {
         private const float AnimationDuration = 0.3f;
-
         public static MiniCamera Instance => s_Instance;
-        static MiniCamera s_Instance;
+        private static MiniCamera s_Instance;
 
         [SerializeField]
         private List<Transform> Objects;
 
-        void Awake()
+        private void Awake()
         {
             SetupInstance();
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             SetupInstance();
         }
 
-        void SetupInstance()
+        private void SetupInstance()
         {
             if (s_Instance != null && s_Instance != this)
             {
@@ -35,7 +34,6 @@ namespace GameCore.UI
             s_Instance = this;
         }
 
-
         public void Show()
         {
             DoScale(Vector3.one);
@@ -44,6 +42,12 @@ namespace GameCore.UI
         public void Hide()
         {
             DoScale(Vector3.zero);
+        }
+
+        public void SetPosition(Transform transform)
+        {
+            gameObject.transform.position = transform.position;
+            gameObject.transform.rotation = transform.rotation;
         }
 
         private void DoScale(Vector3 scale)

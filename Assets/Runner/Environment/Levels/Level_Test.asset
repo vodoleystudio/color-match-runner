@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998452e8577ff4bb78b32585432cf5a3, type: 3}
+  m_Name: Level_Test
+  m_EditorClassIdentifier: 
+  LevelLength: 40
+  LevelLengthBufferStart: 9
+  LevelLengthBufferEnd: 5
+  LevelWidth: 11
+  LevelThickness: 0.1
+  SnapToGrid: 1
+  GridSize: 0.5
+  TerrainMaterial: {fileID: 2100000, guid: e2d13250d13954c7991517c511efc6be, type: 2}
+  StartPrefab: {fileID: 1865139757532878011, guid: d8cc53fcbcfb2d14287f41f129c1694c,
+    type: 3}
+  EndPrefab: {fileID: 1865139757532878011, guid: 979b2618b08ac20459dd7568017d0c90,
+    type: 3}
+  Spawnables:
+  - SpawnablePrefab: {fileID: 0}
+    Position: {x: 0, y: -0.095, z: 40}
+    EulerAngles: {x: -0, y: 0, z: 0}
+    Scale: {x: 25, y: 0.1, z: 25}
+    BaseColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
+    SnapToGrid: 1
+  - SpawnablePrefab: {fileID: 5580896082165009579, guid: c4a463eb64c099e44b7dc170a96ac286,
+      type: 3}
+    Position: {x: 0, y: -0.0000006854534, z: 40.5}
+    EulerAngles: {x: 0, y: 180, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+    BaseColor: {r: 0, g: 0, b: 0, a: 0}
+    SnapToGrid: 1
+  - SpawnablePrefab: {fileID: 4507862839474419013, guid: c51777c417238c34982c63b1f857f70e,
+      type: 3}
+    Position: {x: 0, y: 0, z: -8.5}
+    EulerAngles: {x: -0, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+    BaseColor: {r: 0, g: 0, b: 0, a: 1}
+    SnapToGrid: 1

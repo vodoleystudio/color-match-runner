@@ -47,7 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EndSceneCamera: {fileID: 3296620367162525868}
   m_MaxRotationOfXAngel: 180
-  m_Speed: 0.2
+  m_ParentTransform: {fileID: 3296620365916133734}
+  m_Speed: 50
 --- !u!1 &3296620367162525864
 GameObject:
   m_ObjectHideFlags: 0
