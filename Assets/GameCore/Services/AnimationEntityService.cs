@@ -1,9 +1,9 @@
-using UnityEngine;
 using GameCore.Data;
+using UnityEngine;
 
 namespace GameCore.Services
 {
-    public class AnimationEntityService :IAnimationEntityService 
+    public class AnimationEntityService : IAnimationEntityService 
     {
         private static readonly AnimationEntityService _instance = new AnimationEntityService();
 

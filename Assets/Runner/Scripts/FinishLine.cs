@@ -1,4 +1,5 @@
-using DG.Tweening;
+using GameCore.Services;
+using GameCore.Data;
 using GameCore.UI;
 using UnityEngine;
 
@@ -11,19 +12,35 @@ namespace HyperCasual.Runner
     [RequireComponent(typeof(Collider))]
     public class FinishLine : Spawnable
     {
-        const string k_PlayerTag = "Player";
-        
-        void OnTriggerEnter(Collider col)
+        private const string k_PlayerTag = "Player";
+        private const float k_AnimationTime = 2f;
+
+        [SerializeField]
+        private Transform m_endPositionTransform;
+
+        [SerializeField]
+        private Transform m_MiniCameraSpot;
+
+        public Transform MiniCameraSpot => m_MiniCameraSpot;
+
+        private void OnTriggerEnter(Collider col)
         {
             if (col.CompareTag(k_PlayerTag))
             {
                 //GameManager._instance.Win();
                 MiniCamera.Instance.Hide();
-                if (PlayerController.Instance != null) 
+
+                if (PlayerController.Instance != null)
                 {
                     PlayerController.Instance.Stop();
+                    PlayerController.Instance.MoveTo(PlayerController.Instance.Animator, AnimationType.Jump, PlayerController.Instance.Transform, m_endPositionTransform, k_AnimationTime, () =>
+                    {
+                        PlayerController.Instance.SetPosition(m_endPositionTransform.position);
+                        CameraManager.Instance.Hide();
+                        EndAnimationSequence.Instance.SetParentPosition(m_endPositionTransform);
+                        EndAnimationSequence.Instance.ActivateCamera(CameraManager.Instance.GetCameraTransform());
+                    });
                 }
-                //CameraManager._instance.transform.DORotate(new Vector3(0f, 360f, 0f), 10f, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
             }
         }
     }

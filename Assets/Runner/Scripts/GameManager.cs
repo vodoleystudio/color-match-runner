@@ -4,17 +4,20 @@ using HyperCasual.Core;
 using UnityEngine;
 using GameCore.Services;
 using System.Linq;
+using GameCore.UI;
 
 #if UNITY_EDITOR
+
 using UnityEditor;
+
 #endif
 
 namespace HyperCasual.Runner
 {
     /// <summary>
-    /// A class used to store game state information, 
+    /// A class used to store game state information,
     /// load levels, and save/load statistics as applicable.
-    /// The GameManager class manages all game-related 
+    /// The GameManager class manages all game-related
     /// state changes.
     /// </summary>
     public class GameManager : MonoBehaviour
@@ -23,15 +26,16 @@ namespace HyperCasual.Runner
         /// Returns the GameManager.
         /// </summary>
         public static GameManager Instance => s_Instance;
-        static GameManager s_Instance;
+
+        private static GameManager s_Instance;
 
         [SerializeField]
-        AbstractGameEvent m_WinEvent;
+        private AbstractGameEvent m_WinEvent;
 
         [SerializeField]
-        AbstractGameEvent m_LoseEvent;
+        private AbstractGameEvent m_LoseEvent;
 
-        LevelDefinition m_CurrentLevel;
+        private LevelDefinition m_CurrentLevel;
 
         /// <summary>
         /// Returns true if the game is currently active.
@@ -39,19 +43,20 @@ namespace HyperCasual.Runner
         /// or has ended.
         /// </summary>
         public bool IsPlaying => m_IsPlaying;
-        bool m_IsPlaying;
-        GameObject m_CurrentLevelGO;
-        GameObject m_CurrentTerrainGO;
-        GameObject m_LevelMarkersGO;
 
-        static LevelManager s_LevelManager;
-        static IGamePlayProgressService s_GamePlayProgressService = new GamePlayProgressService();
+        private bool m_IsPlaying;
+        private GameObject m_CurrentLevelGO;
+        private GameObject m_CurrentTerrainGO;
+        private GameObject m_LevelMarkersGO;
+
+        private static LevelManager s_LevelManager;
+        private static IGamePlayProgressService s_GamePlayProgressService = new GamePlayProgressService();
 
 #if UNITY_EDITOR
-        bool m_LevelEditorMode;
+        private bool m_LevelEditorMode;
 #endif
 
-        void Awake()
+        private void Awake()
         {
             if (s_Instance != null && s_Instance != this)
             {
@@ -108,7 +113,7 @@ namespace HyperCasual.Runner
         /// storing a reference to its parent GameObject in levelGameObject
         /// </summary>
         /// <param name="levelDefinition">
-        /// A LevelDefinition ScriptableObject that holds all information needed to 
+        /// A LevelDefinition ScriptableObject that holds all information needed to
         /// load and instantiate a level.
         /// </param>
         /// <param name="levelGameObject">
@@ -162,7 +167,7 @@ namespace HyperCasual.Runner
                 Vector3 scale = spawnableObject.Scale;
 
                 GameObject go = null;
-                
+
                 if (Application.isPlaying)
                 {
                     go = GameObject.Instantiate(spawnableObject.SpawnablePrefab, position, Quaternion.Euler(eulerAngles));
@@ -239,7 +244,7 @@ namespace HyperCasual.Runner
             m_CurrentLevel = null;
         }
 
-        void StartGame()
+        private void StartGame()
         {
             ResetLevel();
             m_IsPlaying = true;
@@ -289,6 +294,13 @@ namespace HyperCasual.Runner
                 if (target != null)
                 {
                     target.transform.SetParent(go.transform);
+                }
+
+                if (Application.isPlaying)
+                {
+                    var finishLine = go.GetComponent<FinishLine>();
+                    MiniCamera.Instance.SetPosition(finishLine.MiniCameraSpot);
+                    Debug.LogError("Camera position set");
                 }
             }
         }

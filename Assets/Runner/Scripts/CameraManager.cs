@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HyperCasual.Runner
@@ -15,27 +13,28 @@ namespace HyperCasual.Runner
         /// Returns the CameraManager.
         /// </summary>
         public static CameraManager Instance => s_Instance;
-        static CameraManager s_Instance;
+
+        private static CameraManager s_Instance;
 
         [SerializeField]
-        CameraAnglePreset m_CameraAnglePreset = CameraAnglePreset.Behind;
+        private CameraAnglePreset m_CameraAnglePreset = CameraAnglePreset.Behind;
 
         [SerializeField]
-        Vector3 m_Offset;
+        private Vector3 m_Offset;
 
         [SerializeField]
-        Vector3 m_LookAtOffset;
+        private Vector3 m_LookAtOffset;
 
         [SerializeField]
-        bool m_LockCameraPosition;
+        private bool m_LockCameraPosition;
 
         [SerializeField]
-        bool m_SmoothCameraFollow;
+        private bool m_SmoothCameraFollow;
 
         [SerializeField]
-        float m_SmoothCameraFollowStrength = 10.0f;
+        private float m_SmoothCameraFollowStrength = 10.0f;
 
-        enum CameraAnglePreset
+        private enum CameraAnglePreset
         {
             Behind,
             Overhead,
@@ -44,7 +43,7 @@ namespace HyperCasual.Runner
             Custom,
         }
 
-        Vector3[] m_PresetOffsets = new Vector3[]
+        private Vector3[] m_PresetOffsets = new Vector3[]
         {
             new Vector3(0.0f, 5.0f, -9.0f), // Behind
             new Vector3(0.0f, 9.0f, -5.0f), // Overhead
@@ -53,7 +52,7 @@ namespace HyperCasual.Runner
             Vector3.zero                    // Custom
         };
 
-        Vector3[] m_PresetLookAtOffsets = new Vector3[]
+        private Vector3[] m_PresetLookAtOffsets = new Vector3[]
         {
             new Vector3(0.0f, 2.0f, 6.0f),  // Behind
             new Vector3(0.0f, 0.0f, 4.0f),  // Overhead
@@ -62,7 +61,7 @@ namespace HyperCasual.Runner
             Vector3.zero                    // Custom
         };
 
-        bool[] m_PresetLockCameraPosition = new bool[]
+        private bool[] m_PresetLockCameraPosition = new bool[]
         {
             false, // Behind
             false, // Overhead
@@ -71,22 +70,22 @@ namespace HyperCasual.Runner
             false  // Custom
         };
 
-        Transform m_Transform;
-        Vector3 m_PrevLookAtOffset;
+        private Transform m_Transform;
+        private Vector3 m_PrevLookAtOffset;
 
-        static readonly Vector3 k_CenteredScale = new Vector3(0.0f, 1.0f, 1.0f);
+        private static readonly Vector3 k_CenteredScale = new Vector3(0.0f, 1.0f, 1.0f);
 
-        void Awake()
+        private void Awake()
         {
             SetupInstance();
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             SetupInstance();
         }
 
-        void SetupInstance()
+        private void SetupInstance()
         {
             if (s_Instance != null && s_Instance != this)
             {
@@ -102,22 +101,30 @@ namespace HyperCasual.Runner
         /// Reset the camera to its starting position relative
         /// to the player.
         /// </summary>
+
+        public Transform GetCameraTransform() => m_Transform;
+
         public void ResetCamera()
         {
             SetCameraPositionAndOrientation(false);
         }
 
-        Vector3 GetCameraOffset()
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
+
+        private Vector3 GetCameraOffset()
         {
             return m_PresetOffsets[(int)m_CameraAnglePreset] + m_Offset;
         }
 
-        Vector3 GetCameraLookAtOffset()
+        private Vector3 GetCameraLookAtOffset()
         {
             return m_PresetLookAtOffsets[(int)m_CameraAnglePreset] + m_LookAtOffset;
         }
 
-        bool GetCameraLockStatus()
+        private bool GetCameraLockStatus()
         {
             if (m_LockCameraPosition)
             {
@@ -127,10 +134,10 @@ namespace HyperCasual.Runner
             return m_PresetLockCameraPosition[(int)m_CameraAnglePreset];
         }
 
-        Vector3 GetPlayerPosition()
+        private Vector3 GetPlayerPosition()
         {
             Vector3 playerPosition = Vector3.up;
-            if (PlayerController.Instance != null) 
+            if (PlayerController.Instance != null)
             {
                 playerPosition = PlayerController.Instance.GetPlayerTop();
             }
@@ -143,7 +150,7 @@ namespace HyperCasual.Runner
             return playerPosition;
         }
 
-        void LateUpdate()
+        private void LateUpdate()
         {
             if (m_Transform == null)
             {
@@ -153,7 +160,7 @@ namespace HyperCasual.Runner
             SetCameraPositionAndOrientation(m_SmoothCameraFollow);
         }
 
-        void SetCameraPositionAndOrientation(bool smoothCameraFollow)
+        private void SetCameraPositionAndOrientation(bool smoothCameraFollow)
         {
             Vector3 playerPosition = GetPlayerPosition();
 
@@ -177,4 +184,3 @@ namespace HyperCasual.Runner
         }
     }
 }
-

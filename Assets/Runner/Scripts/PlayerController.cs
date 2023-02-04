@@ -4,6 +4,8 @@ using UnityEditor;
 using UnityEngine;
 using GameCore.Services;
 using GameCore.Data;
+using DG.Tweening;
+using System;
 
 namespace HyperCasual.Runner
 {
@@ -21,6 +23,8 @@ namespace HyperCasual.Runner
 
         [SerializeField]
         Animator m_Animator;
+
+        public Animator Animator => m_Animator;
 
         [SerializeField]
         SkinnedMeshRenderer m_SkinnedMeshRenderer;
@@ -121,6 +125,17 @@ namespace HyperCasual.Runner
         /// <summary>
         /// Set up all necessary values for the PlayerController.
         /// </summary>
+        /// 
+        public void MoveTo(Animator animator, AnimationType animationType, Transform playerTransform, Transform endPositionTransform, float animationTime, Action onComplete = null)
+        {
+            AnimationEntityService.Instance.Play(animationType, animator);
+            playerTransform.DOMove(endPositionTransform.position, animationTime).OnComplete(() =>
+            {
+                AnimationEntityService.Instance.Play(AnimationType.Idle, animator);
+                onComplete?.Invoke();
+                SetPosition(transform.position);
+            });
+        }
         public void Initialize()
         {
             m_Transform = transform;
@@ -186,6 +201,13 @@ namespace HyperCasual.Runner
             Debug.LogError("Stop");
             AnimationEntityService.Instance.Play(AnimationType.Idle, m_Animator);
             m_TargetSpeed = 0.0f;
+            CancelMovement();
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            m_XPos = position.x;
+            m_ZPos = position.z;
         }
 
         /// <summary>
