@@ -52,14 +52,15 @@ public class EndAnimationSequence : MonoBehaviour
             if (transform.rotation.eulerAngles.x < m_MaxRotationOfXAngel)
             {
                 RotateBaseOnSpaceWorld(m_ParentTransform, m_XandYRotation, m_Speed);
+
+                //I don't now why but for some reason the z axis changes when I rotate the object so every frame i set it to zero
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
             }
             else
             {
                 RotateBaseOnSpaceWorld(m_ParentTransform, m_YRotation, m_Speed);
             }
         }
-        //I don't now why but for some reason the z axis changes when I rotate the object so every frame i set it to zero
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
     }
 
     private void SetupInstance()
