@@ -16,28 +16,34 @@ namespace HyperCasual.Runner
         private const float k_AnimationTime = 2f;
 
         [SerializeField]
-        private Transform m_endPositionTransform;
+        private Transform m_PlayerEndPosition;
 
         [SerializeField]
-        private Transform m_MiniCameraSpot;
+        private Transform _endCameraPosition;
 
-        public Transform MiniCameraSpot => m_MiniCameraSpot;
+        [SerializeField]
+        private MiniCamera _miniCamera;
+
+        [SerializeField]
+        private Transform m_TargetPosition;
+
+        public Transform TargetPosition => m_TargetPosition;
 
         private void OnTriggerEnter(Collider col)
         {
             if (col.CompareTag(k_PlayerTag))
             {
                 //GameManager._instance.Win();
-                MiniCamera.Instance.Hide();
+                _miniCamera.Hide();
 
                 if (PlayerController.Instance != null)
                 {
                     PlayerController.Instance.Stop();
-                    PlayerController.Instance.MoveTo(PlayerController.Instance.Animator, AnimationType.Jump, PlayerController.Instance.Transform, m_endPositionTransform, k_AnimationTime, () =>
+                    PlayerController.Instance.MoveTo(PlayerController.Instance.Animator, AnimationType.Jump, PlayerController.Instance.Transform, m_PlayerEndPosition, k_AnimationTime, () =>
                     {
-                        PlayerController.Instance.SetPosition(m_endPositionTransform.position);
+                        PlayerController.Instance.SetPosition(m_PlayerEndPosition.position);
                         CameraManager.Instance.Hide();
-                        EndAnimationSequence.Instance.SetParentPosition(m_endPositionTransform);
+                        EndAnimationSequence.Instance.SetParentPosition(_endCameraPosition);
                         EndAnimationSequence.Instance.ActivateCamera(CameraManager.Instance.GetCameraTransform());
                     });
                 }

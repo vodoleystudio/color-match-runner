@@ -290,17 +290,11 @@ namespace HyperCasual.Runner
                 GameObject go = GameObject.Instantiate(end, new Vector3(end.transform.position.x, end.transform.position.y, levelDefinition.LevelLength), Quaternion.identity);
                 go.transform.SetParent(levelMarkersGameObject.transform);
 
+                var finishLine = go.GetComponent<FinishLine>();
                 var target = s_LevelManager.ActiveSpawnables.FirstOrDefault(s => s is TargetBase);
                 if (target != null)
                 {
-                    target.transform.SetParent(go.transform);
-                }
-
-                if (Application.isPlaying)
-                {
-                    var finishLine = go.GetComponent<FinishLine>();
-                    MiniCamera.Instance.SetPosition(finishLine.MiniCameraSpot);
-                    Debug.LogError("Camera position set");
+                    target.transform.SetPositionAndRotation(finishLine.TargetPosition.position, finishLine.TargetPosition.rotation);
                 }
             }
         }
