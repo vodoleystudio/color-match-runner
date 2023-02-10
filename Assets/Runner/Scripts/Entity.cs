@@ -1,14 +1,16 @@
 using UnityEngine;
 
 #if UNITY_EDITOR
+
 using UnityEditor;
+
 #endif
 
 namespace HyperCasual.Runner
 {
     /// <summary>
     /// A base class for all objects which populate a
-    /// LevelDefinition. This class includes all logic 
+    /// LevelDefinition. This class includes all logic
     /// necessary for snapping an object to a level's grid.
     /// </summary>
     [ExecuteInEditMode]
@@ -16,16 +18,16 @@ namespace HyperCasual.Runner
     {
         protected Transform m_Transform;
 
-        LevelDefinition m_LevelDefinition;
-        Vector3 m_Position;
-        Color m_BaseColor;
-        bool m_SnappedThisFrame;
-        float m_PreviousGridSize;
+        private LevelDefinition m_LevelDefinition;
+        private Vector3 m_Position;
+        private Color m_BaseColor;
+        private bool m_SnappedThisFrame;
+        private float m_PreviousGridSize;
 
-        MeshRenderer[] m_MeshRenderers;
+        private MeshRenderer[] m_MeshRenderers;
 
         [SerializeField]
-        bool m_SnapToGrid = true;
+        private bool m_SnapToGrid = true;
 
         /// <summary>
         /// The position of this Spawnable, as it is saved.
@@ -55,16 +57,20 @@ namespace HyperCasual.Runner
         }
 
         /// <summary>
-        /// Sets the base color of this spawnable object's materials 
+        /// Sets the base color of this spawnable object's materials
         /// to baseColor.
         /// </summary>
         /// <param name="baseColor">
         /// The color to apply to this spawnable object's materials.
         /// </param>
-        public virtual void SetBaseColor(Color baseColor)
+        public void SetBaseColor(Color baseColor)
         {
             m_BaseColor = baseColor;
+            OnSetBaseColor(m_BaseColor);
+        }
 
+        protected virtual void OnSetBaseColor(Color baseColor)
+        {
             if (m_MeshRenderers == null || m_MeshRenderers.Length == 0)
             {
                 m_MeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();
@@ -118,7 +124,8 @@ namespace HyperCasual.Runner
         /// This method can be overriden in classes that extend Spawnable
         /// to hold any logic needed to reset that object to its default state.
         /// </summary>
-        public virtual void ResetData() { }
+        public virtual void ResetData()
+        { }
 
         protected virtual void OnEnable()
         {
@@ -160,7 +167,7 @@ namespace HyperCasual.Runner
         }
 
         /// <summary>
-        /// If applicable, snap this spawnable object to the grid of the 
+        /// If applicable, snap this spawnable object to the grid of the
         /// current LevelDefinition.
         /// </summary>
         protected virtual void SnapToGrid()

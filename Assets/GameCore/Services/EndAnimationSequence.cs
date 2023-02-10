@@ -1,4 +1,3 @@
-using GameCore.UI;
 using UnityEngine;
 
 public class EndAnimationSequence : MonoBehaviour

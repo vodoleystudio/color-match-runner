@@ -10,7 +10,7 @@ namespace HyperCasual.Runner
     /// </summary>
     public class Target : TargetBase
     {
-        public override void SetBaseColor(Color baseColor)
+        protected override void OnSetBaseColor(Color baseColor)
         {
             var meshRenderers = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
             if (meshRenderers != null)
