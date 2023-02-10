@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace GameCore.Services
 {
-    public class MatchService
+    public class MatchService : IMatchService
     {
         private const float k_MatchBarier = 0.33f;
         private const float k_PartialMatchBarier = 0.67f;
@@ -13,7 +13,7 @@ namespace GameCore.Services
 
         public MatchData MatchColors(Color firstColor, Color secondColor)
         {
-            MatchData matchData = new MatchData();
+            var matchData = new MatchData();
 
             List<float> colorComponents = new List<float>();
 
@@ -26,17 +26,17 @@ namespace GameCore.Services
             if (avarge >= 0.0f && avarge < k_MatchBarier)
             {
                 matchData.m_MatchState = MatchState.Match;
-                Debug.LogError("Match");
+                Debug.LogError("Match State:" + matchData.m_MatchState);
             }
             else if (avarge >= k_MatchBarier && avarge < k_PartialMatchBarier)
             {
                 matchData.m_MatchState = MatchState.PartialMatch;
-                Debug.LogError("PartialMatch");
+                Debug.LogError("Match State:" + matchData.m_MatchState);
             }
             else if (avarge >= k_PartialMatchBarier && avarge <= k_NotMatchBarier)
             {
-                matchData.m_MatchState = MatchState.Match;
-                Debug.LogError("NotMatch");
+                matchData.m_MatchState = MatchState.NotMatch;
+                Debug.LogError("Match State:" + matchData.m_MatchState);
             }
             else
             {
@@ -44,7 +44,7 @@ namespace GameCore.Services
             }
 
             matchData.m_MatchInPercentage = (int)Math.Round((1.0f - avarge) * 100);
-            Debug.LogError((int)Math.Round((1.0f - avarge) * 100));
+            Debug.LogError("Match in procent:" + (int)Math.Round((1.0f - avarge) * 100));
 
             return matchData;
         }

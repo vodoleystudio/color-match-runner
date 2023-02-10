@@ -16,7 +16,7 @@ namespace HyperCasual.Runner
         /// </summary>
         public static LevelManager Instance => s_Instance;
 
-        static LevelManager s_Instance;
+        private static LevelManager s_Instance;
 
         /// <summary>
         /// Returns the LevelDefinition used to create this LevelManager.
@@ -24,7 +24,7 @@ namespace HyperCasual.Runner
         public LevelDefinition LevelDefinition
         {
             get => m_LevelDefinition;
-            set 
+            set
             {
                 m_LevelDefinition = value;
 
@@ -34,9 +34,10 @@ namespace HyperCasual.Runner
                 }
             }
         }
-        LevelDefinition m_LevelDefinition;
 
-        List<Spawnable> m_ActiveSpawnables = new List<Spawnable>();
+        private LevelDefinition m_LevelDefinition;
+
+        private List<Spawnable> m_ActiveSpawnables = new List<Spawnable>();
         public List<Spawnable> ActiveSpawnables => m_ActiveSpawnables;
 
         /// <summary>
@@ -58,17 +59,17 @@ namespace HyperCasual.Runner
             }
         }
 
-        void Awake()
+        private void Awake()
         {
             SetupInstance();
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             SetupInstance();
         }
 
-        void SetupInstance()
+        private void SetupInstance()
         {
             if (s_Instance != null && s_Instance != this)
             {
