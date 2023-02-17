@@ -2,17 +2,12 @@ namespace GameCore.Data
 {
     public class LevelData
     {
-        public LevelData(string name, int levelId, MatchState matchstate, int matchInProcent)
+        public LevelData(string name, int levelId, MatchData matchData)
         {
             m_TargetName = name;
             m_LevelId = levelId;
-            m_MatchState = matchstate;
-            m_MatchInProcent = matchInProcent;
-        }
-
-        public string toString()
-        {
-            return $",LevelId :{m_LevelId}, TargetName: {m_TargetName}, MatchState:{m_MatchState},MatchInProcent:{m_MatchInProcent} ";
+            m_MatchState = matchData.m_MatchState;
+            m_MatchInProcent = matchData.m_MatchInPercentage;
         }
 
         public string m_TargetName;
