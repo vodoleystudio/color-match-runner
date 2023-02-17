@@ -4,6 +4,7 @@ using GameCore.UI;
 using UnityEngine;
 using System.Linq;
 using System;
+using System.Text.RegularExpressions;
 
 namespace HyperCasual.Runner
 {
@@ -54,6 +55,8 @@ namespace HyperCasual.Runner
                     PlayerController.Instance.MoveTo(PlayerController.Instance.Animator, AnimationType.Jump, PlayerController.Instance.Transform, m_PlayerEndPosition, k_AnimationTime, () =>
                     {
                         var matchData = m_MatchService.MatchColors(GetTargetReference().BaseColor, PlayerController.Instance.GetColor());
+                        //SaveManager.Instance.SaveLevelData("TestData", new LevelData("TestLevel", 1, matchData.m_MatchState, matchData.m_MatchInPercentage));
+                        //print(SaveManager.Instance.GetLevelData("TestData").toString());
                         m_prticleSystemService.PlayParticleSystem(matchData.m_MatchState);
                         CameraManager.Instance.Hide();
                         EndAnimationSequence.Instance.SetParentPosition(m_endCameraPosition);

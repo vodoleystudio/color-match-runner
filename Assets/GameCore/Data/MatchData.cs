@@ -1,7 +1,10 @@
 using GameCore.Data;
 
-public class MatchData
+namespace GameCore.Data
 {
-    public MatchState m_MatchState;
-    public int m_MatchInPercentage;
+    public class MatchData
+    {
+        public MatchState m_MatchState;
+        public int m_MatchInPercentage;
+    }
 }

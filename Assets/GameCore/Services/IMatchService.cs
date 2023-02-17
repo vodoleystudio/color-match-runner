@@ -1,4 +1,5 @@
 using UnityEngine;
+using GameCore.Data;
 
 public interface IMatchService
 {

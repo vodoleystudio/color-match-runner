@@ -5,8 +5,8 @@ using UnityEngine.UIElements;
 namespace GameCore.Services
 {
     public class GamePlayProgressService : IGamePlayProgressService
-    {   
-        private const float MinColorUnitResolution = 1/256f; // 0.00390625
+    {
+        private const float MinColorUnitResolution = 1 / 256f; // 0.00390625
         private const float MaxOffset = 127 * MinColorUnitResolution;
         private const float OffsetStep = 3f * MinColorUnitResolution;
         private static Color EmptyColor = new Color(0f, 0f, 0f, 0f);
@@ -39,7 +39,7 @@ namespace GameCore.Services
             gateData.CorrectColor = gateData.GateColors[Random.Range(0, gateData.GateColors.Count)];
 
             Update();
-            
+
             return gateData;
         }
 
@@ -50,4 +50,3 @@ namespace GameCore.Services
         }
     }
 }
-
