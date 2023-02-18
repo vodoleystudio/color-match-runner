@@ -1,6 +1,8 @@
 using UnityEngine;
 using GameCore.Data;
 using UnityEngine.UIElements;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GameCore.Services
 {
@@ -9,33 +11,39 @@ namespace GameCore.Services
         private const float MinColorUnitResolution = 1 / 256f; // 0.00390625
         private const float MaxOffset = 127 * MinColorUnitResolution;
         private const float OffsetStep = 3f * MinColorUnitResolution;
-        private static Color EmptyColor = new Color(0f, 0f, 0f, 0f);
+        private const int m_NumberOfColors = 4;
 
+        private List<Color> m_AllColors = new() { Color.blue, Color.green, Color.cyan, Color.gray, Color.red, Color.magenta, Color.yellow };
+        private List<Color> m_LevelColors = new();
         private float _offset;
 
-        private Color _color = EmptyColor;
+        public void Setup()
+        {
+            m_LevelColors.Clear();
+            var colors = m_AllColors.ToList();
+            int index;
+            for (int i = 0; i < m_NumberOfColors; i++)
+            {
+                index = Random.Range(0, colors.Count);
+                m_LevelColors.Add(colors[index]);
+                colors.RemoveAt(index);
+            }
+        }
 
         public void Reset()
         {
             _offset = MaxOffset;
-            _color = EmptyColor;
         }
 
         public BlockData GenerateBlockData()
         {
             var gateData = new BlockData();
-            if (_color == EmptyColor)
+
+            foreach (var color in m_LevelColors)
             {
-                _color = RandomColorService.Instance.GetRandomColor();
+                gateData.GateColors.Add(color);
             }
 
-            var randomColor = _color;
-            //gateData.GateColors.Add(randomColor);
-            //gateData.GateColors.Add(_randomColorService.GetSimilarRandomColor(randomColor, ColorComponent.R, 0f, 1f));
-            gateData.GateColors.Add(Color.green);
-            gateData.GateColors.Add(Color.red);
-            gateData.GateColors.Add(Color.yellow);
-            gateData.GateColors.Add(Color.blue);
             gateData.CorrectColor = gateData.GateColors[Random.Range(0, gateData.GateColors.Count)];
 
             Update();
