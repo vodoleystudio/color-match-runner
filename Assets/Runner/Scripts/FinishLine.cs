@@ -55,8 +55,9 @@ namespace HyperCasual.Runner
                     PlayerController.Instance.MoveTo(PlayerController.Instance.Animator, AnimationType.Jump, PlayerController.Instance.Transform, m_PlayerEndPosition, k_AnimationTime, () =>
                     {
                         var matchData = m_MatchService.MatchColors(GetTargetReference().BaseColor, PlayerController.Instance.GetColor());
-                        //SaveManager.Instance.SaveLevelData("TestData", new LevelData("TestLevel", 1, 3, matchData));
-                        //print(matchData.ToString());
+                        //var levelData = new LevelData("TestLevel", 1, matchData);
+                        //SaveManager.Instance.SaveLevelData("TestData", new LevelData("TestLevel", 1, matchData));
+                        //Debug.LogError(levelData);
                         m_prticleSystemService.PlayParticleSystem(matchData.m_MatchState);
                         CameraManager.Instance.Hide();
                         EndAnimationSequence.Instance.SetParentPosition(m_endCameraPosition);
