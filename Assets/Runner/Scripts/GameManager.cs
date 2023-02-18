@@ -82,6 +82,7 @@ namespace HyperCasual.Runner
         /// </summary>
         public void LoadLevel(LevelDefinition levelDefinition)
         {
+            s_GamePlayProgressService.Setup();
             m_CurrentLevel = levelDefinition;
             LoadLevel(m_CurrentLevel, ref m_CurrentLevelGO);
             CreateTerrain(m_CurrentLevel, ref m_CurrentTerrainGO);
