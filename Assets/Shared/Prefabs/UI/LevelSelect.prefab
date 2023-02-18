@@ -730,7 +730,7 @@ MonoBehaviour:
   m_LevelButtonsRoot: {fileID: 4571720081767471473}
   m_NextLevelEvent: {fileID: 11400000, guid: b892538bd49f3487bbedf5106c094739, type: 2}
   m_BackEvent: {fileID: 11400000, guid: 58f804667e2cb4eb789b6d2dfb3c4ce3, type: 2}
-  m_UnlockAllLevels: 0
+  m_UnlockAllLevels: 1
 --- !u!1 &5802151828082247271
 GameObject:
   m_ObjectHideFlags: 0
