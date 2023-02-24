@@ -5,13 +5,13 @@ using UnityEngine;
 namespace HyperCasual.Runner
 {
     /// <summary>
-    /// A class used to generate terrain for 
+    /// A class used to generate terrain for
     /// Runner levels.
     /// </summary>
     public class TerrainGenerator : MonoBehaviour
     {
         /// <summary>
-        /// Contains all the measurements needed for the 
+        /// Contains all the measurements needed for the
         /// TerrainGenerator to create a new piece of Terrain.
         /// </summary>
         public struct TerrainDimensions
@@ -20,17 +20,17 @@ namespace HyperCasual.Runner
             /// Width of the terrain to generate.
             /// </summary>
             public float Width;
-            
+
             /// <summary>
             /// Length of the terrain to generate.
             /// </summary>
             public float Length;
-            
+
             /// <summary>
             /// Length of terrain to add before the start of the level.
             /// </summary>
             public float StartBuffer;
-            
+
             /// <summary>
             /// Length of terrain to add after the end of the level.
             /// </summary>
@@ -281,6 +281,7 @@ namespace HyperCasual.Runner
             meshFilter.sharedMesh = mesh;
             MeshRenderer meshRenderer = terrainGameObject.AddComponent<MeshRenderer>();
             meshRenderer.sharedMaterial = terrainMaterial;
+            meshRenderer.enabled = false;
         }
     }
 }

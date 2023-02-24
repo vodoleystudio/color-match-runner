@@ -30,11 +30,6 @@ namespace GameCore.Services
             }
         }
 
-        public void Reset()
-        {
-            _offset = MaxOffset;
-        }
-
         public BlockData GenerateBlockData()
         {
             var gateData = new BlockData();

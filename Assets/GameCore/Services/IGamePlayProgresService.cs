@@ -7,7 +7,5 @@ namespace GameCore.Services
         void Setup();
 
         BlockData GenerateBlockData();
-
-        void Reset();
     }
 }
