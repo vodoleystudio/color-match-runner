@@ -11,8 +11,8 @@ namespace HyperCasual.Runner
     /// </summary>
     public class Gate : Entity
     {
-        const string k_PlayerTag = "Player";
-        const float HideDuration = 0.1f;
+        private const string k_PlayerTag = "Player";
+        private const float HideDuration = 0.1f;
 
         public bool IsUsed { get; private set; }
         public float MixValue { get; set; }
@@ -21,7 +21,7 @@ namespace HyperCasual.Runner
 
         protected override void Awake() => _parent = transform.parent;
 
-        void OnTriggerEnter(Collider col)
+        private void OnTriggerEnter(Collider col)
         {
             if (col.CompareTag(k_PlayerTag))
             {

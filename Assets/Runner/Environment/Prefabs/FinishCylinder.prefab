@@ -121,7 +121,6 @@ MonoBehaviour:
   m_SnapToGrid: 1
   m_PlayerEndPosition: {fileID: 3085257481593949124}
   m_endCameraPosition: {fileID: 8378604436741097687}
-  m_ParticleSystemSpot: {fileID: 0}
   m_miniCamera: {fileID: 1930128009305974266}
   m_TargetPosition: {fileID: 3189675775801323596}
   m_prticleSystemService:
@@ -132,6 +131,10 @@ MonoBehaviour:
       m_ParticleSystem: {fileID: 2555881047172450106}
     - m_MatchState: 3
       m_ParticleSystem: {fileID: 848922107972585570}
+  m_EndGameEvent:
+    m_Event: {fileID: 11400000, guid: b892538bd49f3487bbedf5106c094739, type: 2}
+  m_BackEvent:
+    m_Event: {fileID: 11400000, guid: 58f804667e2cb4eb789b6d2dfb3c4ce3, type: 2}
 --- !u!1 &3184851743525254229
 GameObject:
   m_ObjectHideFlags: 0

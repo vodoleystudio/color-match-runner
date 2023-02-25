@@ -114,6 +114,11 @@ namespace HyperCasual.Runner
             gameObject.SetActive(false);
         }
 
+        public void Activate()
+        {
+            gameObject.SetActive(true);
+        }
+
         private Vector3 GetCameraOffset()
         {
             return m_PresetOffsets[(int)m_CameraAnglePreset] + m_Offset;

@@ -6,26 +6,26 @@ namespace HyperCasual.Core
 {
     public class AdsListener : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
     {
-        [SerializeField] string m_EndOfLevelAndroidAdUnitId = "Interstitial_Android";
-        [SerializeField] string m_EndOfLevelIOSAdUnitId = "Interstitial_iOS";
-        [SerializeField] GenericGameEventListener[] m_EndOfLevelListeners;
+        [SerializeField] private string m_EndOfLevelAndroidAdUnitId = "Interstitial_Android";
+        [SerializeField] private string m_EndOfLevelIOSAdUnitId = "Interstitial_iOS";
+        [SerializeField] private GenericGameEventListener[] m_EndOfLevelListeners;
 
         public void Awake()
         {
-            foreach (GenericGameEventListener trigger in m_EndOfLevelListeners)
+            /*foreach (GenericGameEventListener trigger in m_EndOfLevelListeners)
             {
                 trigger.EventHandler += OnEndOfLevel;
                 trigger.Subscribe();
-            }
+            }*/
         }
 
         public void OnDestroy()
         {
-            foreach (GenericGameEventListener trigger in m_EndOfLevelListeners)
+            /*foreach (GenericGameEventListener trigger in m_EndOfLevelListeners)
             {
                 trigger.EventHandler -= OnEndOfLevel;
                 trigger.Unsubscribe();
-            }
+            }*/
         }
 
         public void OnEndOfLevel()
@@ -38,7 +38,7 @@ namespace HyperCasual.Core
                 {
                     adId = m_EndOfLevelIOSAdUnitId;
                 }
-                
+
                 Debug.Log($"Loading ad {adId} from an end of level event");
                 adsController.ShowAd(adId, this);
             }
@@ -47,7 +47,7 @@ namespace HyperCasual.Core
                 Debug.Log($"Could not load ad because {nameof(AdsController)} has not initialized");
             }
         }
-        
+
         // --- IUnityAdsLoadListener
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace HyperCasual.Core
             // Optionally execute code if the Ad Unit successfully loads content.
             AdsController.Instance.ShowAd(adUnitId, this);
         }
-     
+
         /// <summary>
         /// Handler for when a Unity ad fails to load
         /// </summary>
@@ -79,7 +79,8 @@ namespace HyperCasual.Core
         /// </summary>
         /// <param name="adUnitId"></param>
         /// <param name="showCompletionState"></param>
-        public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState) { }
+        public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
+        { }
 
         /// <summary>
         /// Handler for when showing an ad fails
@@ -91,17 +92,19 @@ namespace HyperCasual.Core
         {
             Debug.LogError($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
         }
-     
+
         /// <summary>
         /// Handler for when an ad starts showing
         /// </summary>
         /// <param name="adUnitId"></param>
-        public void OnUnityAdsShowStart(string adUnitId) { }
-        
+        public void OnUnityAdsShowStart(string adUnitId)
+        { }
+
         /// <summary>
         /// Handler for when the user clicks/taps on an ad
         /// </summary>
         /// <param name="adUnitId"></param>
-        public void OnUnityAdsShowClick(string adUnitId) { }
+        public void OnUnityAdsShowClick(string adUnitId)
+        { }
     }
 }

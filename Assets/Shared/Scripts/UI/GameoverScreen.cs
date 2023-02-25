@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using HyperCasual.Core;
 using UnityEngine;
 using UnityEngine.UI;
+using GameCore.Data;
+using System.Linq;
 
 namespace HyperCasual.Runner
 {
@@ -12,32 +14,50 @@ namespace HyperCasual.Runner
     public class GameoverScreen : View
     {
         [SerializeField]
-        HyperCasualButton m_PlayAgainButton;
-        [SerializeField]
-        HyperCasualButton m_GoToMainMenuButton;
-        [SerializeField]
-        AbstractGameEvent m_PlayAgainEvent;
-        [SerializeField]
-        AbstractGameEvent m_GoToMainMenuEvent;
+        private Slider m_Slider;
 
-        void OnEnable()
+        public Slider Slider
+        {
+            get => m_Slider;
+            set
+            {
+                if (m_Slider.minValue < value.value && value.value < Slider.maxValue)
+                {
+                    m_Slider.value = value.value;
+                }
+            }
+        }
+
+        [SerializeField]
+        private HyperCasualButton m_PlayAgainButton;
+
+        [SerializeField]
+        private HyperCasualButton m_GoToMainMenuButton;
+
+        [SerializeField]
+        private AbstractGameEvent m_PlayAgainEvent;
+
+        [SerializeField]
+        private AbstractGameEvent m_GoToMainMenuEvent;
+
+        private void OnEnable()
         {
             m_PlayAgainButton.AddListener(OnPlayAgainButtonClick);
             m_GoToMainMenuButton.AddListener(OnGoToMainMenuButtonClick);
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             m_PlayAgainButton.RemoveListener(OnPlayAgainButtonClick);
             m_GoToMainMenuButton.RemoveListener(OnGoToMainMenuButtonClick);
         }
 
-        void OnPlayAgainButtonClick()
+        private void OnPlayAgainButtonClick()
         {
             m_PlayAgainEvent.Raise();
         }
 
-        void OnGoToMainMenuButtonClick()
+        private void OnGoToMainMenuButtonClick()
         {
             m_GoToMainMenuEvent.Raise();
         }

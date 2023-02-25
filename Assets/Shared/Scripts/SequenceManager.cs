@@ -145,7 +145,7 @@ namespace HyperCasual.Gameplay
             m_LevelStates.Add(loadLevelState);
             var gameplayState = new State(() => OnGamePlayStarted(loadLevelState));
             var winState = new PauseState(() => OnWinScreenDisplayed(loadLevelState));
-            var loseState = new PauseState(ShowUI<GameoverScreen>);
+            var loseState = new State(ShowUI<GameoverScreen>);
             var pauseState = new PauseState(ShowUI<PauseMenu>);
             var unloadLose = new UnloadLastSceneState(m_SceneController);
             var unloadPause = new UnloadLastSceneState(m_SceneController);
@@ -210,6 +210,7 @@ namespace HyperCasual.Gameplay
         {
             ShowUI<LevelSelectionScreen>();
             AudioManager.Instance.PlayMusic(SoundID.MenuMusic);
+            FindObjectOfType<UIGameOnSimulator>(true).gameObject.SetActive(true);
         }
 
         private void OnGamePlayStarted(IState current)
