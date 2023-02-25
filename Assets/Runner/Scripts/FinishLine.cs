@@ -3,11 +3,8 @@ using GameCore.Data;
 using GameCore.UI;
 using UnityEngine;
 using System.Linq;
-using System;
 using HyperCasual.Core;
-using System.Collections.Generic;
 using System.Collections;
-using DG.Tweening;
 
 namespace HyperCasual.Runner
 {
@@ -46,7 +43,7 @@ namespace HyperCasual.Runner
         [SerializeField]
         private GenericGameEventListener m_BackEvent;
 
-        private void Revers()
+        private void ResetMainCameras()
         {
             CameraManager.Instance.Activate();
             EndAnimationSequence.Instance.HideCamera();
@@ -70,11 +67,11 @@ namespace HyperCasual.Runner
             m_GameOverScreen = UIManager.Instance.GetView<GameoverScreen>();
             if (m_EndGameEvent != null)
             {
-                m_EndGameEvent.EventHandler = Revers;
+                m_EndGameEvent.EventHandler = ResetMainCameras;
             }
             if (m_BackEvent != null)
             {
-                m_BackEvent.EventHandler = Revers;
+                m_BackEvent.EventHandler = ResetMainCameras;
             }
         }
 
@@ -91,9 +88,14 @@ namespace HyperCasual.Runner
             }
         }
 
+        private void SetupMainCameras()
+        {
+            CameraManager.Instance.Hide();
+            EndAnimationSequence.Instance.ActivateCamera(CameraManager.Instance.GetCameraTransform());
+        }
+
         private IEnumerator runEndAnimationSequence()
         {
-            //GameManager._instance.Win();
             m_miniCamera.Hide();
 
             if (PlayerController.Instance != null)
@@ -107,9 +109,8 @@ namespace HyperCasual.Runner
                     ////Debug.LogError(levelData);
                     m_GameOverScreen.Slider.value = m_MatchData.m_MatchInPercentage;
                     m_prticleSystemService.PlayParticleSystem(m_MatchData.m_MatchState);
-                    CameraManager.Instance.Hide();
                     EndAnimationSequence.Instance.SetParentPosition(m_endCameraPosition);
-                    EndAnimationSequence.Instance.ActivateCamera(CameraManager.Instance.GetCameraTransform());
+                    SetupMainCameras();
                 });
 
                 yield return new WaitForSeconds(k_AnimationTime);
