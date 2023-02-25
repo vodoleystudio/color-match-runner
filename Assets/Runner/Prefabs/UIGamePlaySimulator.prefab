@@ -324,9 +324,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SnapToGrid: 1
   m_PlayerEndPosition: {fileID: 0}
-  _endCameraPosition: {fileID: 4095337574878513971}
-  _miniCamera: {fileID: 6017395837718086952}
+  m_endCameraPosition: {fileID: 4095337574878513971}
+  m_miniCamera: {fileID: 0}
   m_TargetPosition: {fileID: 4952507985099179053}
+  m_prticleSystemService:
+    m_ParticleSystem: []
+  m_EndGameEvent:
+    m_Event: {fileID: 11400000, guid: b892538bd49f3487bbedf5106c094739, type: 2}
+  m_BackEvent:
+    m_Event: {fileID: 11400000, guid: 58f804667e2cb4eb789b6d2dfb3c4ce3, type: 2}
 --- !u!1 &6267929805731345667
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,18 +640,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ab9a9ae0a5bf0949a1492b1318334bc, type: 3}
---- !u!114 &6017395837718086952 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 483476592, guid: 4ab9a9ae0a5bf0949a1492b1318334bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 6017395838065082712}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61f78c660ceaa0244855ff75ffac17bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &7215563708184277379 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4008416237436448987, guid: 4ab9a9ae0a5bf0949a1492b1318334bc,

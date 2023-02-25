@@ -51,6 +51,7 @@ namespace HyperCasual.Runner
 
         private static LevelManager s_LevelManager;
         private static IGamePlayProgressService s_GamePlayProgressService = new GamePlayProgressService();
+        public IMatchService MatchService { get; } = new MatchService();
 
 #if UNITY_EDITOR
         private bool m_LevelEditorMode;

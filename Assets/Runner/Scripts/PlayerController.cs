@@ -11,7 +11,7 @@ namespace HyperCasual.Runner
 {
     /// <summary>
     /// A class used to control a player in a Runner
-    /// game. Includes logic for player movement as well as 
+    /// game. Includes logic for player movement as well as
     /// other gameplay logic.
     /// </summary>
     public class PlayerController : MonoBehaviour
@@ -19,44 +19,44 @@ namespace HyperCasual.Runner
         /// <summary> Returns the PlayerController. </summary>
         public static PlayerController Instance => s_Instance;
 
-        static PlayerController s_Instance;
+        private static PlayerController s_Instance;
 
         [SerializeField]
-        Animator m_Animator;
+        private Animator m_Animator;
 
         public Animator Animator => m_Animator;
 
         [SerializeField]
-        SkinnedMeshRenderer m_SkinnedMeshRenderer;
+        private SkinnedMeshRenderer m_SkinnedMeshRenderer;
 
         [SerializeField]
-        PlayerSpeedPreset m_PlayerSpeed = PlayerSpeedPreset.Medium;
+        private PlayerSpeedPreset m_PlayerSpeed = PlayerSpeedPreset.Medium;
 
         [SerializeField]
-        float m_CustomPlayerSpeed = 10.0f;
+        private float m_CustomPlayerSpeed = 10.0f;
 
         [SerializeField]
-        float m_AccelerationSpeed = 10.0f;
+        private float m_AccelerationSpeed = 10.0f;
 
         [SerializeField]
-        float m_DecelerationSpeed = 20.0f;
+        private float m_DecelerationSpeed = 20.0f;
 
         [SerializeField]
-        float m_HorizontalSpeedFactor = 0.5f;
+        private float m_HorizontalSpeedFactor = 0.5f;
 
         [SerializeField]
-        float m_ScaleVelocity = 2.0f;
+        private float m_ScaleVelocity = 2.0f;
 
         [SerializeField]
-        bool m_AutoMoveForward = true;
+        private bool m_AutoMoveForward = true;
 
-        Vector3 m_LastPosition;
-        float m_StartHeight;
+        private Vector3 m_LastPosition;
+        private float m_StartHeight;
 
-        const float k_MinimumScale = 0.1f;
-        static readonly string s_Speed = "Speed";
+        private const float k_MinimumScale = 0.1f;
+        private static readonly string s_Speed = "Speed";
 
-        enum PlayerSpeedPreset
+        private enum PlayerSpeedPreset
         {
             Slow,
             Medium,
@@ -64,20 +64,20 @@ namespace HyperCasual.Runner
             Custom
         }
 
-        Transform m_Transform;
-        Vector3 m_StartPosition;
-        bool m_HasInput;
-        float m_MaxXPosition;
-        float m_XPos;
-        float m_ZPos;
-        float m_TargetPosition;
-        float m_Speed;
-        float m_TargetSpeed;
-        Vector3 m_Scale;
-        Vector3 m_TargetScale;
-        Vector3 m_DefaultScale;
+        private Transform m_Transform;
+        private Vector3 m_StartPosition;
+        private bool m_HasInput;
+        private float m_MaxXPosition;
+        private float m_XPos;
+        private float m_ZPos;
+        private float m_TargetPosition;
+        private float m_Speed;
+        private float m_TargetSpeed;
+        private Vector3 m_Scale;
+        private Vector3 m_TargetScale;
+        private Vector3 m_DefaultScale;
 
-        const float k_HalfWidth = 0.5f;
+        private const float k_HalfWidth = 0.5f;
 
         /// <summary> The player's root Transform component. </summary>
         public Transform Transform => m_Transform;
@@ -109,7 +109,7 @@ namespace HyperCasual.Runner
         /// <summary> The player's maximum X position. </summary>
         public float MaxXPosition => m_MaxXPosition;
 
-        void Awake()
+        private void Awake()
         {
             if (s_Instance != null && s_Instance != this)
             {
@@ -125,17 +125,18 @@ namespace HyperCasual.Runner
         /// <summary>
         /// Set up all necessary values for the PlayerController.
         /// </summary>
-        /// 
-        public void MoveTo(Animator animator, AnimationType animationType, Transform playerTransform, Transform endPositionTransform, float animationTime, Action onComplete = null)
+        ///
+        public void MoveTo(AnimationType animationType, Transform endPositionTransform, float animationTime, Action onComplete = null)
         {
-            AnimationEntityService.Instance.Play(animationType, animator);
-            playerTransform.DOMove(endPositionTransform.position, animationTime).OnComplete(() =>
+            AnimationEntityService.Instance.Play(animationType, Animator);
+            transform.DOMove(endPositionTransform.position, animationTime).OnComplete(() =>
             {
-                AnimationEntityService.Instance.Play(AnimationType.Idle, animator);
-                onComplete?.Invoke();
+                AnimationEntityService.Instance.Play(AnimationType.Idle, Animator);
                 SetPosition(transform.position);
+                onComplete?.Invoke();
             });
         }
+
         public void Initialize()
         {
             m_Transform = transform;
@@ -148,7 +149,7 @@ namespace HyperCasual.Runner
             {
                 m_StartHeight = m_SkinnedMeshRenderer.bounds.size.y;
             }
-            else 
+            else
             {
                 m_StartHeight = 1.0f;
             }
@@ -300,7 +301,7 @@ namespace HyperCasual.Runner
             ResetScale();
         }
 
-        void Update()
+        private void Update()
         {
             float deltaTime = Time.deltaTime;
 
@@ -363,19 +364,19 @@ namespace HyperCasual.Runner
             m_LastPosition = m_Transform.position;
         }
 
-        void Accelerate(float deltaTime, float targetSpeed)
+        private void Accelerate(float deltaTime, float targetSpeed)
         {
             m_Speed += deltaTime * m_AccelerationSpeed;
             m_Speed = Mathf.Min(m_Speed, targetSpeed);
         }
 
-        void Decelerate(float deltaTime, float targetSpeed)
+        private void Decelerate(float deltaTime, float targetSpeed)
         {
             m_Speed -= deltaTime * m_DecelerationSpeed;
             m_Speed = Mathf.Max(m_Speed, targetSpeed);
         }
 
-        bool Approximately(Vector3 a, Vector3 b)
+        private bool Approximately(Vector3 a, Vector3 b)
         {
             return Mathf.Approximately(a.x, b.x) && Mathf.Approximately(a.y, b.y) && Mathf.Approximately(a.z, b.z);
         }
