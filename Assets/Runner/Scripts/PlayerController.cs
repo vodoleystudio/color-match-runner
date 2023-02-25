@@ -159,7 +159,7 @@ namespace HyperCasual.Runner
             }
 
             ResetSpeed();
-            AnimationEntityService.Instance.Play(AnimationType.Run, m_Animator);
+            AnimationEntityService.Instance.Play(AnimationType.Fly, m_Animator);
         }
 
         /// <summary>
