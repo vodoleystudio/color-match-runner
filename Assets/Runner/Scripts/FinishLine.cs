@@ -3,11 +3,8 @@ using GameCore.Data;
 using GameCore.UI;
 using UnityEngine;
 using System.Linq;
-using System;
 using HyperCasual.Core;
-using System.Collections.Generic;
 using System.Collections;
-using DG.Tweening;
 
 namespace HyperCasual.Runner
 {
@@ -20,9 +17,6 @@ namespace HyperCasual.Runner
     {
         private const string k_PlayerTag = "Player";
         private const float k_AnimationTime = 2f;
-        private MatchData m_MatchData;
-        private GameoverScreen m_GameOverScreen;
-        public MatchData GetMatchData => m_MatchData;
         public Transform TargetPosition => m_TargetPosition;
 
         [SerializeField]
@@ -46,7 +40,7 @@ namespace HyperCasual.Runner
         [SerializeField]
         private GenericGameEventListener m_BackEvent;
 
-        private void Revers()
+        private void ResetMainCameras()
         {
             CameraManager.Instance.Activate();
             EndAnimationSequence.Instance.HideCamera();
@@ -67,14 +61,13 @@ namespace HyperCasual.Runner
 
         private void Start()
         {
-            m_GameOverScreen = UIManager.Instance.GetView<GameoverScreen>();
             if (m_EndGameEvent != null)
             {
-                m_EndGameEvent.EventHandler = Revers;
+                m_EndGameEvent.EventHandler = ResetMainCameras;
             }
             if (m_BackEvent != null)
             {
-                m_BackEvent.EventHandler = Revers;
+                m_BackEvent.EventHandler = ResetMainCameras;
             }
         }
 
@@ -91,30 +84,33 @@ namespace HyperCasual.Runner
             }
         }
 
+        private void SetupMainCameras()
+        {
+            CameraManager.Instance.Hide();
+            EndAnimationSequence.Instance.ActivateCamera(CameraManager.Instance.GetCameraTransform());
+        }
+
         private IEnumerator runEndAnimationSequence()
         {
-            //GameManager._instance.Win();
+            var matchData = GameManager.Instance.MatchService.MatchColors(GetTargetReference().BaseColor, PlayerController.Instance.GetColor());
             m_miniCamera.Hide();
-
-            if (PlayerController.Instance != null)
+            PlayerController.Instance.StopPlayer();
+            PlayerController.Instance.MoveTo(AnimationType.Jump, m_PlayerEndPosition, k_AnimationTime, () =>
             {
-                PlayerController.Instance.Stop();
-                PlayerController.Instance.MoveTo(AnimationType.Jump, m_PlayerEndPosition, k_AnimationTime, () =>
-                {
-                    m_MatchData = GameManager.Instance.MatchService.MatchColors(GetTargetReference().BaseColor, PlayerController.Instance.GetColor());
-                    ////var levelData = new LevelData("TestLevel", 1, matchData);
-                    ////SaveManager.Instance.SaveLevelData("TestData", new LevelData("TestLevel", 1, matchData));
-                    ////Debug.LogError(levelData);
-                    m_GameOverScreen.Slider.value = m_MatchData.m_MatchInPercentage;
-                    m_prticleSystemService.PlayParticleSystem(m_MatchData.m_MatchState);
-                    CameraManager.Instance.Hide();
-                    EndAnimationSequence.Instance.SetParentPosition(m_endCameraPosition);
-                    EndAnimationSequence.Instance.ActivateCamera(CameraManager.Instance.GetCameraTransform());
-                });
+                ////var levelData = new LevelData("TestLevel", 1, matchData);
+                ////SaveManager.Instance.SaveLevelData("TestData", new LevelData("TestLevel", 1, matchData));
+                ////Debug.LogError(levelData);
 
-                yield return new WaitForSeconds(k_AnimationTime);
-                GameManager.Instance.Lose();
-            }
+                m_prticleSystemService.PlayParticleSystem(matchData.MatchState);
+                EndAnimationSequence.Instance.SetParentPosition(m_endCameraPosition);
+                SetupMainCameras();
+            });
+
+            yield return new WaitForSeconds(k_AnimationTime);
+
+            var gameOverScreen = UIManager.Instance.GetView<GameoverScreen>();
+            gameOverScreen.Slider.value = matchData.MatchInPercentage;
+            GameManager.Instance.Lose();
         }
     }
 }

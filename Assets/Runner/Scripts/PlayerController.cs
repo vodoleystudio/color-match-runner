@@ -109,6 +109,8 @@ namespace HyperCasual.Runner
         /// <summary> The player's maximum X position. </summary>
         public float MaxXPosition => m_MaxXPosition;
 
+        private bool m_IsTweenControl = false;
+
         private void Awake()
         {
             if (s_Instance != null && s_Instance != this)
@@ -129,16 +131,18 @@ namespace HyperCasual.Runner
         public void MoveTo(AnimationType animationType, Transform endPositionTransform, float animationTime, Action onComplete = null)
         {
             AnimationEntityService.Instance.Play(animationType, Animator);
-            transform.DOMove(endPositionTransform.position, animationTime).OnComplete(() =>
+            m_Transform.DOMove(endPositionTransform.position, animationTime).OnComplete(() =>
             {
                 AnimationEntityService.Instance.Play(AnimationType.Idle, Animator);
-                SetPosition(transform.position);
+                m_XPos = m_Transform.position.x;
+                m_ZPos = m_Transform.position.z;
                 onComplete?.Invoke();
             });
         }
 
         public void Initialize()
         {
+            m_IsTweenControl = false;
             m_Transform = transform;
             m_StartPosition = m_Transform.position;
             m_DefaultScale = m_Transform.localScale;
@@ -197,18 +201,13 @@ namespace HyperCasual.Runner
             m_TargetSpeed = GetDefaultSpeed();
         }
 
-        public void Stop()
+        public void StopPlayer()
         {
             Debug.LogError("Stop");
             AnimationEntityService.Instance.Play(AnimationType.Idle, m_Animator);
             m_TargetSpeed = 0.0f;
             CancelMovement();
-        }
-
-        public void SetPosition(Vector3 position)
-        {
-            m_XPos = position.x;
-            m_ZPos = position.z;
+            m_IsTweenControl = true;
         }
 
         /// <summary>
@@ -288,6 +287,7 @@ namespace HyperCasual.Runner
         /// </summary>
         public void ResetPlayer()
         {
+            m_IsTweenControl = false;
             m_Transform.position = m_StartPosition;
             m_XPos = 0.0f;
             m_ZPos = m_StartPosition.z;
@@ -303,6 +303,11 @@ namespace HyperCasual.Runner
 
         private void Update()
         {
+            if (m_IsTweenControl)
+            {
+                return;
+            }
+
             float deltaTime = Time.deltaTime;
 
             // Update Scale
