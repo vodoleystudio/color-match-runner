@@ -12,7 +12,7 @@ namespace HyperCasual.Runner
     public class Gate : Entity
     {
         private const string k_PlayerTag = "Player";
-        private const float HideDuration = 0.1f;
+        private const float HideDuration = 0.2f;
         private Vector3 defaultScale;
 
         public bool IsUsed { get; private set; }

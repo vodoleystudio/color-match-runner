@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4807591157659393222}
   - component: {fileID: 5928528988436547237}
   - component: {fileID: 4877652770548064436}
-  - component: {fileID: 5666127300455647228}
+  - component: {fileID: 7986040216147542613}
   m_Layer: 0
   m_Name: Gate_Color
   m_TagString: Untagged
@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SnapToGrid: 1
---- !u!135 &5666127300455647228
-SphereCollider:
+--- !u!136 &7986040216147542613
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -108,6 +108,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 16
+  m_Height: 55
+  m_Direction: 0
+  m_Center: {x: -1.7359724, y: 0.8091297, z: -0.52488136}
