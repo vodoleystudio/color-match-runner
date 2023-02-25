@@ -12,20 +12,20 @@ namespace HyperCasual.Core
 
         public void Awake()
         {
-            /*foreach (GenericGameEventListener trigger in m_EndOfLevelListeners)
+            foreach (GenericGameEventListener trigger in m_EndOfLevelListeners)
             {
                 trigger.EventHandler += OnEndOfLevel;
                 trigger.Subscribe();
-            }*/
+            }
         }
 
         public void OnDestroy()
         {
-            /*foreach (GenericGameEventListener trigger in m_EndOfLevelListeners)
+            foreach (GenericGameEventListener trigger in m_EndOfLevelListeners)
             {
                 trigger.EventHandler -= OnEndOfLevel;
                 trigger.Unsubscribe();
-            }*/
+            }
         }
 
         public void OnEndOfLevel()
