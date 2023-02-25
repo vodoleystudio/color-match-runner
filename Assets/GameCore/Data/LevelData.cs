@@ -21,7 +21,7 @@ namespace GameCore.Data
 
         public override string ToString()
         {
-            return base.ToString() + $" ,Name: {m_TargetName} ,LevelId: {m_LevelId} ,MatchState: {m_MatchData.m_MatchState} ,MatchInProcent: {m_MatchData.m_MatchInPercentage}";
+            return base.ToString() + $" ,Name: {m_TargetName} ,LevelId: {m_LevelId} ,MatchState: {m_MatchData.MatchState} ,MatchInProcent: {m_MatchData.MatchInPercentage}";
         }
     }
 }

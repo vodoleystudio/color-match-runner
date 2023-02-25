@@ -17,9 +17,6 @@ namespace HyperCasual.Runner
     {
         private const string k_PlayerTag = "Player";
         private const float k_AnimationTime = 2f;
-        private MatchData m_MatchData;
-        private GameoverScreen m_GameOverScreen;
-        public MatchData GetMatchData => m_MatchData;
         public Transform TargetPosition => m_TargetPosition;
 
         [SerializeField]
@@ -64,7 +61,6 @@ namespace HyperCasual.Runner
 
         private void Start()
         {
-            m_GameOverScreen = UIManager.Instance.GetView<GameoverScreen>();
             if (m_EndGameEvent != null)
             {
                 m_EndGameEvent.EventHandler = ResetMainCameras;
@@ -96,26 +92,25 @@ namespace HyperCasual.Runner
 
         private IEnumerator runEndAnimationSequence()
         {
+            var matchData = GameManager.Instance.MatchService.MatchColors(GetTargetReference().BaseColor, PlayerController.Instance.GetColor());
             m_miniCamera.Hide();
-
-            if (PlayerController.Instance != null)
+            PlayerController.Instance.StopPlayer();
+            PlayerController.Instance.MoveTo(AnimationType.Jump, m_PlayerEndPosition, k_AnimationTime, () =>
             {
-                PlayerController.Instance.StopPlayer();
-                PlayerController.Instance.MoveTo(AnimationType.Jump, m_PlayerEndPosition, k_AnimationTime, () =>
-                {
-                    m_MatchData = GameManager.Instance.MatchService.MatchColors(GetTargetReference().BaseColor, PlayerController.Instance.GetColor());
-                    ////var levelData = new LevelData("TestLevel", 1, matchData);
-                    ////SaveManager.Instance.SaveLevelData("TestData", new LevelData("TestLevel", 1, matchData));
-                    ////Debug.LogError(levelData);
-                    m_GameOverScreen.Slider.value = m_MatchData.m_MatchInPercentage;
-                    m_prticleSystemService.PlayParticleSystem(m_MatchData.m_MatchState);
-                    EndAnimationSequence.Instance.SetParentPosition(m_endCameraPosition);
-                    SetupMainCameras();
-                });
+                ////var levelData = new LevelData("TestLevel", 1, matchData);
+                ////SaveManager.Instance.SaveLevelData("TestData", new LevelData("TestLevel", 1, matchData));
+                ////Debug.LogError(levelData);
 
-                yield return new WaitForSeconds(k_AnimationTime);
-                GameManager.Instance.Lose();
-            }
+                m_prticleSystemService.PlayParticleSystem(matchData.MatchState);
+                EndAnimationSequence.Instance.SetParentPosition(m_endCameraPosition);
+                SetupMainCameras();
+            });
+
+            yield return new WaitForSeconds(k_AnimationTime);
+
+            var gameOverScreen = UIManager.Instance.GetView<GameoverScreen>();
+            gameOverScreen.Slider.value = matchData.MatchInPercentage;
+            GameManager.Instance.Lose();
         }
     }
 }
