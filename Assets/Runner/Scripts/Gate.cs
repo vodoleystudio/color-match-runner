@@ -13,13 +13,18 @@ namespace HyperCasual.Runner
     {
         private const string k_PlayerTag = "Player";
         private const float HideDuration = 0.1f;
+        private Vector3 defaultScale;
 
         public bool IsUsed { get; private set; }
         public float MixValue { get; set; }
 
         private Transform _parent;
 
-        protected override void Awake() => _parent = transform.parent;
+        protected override void Awake()
+        {
+            defaultScale = transform.localScale;
+            _parent = transform.parent;
+        }
 
         private void OnTriggerEnter(Collider col)
         {
@@ -35,7 +40,7 @@ namespace HyperCasual.Runner
         public override void ResetData()
         {
             IsUsed = false;
-            transform.localScale = Vector3.one;
+            transform.localScale = defaultScale;
             transform.SetParent(_parent);
         }
     }
