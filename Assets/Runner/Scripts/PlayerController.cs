@@ -201,7 +201,7 @@ namespace HyperCasual.Runner
             m_TargetSpeed = GetDefaultSpeed();
         }
 
-        public void Stop()
+        public void StopPlayer()
         {
             Debug.LogError("Stop");
             AnimationEntityService.Instance.Play(AnimationType.Idle, m_Animator);

@@ -100,7 +100,7 @@ namespace HyperCasual.Runner
 
             if (PlayerController.Instance != null)
             {
-                PlayerController.Instance.Stop();
+                PlayerController.Instance.StopPlayer();
                 PlayerController.Instance.MoveTo(AnimationType.Jump, m_PlayerEndPosition, k_AnimationTime, () =>
                 {
                     m_MatchData = GameManager.Instance.MatchService.MatchColors(GetTargetReference().BaseColor, PlayerController.Instance.GetColor());
