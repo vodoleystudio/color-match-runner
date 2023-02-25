@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2690285659780882886}
   - component: {fileID: 2690285659780882881}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: StarsVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
