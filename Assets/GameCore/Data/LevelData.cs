@@ -1,27 +1,27 @@
-using Mono.Cecil.Cil;
+using System;
 
 namespace GameCore.Data
 {
+    [Serializable]
     public class LevelData
     {
-        private string m_TargetName;
-        public string TargetName => m_TargetName;
+        public string LevelId;
 
-        private int m_LevelId;
-        public int LevelId => m_LevelId;
+        public MatchData MatchData;
 
-        private MatchData m_MatchData;
-
-        public LevelData(string name, int levelId, MatchData matchData)
+        public LevelData()
         {
-            m_TargetName = name;
-            m_LevelId = levelId;
-            m_MatchData = matchData;
+        }
+
+        public LevelData(string levelId, MatchData matchData)
+        {
+            LevelId = levelId;
+            MatchData = matchData;
         }
 
         public override string ToString()
         {
-            return base.ToString() + $" ,Name: {m_TargetName} ,LevelId: {m_LevelId} ,MatchState: {m_MatchData.MatchState} ,MatchInProcent: {m_MatchData.MatchInPercentage}";
+            return base.ToString() + $" LevelId: {LevelId} ,MatchState: {MatchData?.MatchState} ,MatchInProcent: {MatchData?.MatchInPercentage}";
         }
     }
 }

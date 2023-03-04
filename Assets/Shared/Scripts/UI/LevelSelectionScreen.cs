@@ -13,26 +13,34 @@ namespace HyperCasual.Gameplay
     public class LevelSelectionScreen : View
     {
         [SerializeField]
-        HyperCasualButton m_QuickPlayButton;
+        private HyperCasualButton m_QuickPlayButton;
+
         [SerializeField]
-        HyperCasualButton m_BackButton;
+        private HyperCasualButton m_BackButton;
+
         [Space]
         [SerializeField]
-        LevelSelectButton m_LevelButtonPrefab;
+        private LevelSelectButton m_LevelButtonPrefab;
+
         [SerializeField]
-        RectTransform m_LevelButtonsRoot;
+        private RectTransform m_LevelButtonsRoot;
+
         [SerializeField]
-        AbstractGameEvent m_NextLevelEvent;
+        private AbstractGameEvent m_NextLevelEvent;
+
         [SerializeField]
-        AbstractGameEvent m_BackEvent;
+        private AbstractGameEvent m_BackEvent;
+
 #if UNITY_EDITOR
+
         [SerializeField]
-        bool m_UnlockAllLevels;
+        private bool m_UnlockAllLevels;
+
 #endif
 
-        readonly List<LevelSelectButton> m_Buttons = new();
+        private readonly List<LevelSelectButton> m_Buttons = new();
 
-        void Start()
+        private void Start()
         {
             var levels = SequenceManager.Instance.Levels;
             for (int i = 0; i < levels.Length; i++)
@@ -43,22 +51,23 @@ namespace HyperCasual.Gameplay
             ResetButtonData();
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             ResetButtonData();
-            
+
             m_QuickPlayButton.AddListener(OnQuickPlayButtonClicked);
             m_BackButton.AddListener(OnBackButtonClicked);
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             m_QuickPlayButton.RemoveListener(OnQuickPlayButtonClicked);
             m_BackButton.RemoveListener(OnBackButtonClicked);
         }
 
-        void ResetButtonData()
+        private void ResetButtonData()
         {
+            var levels = SequenceManager.Instance.Levels;
             var levelProgress = SaveManager.Instance.LevelProgress;
             for (int i = 0; i < m_Buttons.Count; i++)
             {
@@ -67,11 +76,11 @@ namespace HyperCasual.Gameplay
 #if UNITY_EDITOR
                 unlocked = unlocked || m_UnlockAllLevels;
 #endif
-                button.SetData(i, unlocked, OnClick);
+                button.SetData(i, unlocked, OnClick, SaveManager.Instance.GetLevelData(levels[i].name));
             }
         }
-        
-        void OnClick(int startingIndex)
+
+        private void OnClick(int startingIndex)
         {
             if (startingIndex < 0)
                 throw new Exception("Button is not initialized");
@@ -79,13 +88,13 @@ namespace HyperCasual.Gameplay
             SequenceManager.Instance.SetStartingLevel(startingIndex);
             m_NextLevelEvent.Raise();
         }
-        
-        void OnQuickPlayButtonClicked()
+
+        private void OnQuickPlayButtonClicked()
         {
             OnClick(SaveManager.Instance.LevelProgress);
         }
-        
-        void OnBackButtonClicked()
+
+        private void OnBackButtonClicked()
         {
             m_BackEvent.Raise();
         }

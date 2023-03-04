@@ -5,6 +5,8 @@ using UnityEngine;
 using System.Linq;
 using HyperCasual.Core;
 using System.Collections;
+using System;
+using HyperCasual.Gameplay;
 
 namespace HyperCasual.Runner
 {
@@ -40,7 +42,7 @@ namespace HyperCasual.Runner
         [SerializeField]
         private GenericGameEventListener m_BackEvent;
 
-        private void ResetMainCameras()
+        private void ResetCameras()
         {
             CameraManager.Instance.Activate();
             EndAnimationSequence.Instance.HideCamera();
@@ -63,11 +65,11 @@ namespace HyperCasual.Runner
         {
             if (m_EndGameEvent != null)
             {
-                m_EndGameEvent.EventHandler = ResetMainCameras;
+                m_EndGameEvent.EventHandler = ResetCameras;
             }
             if (m_BackEvent != null)
             {
-                m_BackEvent.EventHandler = ResetMainCameras;
+                m_BackEvent.EventHandler = ResetCameras;
             }
         }
 
@@ -93,14 +95,14 @@ namespace HyperCasual.Runner
         private IEnumerator runEndAnimationSequence()
         {
             var matchData = GameManager.Instance.MatchService.MatchColors(GetTargetReference().BaseColor, PlayerController.Instance.GetColor());
+            var levelData = new LevelData(LevelManager.Instance.LevelDefinition.name, matchData);
+            SaveManager.Instance.SaveLevelData(levelData.LevelId, levelData);
             m_miniCamera.Hide();
+
             PlayerController.Instance.StopPlayer();
             PlayerController.Instance.MoveTo(AnimationType.Jump, m_PlayerEndPosition, k_AnimationTime, () =>
             {
-                ////var levelData = new LevelData("TestLevel", 1, matchData);
-                ////SaveManager.Instance.SaveLevelData("TestData", new LevelData("TestLevel", 1, matchData));
-                ////Debug.LogError(levelData);
-
+                Debug.LogError(SaveManager.Instance.GetLevelData(levelData.LevelId.ToString()));
                 m_prticleSystemService.PlayParticleSystem(matchData.MatchState);
                 EndAnimationSequence.Instance.SetParentPosition(m_endCameraPosition);
                 SetupMainCameras();
