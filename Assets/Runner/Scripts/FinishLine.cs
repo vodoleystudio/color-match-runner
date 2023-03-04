@@ -95,14 +95,14 @@ namespace HyperCasual.Runner
         private IEnumerator runEndAnimationSequence()
         {
             var matchData = GameManager.Instance.MatchService.MatchColors(GetTargetReference().BaseColor, PlayerController.Instance.GetColor());
+            var levelData = new LevelData(LevelManager.Instance.LevelDefinition.name, matchData);
+            SaveManager.Instance.SaveLevelData(levelData.LevelId, levelData);
             m_miniCamera.Hide();
+
             PlayerController.Instance.StopPlayer();
             PlayerController.Instance.MoveTo(AnimationType.Jump, m_PlayerEndPosition, k_AnimationTime, () =>
             {
-                var levelData = new LevelData(LevelManager.Instance.LevelDefinition.name, matchData);
-                SaveManager.Instance.SaveLevelData(levelData.LevelId, levelData);
                 Debug.LogError(SaveManager.Instance.GetLevelData(levelData.LevelId.ToString()));
-
                 m_prticleSystemService.PlayParticleSystem(matchData.MatchState);
                 EndAnimationSequence.Instance.SetParentPosition(m_endCameraPosition);
                 SetupMainCameras();
@@ -113,7 +113,6 @@ namespace HyperCasual.Runner
             var gameOverScreen = UIManager.Instance.GetView<GameoverScreen>();
             gameOverScreen.Slider.value = matchData.MatchInPercentage;
             GameManager.Instance.Lose();
-            //LevelManager.Instance.LevelDefinition.name
         }
     }
 }

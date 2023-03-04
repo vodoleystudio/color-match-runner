@@ -17,6 +17,7 @@ namespace HyperCasual.Runner
     {
         private const string k_FolderName = "UiImages";
         private const string k_TargetName = "Target";
+        private List<Image> m_Icons = new();
 
         [SerializeField]
         private Image m_MatchIcon;
@@ -65,6 +66,14 @@ namespace HyperCasual.Runner
             PlayButtonSound();
         }
 
+        private void Awake()
+        {
+            m_Icons.Add(m_MatchIcon);
+            m_Icons.Add(m_PartialMatchIcon);
+            m_Icons.Add(m_NotMatchIcon);
+            m_Icons.Add(m_QuestionIcon);
+        }
+
         private void ActivateMatchState(LevelData levelData)
         {
             if (levelData?.MatchData != null)
@@ -92,10 +101,10 @@ namespace HyperCasual.Runner
 
         private void ActivateAllTheViewsExeptOne(Image icon)
         {
-            m_MatchIcon.gameObject.SetActive(false);
-            m_PartialMatchIcon.gameObject.SetActive(false);
-            m_NotMatchIcon.gameObject.SetActive(false);
-            m_QuestionIcon.gameObject.SetActive(false);
+            foreach (var image in m_Icons)
+            {
+                image.gameObject.SetActive(false);
+            }
 
             if (icon == m_MatchIcon)
             {
