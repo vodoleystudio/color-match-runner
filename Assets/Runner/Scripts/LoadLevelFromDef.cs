@@ -10,8 +10,8 @@ namespace HyperCasual.Runner
     public class LoadLevelFromDef : AbstractState
     {
         public readonly LevelDefinition m_LevelDefinition;
-        readonly SceneController m_SceneController;
-        readonly GameObject[] m_ManagerPrefabs;
+        private readonly SceneController m_SceneController;
+        private readonly GameObject[] m_ManagerPrefabs;
 
         public LoadLevelFromDef(SceneController sceneController, AbstractLevelData levelData, GameObject[] managerPrefabs)
         {
@@ -21,7 +21,7 @@ namespace HyperCasual.Runner
             m_ManagerPrefabs = managerPrefabs;
             m_SceneController = sceneController;
         }
-        
+
         public override IEnumerator Execute()
         {
             if (m_LevelDefinition == null)
@@ -36,6 +36,8 @@ namespace HyperCasual.Runner
             }
 
             GameManager.Instance.LoadLevel(m_LevelDefinition);
+
+            m_SceneController.ActivateMainScene();
         }
     }
 }

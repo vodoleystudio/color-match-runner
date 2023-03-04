@@ -12,9 +12,9 @@ namespace HyperCasual.Core
     /// </summary>
     public class SceneController
     {
-        Scene m_LastScene;
-        readonly Scene m_NeverUnloadScene;
-        
+        private Scene m_LastScene;
+        private readonly Scene m_NeverUnloadScene;
+
         /// <param name="neverUnloadScene">The scene we instantiate all level-independent managers in it and never unloads.</param>
         public SceneController(Scene neverUnloadScene)
         {
@@ -36,9 +36,9 @@ namespace HyperCasual.Core
 
             yield return LoadSceneAdditive(scene);
         }
-        
+
         /// <summary>
-        /// Creates and Loads a new empty scene of the given name and unloads others. 
+        /// Creates and Loads a new empty scene of the given name and unloads others.
         /// </summary>
         /// <param name="scene">scene name</param>
         /// <exception cref="ArgumentException">scene name is invalid</exception>
@@ -51,12 +51,17 @@ namespace HyperCasual.Core
 
             LoadNewSceneAdditive(scene);
         }
-        
-        IEnumerator UnloadScene(Scene scene)
+
+        public void ActivateMainScene()
         {
-            if (!m_LastScene.IsValid()) 
+            SceneManager.SetActiveScene(m_NeverUnloadScene);
+        }
+
+        private IEnumerator UnloadScene(Scene scene)
+        {
+            if (!m_LastScene.IsValid())
                 yield break;
-            
+
             var asyncUnload = SceneManager.UnloadSceneAsync(scene);
             while (!asyncUnload.isDone)
             {
@@ -64,7 +69,7 @@ namespace HyperCasual.Core
             }
         }
 
-        IEnumerator LoadSceneAdditive(string scenePath)
+        private IEnumerator LoadSceneAdditive(string scenePath)
         {
             var asyncLoad = SceneManager.LoadSceneAsync(scenePath, LoadSceneMode.Additive);
 
@@ -76,8 +81,8 @@ namespace HyperCasual.Core
             m_LastScene = SceneManager.GetSceneByPath(scenePath);
             SceneManager.SetActiveScene(m_LastScene);
         }
-        
-        void LoadNewSceneAdditive(string sceneName)
+
+        private void LoadNewSceneAdditive(string sceneName)
         {
             var scene = SceneManager.CreateScene(sceneName);
             SceneManager.SetActiveScene(scene);
