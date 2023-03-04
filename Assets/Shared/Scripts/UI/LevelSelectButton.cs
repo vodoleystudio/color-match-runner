@@ -81,46 +81,29 @@ namespace HyperCasual.Runner
                 switch (levelData.MatchData.MatchState)
                 {
                     case MatchState.Match:
-                        ActivateAllTheViewsExeptOne(m_MatchIcon);
+                        ActivateIcon(m_MatchIcon);
                         break;
 
                     case MatchState.PartialMatch:
-                        ActivateAllTheViewsExeptOne(m_PartialMatchIcon);
+                        ActivateIcon(m_PartialMatchIcon);
                         break;
 
                     case MatchState.NotMatch:
-                        ActivateAllTheViewsExeptOne(m_NotMatchIcon);
+                        ActivateIcon(m_NotMatchIcon);
                         break;
                 }
             }
             else
             {
-                ActivateAllTheViewsExeptOne(m_QuestionIcon);
+                ActivateIcon(m_QuestionIcon);
             }
         }
 
-        private void ActivateAllTheViewsExeptOne(Image icon)
+        private void ActivateIcon(Image icon)
         {
             foreach (var image in m_Icons)
             {
-                image.gameObject.SetActive(false);
-            }
-
-            if (icon == m_MatchIcon)
-            {
-                m_MatchIcon.gameObject.SetActive(true);
-            }
-            if (icon == m_PartialMatchIcon)
-            {
-                m_PartialMatchIcon.gameObject.SetActive(true);
-            }
-            if (icon == m_NotMatchIcon)
-            {
-                m_NotMatchIcon.gameObject.SetActive(true);
-            }
-            if (icon == m_QuestionIcon)
-            {
-                m_QuestionIcon.gameObject.SetActive(true);
+                image.gameObject.SetActive(image == icon);
             }
         }
     }
