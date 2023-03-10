@@ -199,6 +199,10 @@ namespace HyperCasual.Runner
                         {
                             block.Gates[j].SetBaseColor(blockData.GateColors[j]);
                             block.Gates[j].MixValue = blockData.MixValue;
+
+                            var pos = block.Gates[j].transform.position;
+                            var offset = blockData.PositionOffsets[j];
+                            block.Gates[j].transform.position = new Vector3(pos.x + offset.x, pos.y + offset.y, pos.z + offset.z);
                         }
 
                         targetColor = Color.Lerp(blockData.CorrectColor, targetColor, blockData.MixValue);
