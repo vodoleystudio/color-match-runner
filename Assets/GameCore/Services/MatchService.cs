@@ -7,9 +7,9 @@ namespace GameCore.Services
 {
     public class MatchService : IMatchService
     {
-        private const float k_MatchBarier = 0.1f;
-        private const float k_PartialMatchBarier = 0.2f;
-        private const float k_NotMatchBarier = 0.8f;
+        private const float k_MatchBarier = 0.06f;
+        private const float k_PartialMatchBarier = 0.15f;
+        private const float k_NotMatchBarier = 0.85f;
 
         public MatchData MatchColors(Color firstColor, Color secondColor)
         {
