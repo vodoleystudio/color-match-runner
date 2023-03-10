@@ -31,7 +31,7 @@ namespace GameCore.Services
             foreach (var color in m_LevelColors)
             {
                 gateData.GateColors.Add(color);
-                gateData.PositionOffsets.Add(new Vector3(Random.Range(-3f, 3f), 0, Random.Range(-5f, 5f)));
+                gateData.PositionOffsets.Add(new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-5f, 5f)));
             }
 
             gateData.CorrectColor = gateData.GateColors[Random.Range(0, gateData.GateColors.Count)];
