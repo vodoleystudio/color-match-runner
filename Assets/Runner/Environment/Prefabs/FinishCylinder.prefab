@@ -136,6 +136,8 @@ MonoBehaviour:
     m_Event: {fileID: 11400000, guid: b892538bd49f3487bbedf5106c094739, type: 2}
   m_BackEvent:
     m_Event: {fileID: 11400000, guid: 58f804667e2cb4eb789b6d2dfb3c4ce3, type: 2}
+  m_EndOfAdEvent:
+    m_Event: {fileID: 11400000, guid: bf8b2c9abea83fa45a904bc33c07bb03, type: 2}
 --- !u!1 &3184851743525254229
 GameObject:
   m_ObjectHideFlags: 0

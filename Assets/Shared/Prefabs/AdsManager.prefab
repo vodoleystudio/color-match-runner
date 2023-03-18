@@ -64,3 +64,4 @@ MonoBehaviour:
   m_EndOfLevelListeners:
   - m_Event: {fileID: 11400000, guid: 4facc4ba26e884ef88b6c2506fa5ae2c, type: 2}
   - m_Event: {fileID: 11400000, guid: 2b6d3353ba4d84d3ca725ef1835ca96f, type: 2}
+  m_EndOfAdEvent: {fileID: 11400000, guid: bf8b2c9abea83fa45a904bc33c07bb03, type: 2}

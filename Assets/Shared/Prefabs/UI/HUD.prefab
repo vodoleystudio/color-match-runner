@@ -100,7 +100,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2418144165573983334}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -148,7 +148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2418144166341577244
 RectTransform:
   m_ObjectHideFlags: 0
@@ -242,7 +242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2418144166394300179
 RectTransform:
   m_ObjectHideFlags: 0
@@ -757,6 +757,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gold Container
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910761123095850727, guid: 5a03a3a59cfb547b5b913cde3282c131,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4174385919738700553, guid: 5a03a3a59cfb547b5b913cde3282c131,
         type: 3}
