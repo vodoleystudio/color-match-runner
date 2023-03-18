@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using GameCore.Data;
 using System.Linq;
+using TMPro;
+using System;
 
 namespace HyperCasual.Runner
 {
@@ -14,17 +16,38 @@ namespace HyperCasual.Runner
     public class GameoverScreen : View
     {
         [SerializeField]
-        private Slider m_Slider;
+        private RectTransform m_SliderRectTransform;
 
-        public Slider Slider
+        [SerializeField]
+        private Animator m_SliderAnimator;
+
+        [SerializeField]
+        private TextMeshProUGUI m_Text;
+
+        public Animator SliderAnimator
         {
-            get => m_Slider;
+            get => m_SliderAnimator;
             set
             {
-                if (m_Slider.minValue < value.value && value.value < Slider.maxValue)
-                {
-                    m_Slider.value = value.value;
-                }
+                m_SliderAnimator = value;
+            }
+        }
+
+        public RectTransform SliderMask
+        {
+            get => m_SliderRectTransform;
+            set
+            {
+                m_SliderRectTransform = value;
+            }
+        }
+
+        public int MatchInProcentText
+        {
+            get => Convert.ToInt32(m_Text.text);
+            set
+            {
+                m_Text.text = $"{value}%";
             }
         }
 

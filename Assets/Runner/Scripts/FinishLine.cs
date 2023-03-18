@@ -5,8 +5,10 @@ using UnityEngine;
 using System.Linq;
 using HyperCasual.Core;
 using System.Collections;
+using DG.Tweening;
 using System;
 using HyperCasual.Gameplay;
+using TMPro;
 
 namespace HyperCasual.Runner
 {
@@ -19,6 +21,9 @@ namespace HyperCasual.Runner
     {
         private const string k_PlayerTag = "Player";
         private const float k_AnimationTime = 2f;
+        private const float k_SliderTextAnimationTime = 1.7f;
+
+        private GameoverScreen m_GameOverScreen;
         public Transform TargetPosition => m_TargetPosition;
 
         [SerializeField]
@@ -71,6 +76,7 @@ namespace HyperCasual.Runner
             {
                 m_BackEvent.EventHandler = ResetCameras;
             }
+            m_GameOverScreen = UIManager.Instance.GetView<GameoverScreen>();
         }
 
         private Target GetTargetReference()
@@ -109,9 +115,8 @@ namespace HyperCasual.Runner
             });
 
             yield return new WaitForSeconds(k_AnimationTime);
-
-            var gameOverScreen = UIManager.Instance.GetView<GameoverScreen>();
-            gameOverScreen.Slider.value = matchData.MatchInPercentage;
+            m_GameOverScreen.SliderMask.anchorMax = new Vector2(matchData.MatchInPercentage / 100f, 1f);
+            DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime);
             GameManager.Instance.Lose();
         }
     }
