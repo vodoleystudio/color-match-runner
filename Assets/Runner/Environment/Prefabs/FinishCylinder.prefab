@@ -136,8 +136,6 @@ MonoBehaviour:
     m_Event: {fileID: 11400000, guid: b892538bd49f3487bbedf5106c094739, type: 2}
   m_BackEvent:
     m_Event: {fileID: 11400000, guid: 58f804667e2cb4eb789b6d2dfb3c4ce3, type: 2}
-  m_EndOfAdEvent:
-    m_Event: {fileID: 11400000, guid: bf8b2c9abea83fa45a904bc33c07bb03, type: 2}
 --- !u!1 &3184851743525254229
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5537933941331474278}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 4.24, z: 0}
+  m_LocalPosition: {x: 0.35, y: 4.24, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
