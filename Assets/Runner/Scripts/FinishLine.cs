@@ -6,9 +6,6 @@ using System.Linq;
 using HyperCasual.Core;
 using System.Collections;
 using DG.Tweening;
-using System;
-using HyperCasual.Gameplay;
-using TMPro;
 
 namespace HyperCasual.Runner
 {
@@ -108,7 +105,6 @@ namespace HyperCasual.Runner
             PlayerController.Instance.StopPlayer();
             PlayerController.Instance.MoveTo(AnimationType.Jump, m_PlayerEndPosition, k_AnimationTime, () =>
             {
-                Debug.LogError(SaveManager.Instance.GetLevelData(levelData.LevelId.ToString()));
                 m_prticleSystemService.PlayParticleSystem(matchData.MatchState);
                 EndAnimationSequence.Instance.SetParentPosition(m_endCameraPosition);
                 SetupMainCameras();

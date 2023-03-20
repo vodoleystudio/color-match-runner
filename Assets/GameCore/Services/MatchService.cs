@@ -26,17 +26,14 @@ namespace GameCore.Services
             if (avarge >= 0.0f && avarge < k_MatchBarier)
             {
                 matchData.MatchState = MatchState.Match;
-                Debug.LogError("Match State:" + matchData.MatchState);
             }
             else if (avarge >= k_MatchBarier && avarge < k_PartialMatchBarier)
             {
                 matchData.MatchState = MatchState.PartialMatch;
-                Debug.LogError("Match State:" + matchData.MatchState);
             }
             else if (avarge >= k_PartialMatchBarier && avarge <= k_NotMatchBarier)
             {
                 matchData.MatchState = MatchState.NotMatch;
-                Debug.LogError("Match State:" + matchData.MatchState);
             }
             else
             {
@@ -44,8 +41,7 @@ namespace GameCore.Services
             }
 
             matchData.MatchInPercentage = (int)Math.Round((1.0f - avarge) * 100);
-            Debug.LogError("Match in procent:" + (int)Math.Round((1.0f - avarge) * 100));
-
+            Debug.LogError($"MatchState is {matchData.MatchState}, Match in procent: {(int)Math.Round((1.0f - avarge) * 100)}");
             return matchData;
         }
     }
