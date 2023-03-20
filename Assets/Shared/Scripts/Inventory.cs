@@ -14,33 +14,36 @@ namespace HyperCasual.Runner
     public class Inventory : AbstractSingleton<Inventory>
     {
         [SerializeField]
-        GenericGameEventListener m_GoldEventListener;
-        [SerializeField]
-        GenericGameEventListener m_KeyEventListener;
-        [SerializeField]
-        GenericGameEventListener m_WinEventListener;
-        [SerializeField]
-        GenericGameEventListener m_LoseEventListener;
+        private GenericGameEventListener m_GoldEventListener;
 
-        int m_TempGold;
-        int m_TotalGold;
-        float m_TempXp;
-        float m_TotalXp;
-        int m_TempKeys;
+        [SerializeField]
+        private GenericGameEventListener m_KeyEventListener;
+
+        [SerializeField]
+        private GenericGameEventListener m_WinEventListener;
+
+        [SerializeField]
+        private GenericGameEventListener m_LoseEventListener;
+
+        private int m_TempGold;
+        private int m_TotalGold;
+        private float m_TempXp;
+        private float m_TotalXp;
+        private int m_TempKeys;
 
         /// <summary>
         /// Temporary const
         /// Users keep accumulating XP when playing the game and they're rewarded as they hit a milestone.
         /// Milestones are simply a threshold to reward users for playing the game. We need to come up with
         /// a proper formula to calculate milestone values but because we don't have a plan for the milestone
-        /// rewards yet, we have simple set the value to something users can never reach. 
+        /// rewards yet, we have simple set the value to something users can never reach.
         /// </summary>
-        const float k_MilestoneFactor = 1.2f;
+        private const float k_MilestoneFactor = 1.2f;
 
-        Hud m_Hud;
-        LevelCompleteScreen m_LevelCompleteScreen;
+        private Hud m_Hud;
+        private LevelCompleteScreen m_LevelCompleteScreen;
 
-        void Start()
+        private void Start()
         {
             m_GoldEventListener.EventHandler = OnGoldPicked;
             m_KeyEventListener.EventHandler = OnKeyPicked;
@@ -55,9 +58,9 @@ namespace HyperCasual.Runner
 
             m_LevelCompleteScreen = UIManager.Instance.GetView<LevelCompleteScreen>();
             m_Hud = UIManager.Instance.GetView<Hud>();
-        } 
+        }
 
-        void OnEnable()
+        private void OnEnable()
         {
             m_GoldEventListener.Subscribe();
             m_KeyEventListener.Subscribe();
@@ -65,7 +68,7 @@ namespace HyperCasual.Runner
             m_LoseEventListener.Subscribe();
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             m_GoldEventListener.Unsubscribe();
             m_KeyEventListener.Unsubscribe();
@@ -73,7 +76,7 @@ namespace HyperCasual.Runner
             m_LoseEventListener.Unsubscribe();
         }
 
-        void OnGoldPicked()
+        private void OnGoldPicked()
         {
             if (m_GoldEventListener.m_Event is ItemPickedEvent goldPickedEvent)
             {
@@ -89,7 +92,7 @@ namespace HyperCasual.Runner
             }
         }
 
-        void OnKeyPicked()
+        private void OnKeyPicked()
         {
             if (m_KeyEventListener.m_Event is ItemPickedEvent keyPickedEvent)
             {
@@ -101,7 +104,7 @@ namespace HyperCasual.Runner
             }
         }
 
-        void OnWin()
+        private void OnWin()
         {
             m_TotalGold += m_TempGold;
             m_TempGold = 0;
@@ -119,7 +122,7 @@ namespace HyperCasual.Runner
             SaveManager.Instance.XP = m_TotalXp;
         }
 
-        void OnLose()
+        private void OnLose()
         {
             m_TempGold = 0;
             m_TotalXp += m_TempXp;
@@ -127,13 +130,13 @@ namespace HyperCasual.Runner
             SaveManager.Instance.XP = m_TotalXp;
         }
 
-        void Update()
+        private void Update()
         {
             if (m_Hud != null && m_Hud.gameObject.activeSelf)
             {
                 m_TempXp += PlayerController.Instance.Speed * Time.deltaTime;
                 m_Hud.XpValue = m_TempXp;
-                
+
                 if (SequenceManager.Instance.m_CurrentLevel is LoadLevelFromDef loadLevelFromDef)
                 {
                     m_Hud.XpSlider.minValue = 0;

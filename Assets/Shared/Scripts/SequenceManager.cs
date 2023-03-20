@@ -145,7 +145,7 @@ namespace HyperCasual.Gameplay
             m_LevelStates.Add(loadLevelState);
             var gameplayState = new State(() => OnGamePlayStarted(loadLevelState));
             var winState = new PauseState(() => OnWinScreenDisplayed(loadLevelState));
-            var loseState = new State(ShowUI<GameoverScreen>);
+            var loseState = new State(() => OnGameOverScreenDisplayed(loadLevelState));
             var pauseState = new PauseState(ShowUI<PauseMenu>);
             var unloadLose = new UnloadLastSceneState(m_SceneController);
             var unloadPause = new UnloadLastSceneState(m_SceneController);
@@ -193,9 +193,20 @@ namespace HyperCasual.Gameplay
             FindObjectOfType<UIGameOnSimulator>(true).gameObject.SetActive(true);
         }
 
+        private void OnGameOverScreenDisplayed(IState currentLevel)
+        {
+            ShowUI<GameoverScreen>();
+            SaveLevel(currentLevel);
+        }
+
         private void OnWinScreenDisplayed(IState currentLevel)
         {
             UIManager.Instance.Show<LevelCompleteScreen>();
+            SaveLevel(currentLevel);
+        }
+
+        private void SaveLevel(IState currentLevel)
+        {
             var currentLevelIndex = m_LevelStates.IndexOf(currentLevel);
 
             if (currentLevelIndex == -1)
