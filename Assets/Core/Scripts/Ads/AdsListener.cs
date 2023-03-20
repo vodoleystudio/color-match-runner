@@ -40,7 +40,7 @@ namespace HyperCasual.Core
                 }
 
                 Debug.Log($"Loading ad {adId} from an end of level event");
-                //adsController.ShowAd(adId, this);
+                adsController.ShowAd(adId, this);
             }
             else
             {
