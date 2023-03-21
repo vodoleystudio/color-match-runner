@@ -33,6 +33,9 @@ namespace HyperCasual.Runner
         [SerializeField]
         private Image m_QuestionIcon;
 
+        [SerializeField]
+        private GameObject m_MatchIconsContainer;
+
         private int m_Index = -1;
         private Action<int> m_OnClick;
         private bool m_IsUnlocked;
@@ -47,6 +50,7 @@ namespace HyperCasual.Runner
             m_IsUnlocked = unlocked;
             m_Button.interactable = m_IsUnlocked;
             m_LockerImage.gameObject.SetActive(!m_IsUnlocked);
+            m_MatchIconsContainer.SetActive(m_IsUnlocked);
             ActivateMatchState(levelData);
             m_MainImage.sprite = Resources.Load<Sprite>($"{k_FolderName}/{k_TargetName}{index}");
         }
