@@ -124,7 +124,7 @@ MonoBehaviour:
   m_endCameraPosition: {fileID: 8378604436741097687}
   m_miniCamera: {fileID: 1930128009305974266}
   m_TargetPosition: {fileID: 3189675775801323596}
-  m_prticleSystemService:
+  m_ParticleSystemService:
     m_ParticleSystem:
     - m_MatchState: 1
       m_ParticleSystem: {fileID: 7794367930967583346}

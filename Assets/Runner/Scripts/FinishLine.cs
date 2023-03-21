@@ -6,6 +6,7 @@ using System.Linq;
 using HyperCasual.Core;
 using System.Collections;
 using DG.Tweening;
+using System;
 
 namespace HyperCasual.Runner
 {
@@ -18,7 +19,7 @@ namespace HyperCasual.Runner
     {
         private const string k_PlayerTag = "Player";
         private const float k_AnimationTime = 2f;
-        private const float k_SliderTextAnimationTime = 1.7f;
+        private const float k_SliderTextAnimationTime = 2.3f;
 
         private GameoverScreen m_GameOverScreen;
         public Transform TargetPosition => m_TargetPosition;
@@ -36,7 +37,7 @@ namespace HyperCasual.Runner
         private Transform m_TargetPosition;
 
         [SerializeField]
-        private PrticleSystemService m_prticleSystemService;
+        private PrticleSystemService m_ParticleSystemService;
 
         [SerializeField]
         private GenericGameEventListener m_EndGameEvent;
@@ -105,15 +106,21 @@ namespace HyperCasual.Runner
             PlayerController.Instance.StopPlayer();
             PlayerController.Instance.MoveTo(AnimationType.Jump, m_PlayerEndPosition, k_AnimationTime, () =>
             {
-                m_prticleSystemService.PlayParticleSystem(matchData.MatchState);
                 EndAnimationSequence.Instance.SetParentPosition(m_endCameraPosition);
                 SetupMainCameras();
             });
 
-            yield return new WaitForSeconds(k_AnimationTime);
+            yield return new WaitForSeconds(k_AnimationTime / 2);
             m_GameOverScreen.SliderMask.anchorMax = new Vector2(matchData.MatchInPercentage / 100f, 1f);
             DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime);
+            StartCoroutine(PlayParticleSystem(matchData));
             GameManager.Instance.Lose();
+        }
+
+        private IEnumerator PlayParticleSystem(MatchData matchData)
+        {
+            yield return new WaitForSeconds(k_SliderTextAnimationTime - 0.1f);
+            m_ParticleSystemService.PlayParticleSystem(matchData.MatchState);
         }
     }
 }
