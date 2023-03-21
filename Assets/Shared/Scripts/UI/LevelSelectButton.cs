@@ -1,12 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using HyperCasual.Core;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using GameCore.Data;
-using System.Diagnostics;
 
 namespace HyperCasual.Runner
 {
@@ -21,6 +17,9 @@ namespace HyperCasual.Runner
 
         [SerializeField]
         private Image m_MainImage;
+
+        [SerializeField]
+        private Image m_LockerImage;
 
         [SerializeField]
         private Image m_MatchIcon;
@@ -47,6 +46,7 @@ namespace HyperCasual.Runner
             m_OnClick = onClick;
             m_IsUnlocked = unlocked;
             m_Button.interactable = m_IsUnlocked;
+            m_LockerImage.gameObject.SetActive(!m_IsUnlocked);
             ActivateMatchState(levelData);
             m_MainImage.sprite = Resources.Load<Sprite>($"{k_FolderName}/{k_TargetName}{index}");
         }
