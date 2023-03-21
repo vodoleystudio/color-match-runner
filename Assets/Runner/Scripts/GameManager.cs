@@ -5,6 +5,7 @@ using UnityEngine;
 using GameCore.Services;
 using System.Linq;
 using GameCore.UI;
+using GameCore.Data;
 
 #if UNITY_EDITOR
 
@@ -50,7 +51,9 @@ namespace HyperCasual.Runner
         private GameObject m_LevelMarkersGO;
 
         private static LevelManager s_LevelManager;
-        private static IGamePlayProgressService s_GamePlayProgressService = new GamePlayProgressService();
+        //private static IGamePlayProgressService s_GamePlayProgressService = new GamePlayProgressService();
+        private static List<Color> m_AllColors = new() { Color.blue, Color.green, Color.cyan, Color.gray, Color.red, Color.magenta, Color.yellow };
+        private static List<Color> m_LevelColors = new();
         public IMatchService MatchService { get; } = new MatchService();
 
 #if UNITY_EDITOR
@@ -144,8 +147,6 @@ namespace HyperCasual.Runner
             s_LevelManager = levelGameObject.AddComponent<LevelManager>();
             s_LevelManager.LevelDefinition = levelDefinition;
 
-            s_GamePlayProgressService.Setup();
-
             Transform levelParent = levelGameObject.transform;
 
             var targetColor = Color.white;
@@ -193,7 +194,7 @@ namespace HyperCasual.Runner
                 {
                     if (spawnable is Block block)
                     {
-                        var blockData = s_GamePlayProgressService.GenerateBlockData();
+                        var blockData = GenerateBlockData(4);
 
                         for (int j = 0; j < blockData.GateColors.Count; j++)
                         {
@@ -349,6 +350,30 @@ namespace HyperCasual.Runner
                 ResetLevel();
             }
 #endif
+        }
+
+        private static BlockData GenerateBlockData(int numberOfColors)
+        {
+            m_LevelColors.Clear();
+            var colors = m_AllColors.ToList();
+            int index;
+            for (int i = 0; i < numberOfColors; i++)
+            {
+                index = Random.Range(0, colors.Count);
+                m_LevelColors.Add(colors[index]);
+                colors.RemoveAt(index);
+            }
+
+            var gateData = new BlockData();
+
+            foreach (var color in m_LevelColors)
+            {
+                gateData.GateColors.Add(color);
+                gateData.PositionOffsets.Add(new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-5f, 5f)));
+            }
+
+            gateData.CorrectColor = gateData.GateColors[Random.Range(0, gateData.GateColors.Count)];
+            return gateData;
         }
     }
 }
