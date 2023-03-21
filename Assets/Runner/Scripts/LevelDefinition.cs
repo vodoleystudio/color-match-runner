@@ -64,6 +64,8 @@ namespace HyperCasual.Runner
         /// </summary>
         public GameObject EndPrefab;
 
+        public Vector3 Offset = Vector3.zero;
+
         /// <summary>
         /// An array of all SpawnableObjects that exist in this level.
         /// </summary>
@@ -125,6 +127,7 @@ namespace HyperCasual.Runner
             TerrainMaterial = updatedLevel.TerrainMaterial;
             StartPrefab = updatedLevel.StartPrefab;
             EndPrefab = updatedLevel.EndPrefab;
+            Offset = updatedLevel.Offset;
             Spawnables = updatedLevel.Spawnables;
         }
     }

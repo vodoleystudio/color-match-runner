@@ -194,7 +194,7 @@ namespace HyperCasual.Runner
                 {
                     if (spawnable is Block block)
                     {
-                        var blockData = GenerateBlockData(4);
+                        var blockData = GenerateBlockData(4 , m_AllColors ,levelDefinition);
 
                         for (int j = 0; j < blockData.GateColors.Count; j++)
                         {
@@ -352,24 +352,24 @@ namespace HyperCasual.Runner
 #endif
         }
 
-        private static BlockData GenerateBlockData(int numberOfColors)
+        private static BlockData GenerateBlockData(int numberOfColors, List<Color> allColors , LevelDefinition levelDefinition)
         {
-            m_LevelColors.Clear();
+            List<Color> levelColors = new();
             var colors = m_AllColors.ToList();
             int index;
             for (int i = 0; i < numberOfColors; i++)
             {
                 index = Random.Range(0, colors.Count);
-                m_LevelColors.Add(colors[index]);
+                levelColors.Add(colors[index]);
                 colors.RemoveAt(index);
             }
 
             var gateData = new BlockData();
 
-            foreach (var color in m_LevelColors)
+            foreach (var color in levelColors)
             {
                 gateData.GateColors.Add(color);
-                gateData.PositionOffsets.Add(new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-5f, 5f)));
+                gateData.PositionOffsets.Add(new Vector3(Random.Range(-levelDefinition.Offset.x , levelDefinition.Offset.x), Random.Range(-levelDefinition.Offset.y, levelDefinition.Offset.y) , Random.Range(-levelDefinition.Offset.z, levelDefinition.Offset.z)));
             }
 
             gateData.CorrectColor = gateData.GateColors[Random.Range(0, gateData.GateColors.Count)];
