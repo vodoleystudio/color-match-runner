@@ -20,6 +20,9 @@ namespace HyperCasual.Runner
         private List<Image> m_Icons = new();
 
         [SerializeField]
+        private Image m_MainImage;
+
+        [SerializeField]
         private Image m_MatchIcon;
 
         [SerializeField]
@@ -45,7 +48,7 @@ namespace HyperCasual.Runner
             m_IsUnlocked = unlocked;
             m_Button.interactable = m_IsUnlocked;
             ActivateMatchState(levelData);
-            m_Button.image.sprite = Resources.Load<Sprite>($"{k_FolderName}/{k_TargetName}{index}");
+            m_MainImage.sprite = Resources.Load<Sprite>($"{k_FolderName}/{k_TargetName}{index}");
         }
 
         protected override void OnEnable()
