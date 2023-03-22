@@ -6,6 +6,7 @@ using System.Linq;
 using HyperCasual.Core;
 using System.Collections;
 using DG.Tweening;
+using System;
 
 namespace HyperCasual.Runner
 {
@@ -18,7 +19,7 @@ namespace HyperCasual.Runner
     {
         private const string k_PlayerTag = "Player";
         private const float k_AnimationTime = 2f;
-        private const float k_SliderTextAnimationTime = 1.7f;
+        private const float k_SliderTextAnimationTime = 2.3f;
 
         private GameoverScreen m_GameOverScreen;
         public Transform TargetPosition => m_TargetPosition;
@@ -36,13 +37,15 @@ namespace HyperCasual.Runner
         private Transform m_TargetPosition;
 
         [SerializeField]
-        private PrticleSystemService m_prticleSystemService;
+        private PrticleSystemService m_ParticleSystemService;
 
         [SerializeField]
         private GenericGameEventListener m_EndGameEvent;
 
         [SerializeField]
         private GenericGameEventListener m_BackEvent;
+
+        private Target Target => (Target)LevelManager.Instance.ActiveSpawnables.FirstOrDefault(s => s is Target);
 
         private void ResetCameras()
         {
@@ -76,11 +79,6 @@ namespace HyperCasual.Runner
             m_GameOverScreen = UIManager.Instance.GetView<GameoverScreen>();
         }
 
-        private Target GetTargetReference()
-        {
-            return (Target)LevelManager.Instance.ActiveSpawnables.FirstOrDefault(s => s is Target);
-        }
-
         private void OnTriggerEnter(Collider col)
         {
             if (col.CompareTag(k_PlayerTag))
@@ -97,7 +95,7 @@ namespace HyperCasual.Runner
 
         private IEnumerator runEndAnimationSequence()
         {
-            var matchData = GameManager.Instance.MatchService.MatchColors(GetTargetReference().BaseColor, PlayerController.Instance.GetColor());
+            var matchData = GameManager.Instance.MatchService.MatchColors(Target.BaseColor, PlayerController.Instance.GetColor());
             var levelData = new LevelData(LevelManager.Instance.LevelDefinition.name, matchData);
             SaveManager.Instance.SaveLevelData(levelData.LevelId, levelData);
             m_miniCamera.Hide();
@@ -105,15 +103,48 @@ namespace HyperCasual.Runner
             PlayerController.Instance.StopPlayer();
             PlayerController.Instance.MoveTo(AnimationType.Jump, m_PlayerEndPosition, k_AnimationTime, () =>
             {
-                m_prticleSystemService.PlayParticleSystem(matchData.MatchState);
                 EndAnimationSequence.Instance.SetParentPosition(m_endCameraPosition);
                 SetupMainCameras();
             });
 
-            yield return new WaitForSeconds(k_AnimationTime);
+            yield return new WaitForSeconds(k_AnimationTime / 2);
             m_GameOverScreen.SliderMask.anchorMax = new Vector2(matchData.MatchInPercentage / 100f, 1f);
-            DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime);
+            DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() => PlayAnimations(matchData));
+            StartCoroutine(PlayParticleSystem(matchData));
             GameManager.Instance.Lose();
+        }
+
+        private IEnumerator PlayParticleSystem(MatchData matchData)
+        {
+            yield return new WaitForSeconds(k_SliderTextAnimationTime - 0.1f);
+            m_ParticleSystemService.PlayParticleSystem(matchData.MatchState);
+        }
+
+        private void PlayAnimations(MatchData matchData)
+        {
+            switch (matchData.MatchState)
+            {
+                case MatchState.Match:
+                    play(AnimationType.Jump);
+                    break;
+
+                case MatchState.PartialMatch:
+                    play(AnimationType.Yes);
+                    break;
+
+                case MatchState.NotMatch:
+                    play(AnimationType.Roar);
+                    break;
+
+                default:
+                    throw new Exception($"State {matchData.MatchState} not defined!");
+            }
+
+            void play(AnimationType animation)
+            {
+                AnimationEntityService.Instance.Play(animation, PlayerController.Instance.Animator);
+                AnimationEntityService.Instance.Play(animation, Target.Animator);
+            }
         }
     }
 }

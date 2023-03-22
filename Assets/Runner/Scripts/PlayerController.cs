@@ -138,6 +138,7 @@ namespace HyperCasual.Runner
                 m_ZPos = m_Transform.position.z;
                 onComplete?.Invoke();
             });
+            m_Transform.DORotateQuaternion(endPositionTransform.rotation, animationTime);
         }
 
         public void Initialize()

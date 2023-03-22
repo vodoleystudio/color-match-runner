@@ -13,6 +13,14 @@ namespace HyperCasual.Runner
         [SerializeField]
         private SkinnedMeshRenderer m_SkinnedMeshRenderer;
 
+        public Animator Animator { get; private set; }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            Animator = GetComponentInChildren<Animator>();
+        }
+
         protected override void OnSetBaseColor(Color color)
         {
             m_SkinnedMeshRenderer.material.color = color;
