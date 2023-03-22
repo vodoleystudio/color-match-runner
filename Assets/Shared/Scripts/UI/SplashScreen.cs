@@ -31,6 +31,7 @@ namespace HyperCasual.Gameplay
         public override void Initialize()
         {
             base.Initialize();
+            _cloudsStartPosition = new Dictionary<Image, Vector3>();
             foreach (var cloud in _clouds)
             {
                 _cloudsStartPosition.Add(cloud, cloud.transform.position);
@@ -49,7 +50,14 @@ namespace HyperCasual.Gameplay
 
         public override void Hide()
         {
-            StartCoroutine(HideCoroutine());
+            if (_cloudsStartPosition == null)
+            {
+                base.Hide();
+            }
+            else
+            {
+                StartCoroutine(HideCoroutine());
+            }
         }
 
         private IEnumerator HideCoroutine()
