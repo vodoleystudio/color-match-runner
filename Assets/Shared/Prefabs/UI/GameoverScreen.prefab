@@ -638,10 +638,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4409913023246165829, guid: 7515866bff5ab47e48a3ffd99bfe6507,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4517307188362163993, guid: 7515866bff5ab47e48a3ffd99bfe6507,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4584801869961129658, guid: 7515866bff5ab47e48a3ffd99bfe6507,
         type: 3}
       propertyPath: m_Name
       value: Progress Bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626029049979827154, guid: 7515866bff5ab47e48a3ffd99bfe6507,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534877948583361950, guid: 7515866bff5ab47e48a3ffd99bfe6507,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7828234109918866748, guid: 7515866bff5ab47e48a3ffd99bfe6507,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821622042915762228, guid: 7515866bff5ab47e48a3ffd99bfe6507,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7515866bff5ab47e48a3ffd99bfe6507, type: 3}
