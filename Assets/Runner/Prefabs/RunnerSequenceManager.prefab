@@ -56,7 +56,7 @@ MonoBehaviour:
   - {fileID: 3490529609569554804, guid: 6fcb3adbac8b3ef4195356fa4cf2cb78, type: 3}
   - {fileID: 3296620365916133729, guid: 16e0fdc706fd9884da579d63c884adbb, type: 3}
   m_Levels:
-  - {fileID: 11400000, guid: 41096e7ea7e17b14591f32aa6578df05, type: 2}
+  - {fileID: 11400000, guid: 416e4702edca80046846ce3fec643a48, type: 2}
   - {fileID: 11400000, guid: 30831f9d5a0bbc54c8589cb259bd762e, type: 2}
   - {fileID: 11400000, guid: ef17b6ffca6de454199856e4c90572af, type: 2}
   - {fileID: 11400000, guid: a694e76bc0f836941b4bcc26e006d8de, type: 2}
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_WinEvent: {fileID: 11400000, guid: 4facc4ba26e884ef88b6c2506fa5ae2c, type: 2}
   m_LoseEvent: {fileID: 11400000, guid: 2b6d3353ba4d84d3ca725ef1835ca96f, type: 2}
   m_PauseEvent: {fileID: 11400000, guid: 4bbf7a853b87f44299489a25eb0d9ce5, type: 2}
-  m_SplashDelay: 1
+  m_SplashDelay: 0.01
 --- !u!114 &3832517329008096586
 MonoBehaviour:
   m_ObjectHideFlags: 0
