@@ -146,7 +146,7 @@ namespace HyperCasual.Runner
             levelGameObject = new GameObject("LevelManager");
             s_LevelManager = levelGameObject.AddComponent<LevelManager>();
             s_LevelManager.LevelDefinition = levelDefinition;
-            SetLevelColors(levelDefinition.NumberOfGates, levelDefinition);
+            SetLevelColors(levelDefinition.NumberOfColors, levelDefinition);
             Transform levelParent = levelGameObject.transform;
 
             var targetColor = Color.white;
