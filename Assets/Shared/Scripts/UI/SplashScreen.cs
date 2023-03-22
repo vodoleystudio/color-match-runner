@@ -26,12 +26,11 @@ namespace HyperCasual.Gameplay
         private Transform _rightAnchor;
 
         [SerializeField]
-        private Dictionary<Image, Vector3> _cloudsStartPosition;
+        private Dictionary<Image, Vector3> _cloudsStartPosition = new Dictionary<Image, Vector3>();
 
         public override void Initialize()
         {
             base.Initialize();
-            _cloudsStartPosition = new Dictionary<Image, Vector3>();
             foreach (var cloud in _clouds)
             {
                 _cloudsStartPosition.Add(cloud, cloud.transform.position);
@@ -50,13 +49,13 @@ namespace HyperCasual.Gameplay
 
         public override void Hide()
         {
-            if (_cloudsStartPosition == null)
+            if (gameObject.activeSelf)
             {
-                base.Hide();
+                StartCoroutine(HideCoroutine());
             }
             else
             {
-                StartCoroutine(HideCoroutine());
+                base.Hide();
             }
         }
 
@@ -73,7 +72,12 @@ namespace HyperCasual.Gameplay
 
             foreach (var cloud in _clouds)
             {
-                cloud.transform.position = _cloudsStartPosition[cloud];
+                if (_cloudsStartPosition.ContainsKey(cloud))
+                {
+                    cloud.transform.position = _cloudsStartPosition[cloud];
+                }
+
+                cloud.color = new Color(cloud.color.r, cloud.color.g, cloud.color.b, 1f);
             }
         }
     }
