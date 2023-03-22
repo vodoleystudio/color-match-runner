@@ -5,6 +5,7 @@ using UnityEngine;
 using GameCore.Services;
 using System.Linq;
 using GameCore.UI;
+using GameCore.Data;
 
 #if UNITY_EDITOR
 
@@ -37,6 +38,8 @@ namespace HyperCasual.Runner
 
         private LevelDefinition m_CurrentLevel;
 
+        private const int k_NumberOfGates = 4;
+
         /// <summary>
         /// Returns true if the game is currently active.
         /// Returns false if the game is paused, has not yet begun,
@@ -50,7 +53,7 @@ namespace HyperCasual.Runner
         private GameObject m_LevelMarkersGO;
 
         private static LevelManager s_LevelManager;
-        private static IGamePlayProgressService s_GamePlayProgressService = new GamePlayProgressService();
+        private static List<Color> s_LevelColors = new();
         public IMatchService MatchService { get; } = new MatchService();
 
 #if UNITY_EDITOR
@@ -143,9 +146,7 @@ namespace HyperCasual.Runner
             levelGameObject = new GameObject("LevelManager");
             s_LevelManager = levelGameObject.AddComponent<LevelManager>();
             s_LevelManager.LevelDefinition = levelDefinition;
-
-            s_GamePlayProgressService.Setup();
-
+            SetLevelColors(levelDefinition.NumberOfGates, levelDefinition);
             Transform levelParent = levelGameObject.transform;
 
             var targetColor = Color.white;
@@ -193,7 +194,7 @@ namespace HyperCasual.Runner
                 {
                     if (spawnable is Block block)
                     {
-                        var blockData = s_GamePlayProgressService.GenerateBlockData();
+                        var blockData = GenerateBlockData(levelDefinition.NumberOfGates, levelDefinition.NumberOfColors, levelDefinition);
 
                         for (int j = 0; j < blockData.GateColors.Count; j++)
                         {
@@ -252,7 +253,6 @@ namespace HyperCasual.Runner
         private void StartGame()
         {
             ResetLevel();
-            m_IsPlaying = true;
         }
 
         /// <summary>
@@ -349,6 +349,45 @@ namespace HyperCasual.Runner
                 ResetLevel();
             }
 #endif
+        }
+
+        private static void SetLevelColors(int numberOfColors, LevelDefinition levelDefinition)
+        {
+            s_LevelColors.Clear();
+            var colors = levelDefinition.LevelColors.ToList();
+            for (int i = 0; i < numberOfColors; i++)
+            {
+                RandomAddWithOutRepetition(s_LevelColors, colors);
+            }
+        }
+
+        private static BlockData GenerateBlockData(int numberOfGates, int numberOfColors, LevelDefinition levelDefinition)
+        {
+            var gateData = new BlockData();
+            var colors = s_LevelColors.ToList();
+
+            for (int i = 0; i < numberOfGates; i++)
+            {
+                if (levelDefinition.IsRandomOrder)
+                {
+                    RandomAddWithOutRepetition(gateData.GateColors, colors);
+                }
+                else
+                {
+                    gateData.GateColors.Add(colors[i]);
+                }
+                gateData.PositionOffsets.Add(new Vector3(Random.Range(-levelDefinition.Offset.x, levelDefinition.Offset.x), Random.Range(-levelDefinition.Offset.y, levelDefinition.Offset.y), Random.Range(-levelDefinition.Offset.z, levelDefinition.Offset.z)));
+            }
+
+            gateData.CorrectColor = gateData.GateColors[Random.Range(0, gateData.GateColors.Count)];
+            return gateData;
+        }
+
+        private static void RandomAddWithOutRepetition(List<Color> listToAdd, List<Color> listToAddFrom)
+        {
+            var index = Random.Range(0, listToAddFrom.Count);
+            listToAdd.Add(listToAddFrom[index]);
+            listToAddFrom.RemoveAt(index);
         }
     }
 }

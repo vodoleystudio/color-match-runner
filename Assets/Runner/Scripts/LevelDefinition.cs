@@ -43,7 +43,7 @@ namespace HyperCasual.Runner
         public bool SnapToGrid = true;
 
         /// <summary>
-        /// The size of the grid that spawnables will snap to if SnapToGrid 
+        /// The size of the grid that spawnables will snap to if SnapToGrid
         /// is true.
         /// </summary>
         public float GridSize = 1.0f;
@@ -59,10 +59,23 @@ namespace HyperCasual.Runner
         public GameObject StartPrefab;
 
         /// <summary>
-        /// A prefab placed at the end of this level. This prefab should 
+        /// A prefab placed at the end of this level. This prefab should
         /// contain collision logic to complete the level.
         /// </summary>
         public GameObject EndPrefab;
+
+        public Vector3 Offset = Vector3.zero;
+
+        public List<Color> LevelColors = new();
+
+        public int NumberOfColors = 4;
+
+        public bool IsRandomOrder = false;
+
+        //currently the system doesnt support any other number of gates except 4
+        private const int m_NumberOfGates = 4;
+
+        public int NumberOfGates => m_NumberOfGates;
 
         /// <summary>
         /// An array of all SpawnableObjects that exist in this level.
@@ -93,13 +106,13 @@ namespace HyperCasual.Runner
             public Vector3 Scale = Vector3.one;
 
             /// <summary>
-            /// The base color to be applied to the materials on 
+            /// The base color to be applied to the materials on
             /// this SpawnableObject.
             /// </summary>
             public Color BaseColor = Color.white;
 
             /// <summary>
-            /// True if this object should snap to a levels grid. 
+            /// True if this object should snap to a levels grid.
             /// Setting this value to false will make this SpawnableObject
             /// ignore the level's snap settings.
             /// </summary>
@@ -125,6 +138,10 @@ namespace HyperCasual.Runner
             TerrainMaterial = updatedLevel.TerrainMaterial;
             StartPrefab = updatedLevel.StartPrefab;
             EndPrefab = updatedLevel.EndPrefab;
+            Offset = updatedLevel.Offset;
+            LevelColors = updatedLevel.LevelColors;
+            NumberOfColors = updatedLevel.NumberOfColors;
+            IsRandomOrder = updatedLevel.IsRandomOrder;
             Spawnables = updatedLevel.Spawnables;
         }
     }
