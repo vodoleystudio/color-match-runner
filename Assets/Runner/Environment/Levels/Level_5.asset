@@ -37,7 +37,7 @@ MonoBehaviour:
   - {r: 0.15294118, g: 0.23529412, b: 0.45882353, a: 1}
   - {r: 0.18431373, g: 0.21176471, b: 0.2509804, a: 1}
   NumberOfColors: 6
-  RandomOrder: 1
+  IsRandomOrder: 1
   Spawnables:
   - SpawnablePrefab: {fileID: 0}
     Position: {x: 0, y: -3.91, z: 530}

@@ -24,7 +24,7 @@ MonoBehaviour:
     type: 3}
   EndPrefab: {fileID: 1865139757532878011, guid: 979b2618b08ac20459dd7568017d0c90,
     type: 3}
-  Offset: {x: 1, y: 0, z: 2}
+  Offset: {x: 1, y: 0, z: 4}
   LevelColors:
   - {r: 1, g: 0.7647059, b: 0.07058824, a: 1}
   - {r: 0.6392157, g: 0.79607844, b: 0.21960784, a: 1}
@@ -37,7 +37,7 @@ MonoBehaviour:
   - {r: 0.34117648, g: 0.34509805, b: 0.73333335, a: 1}
   - {r: 0.5137255, g: 0.20392157, b: 0.44313726, a: 1}
   NumberOfColors: 4
-  RandomOrder: 0
+  IsRandomOrder: 0
   Spawnables:
   - SpawnablePrefab: {fileID: 4507862839474419013, guid: c51777c417238c34982c63b1f857f70e,
       type: 3}
