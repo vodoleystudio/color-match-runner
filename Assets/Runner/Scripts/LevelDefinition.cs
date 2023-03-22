@@ -73,7 +73,7 @@ namespace HyperCasual.Runner
         public bool IsRandomOrder = false;
 
         //currently the system doesnt support any other number of gates except 4
-        private int m_NumberOfGates = 4;
+        private const int m_NumberOfGates = 4;
 
         public int NumberOfGates => m_NumberOfGates;
 
