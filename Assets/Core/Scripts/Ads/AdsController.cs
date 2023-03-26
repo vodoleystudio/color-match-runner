@@ -9,17 +9,17 @@ namespace HyperCasual.Core
         private static bool s_Initialized = false;
         public bool Initialized => s_Initialized;
 
-        
-        #pragma warning disable 0414
+#pragma warning disable 0414
+
         //NOTE: Replace the following in the prefab with your gameID from your Unity web dashboard. This will be different for each platform.
         [SerializeField]
         private string m_AndroidGameId = "4960150";
-        
+
         [SerializeField]
         private string m_iOSGameId = "4960151";
-        #pragma warning restore 0414
-        
-        
+
+#pragma warning restore 0414
+
 #if UNITY_ANDROID
         public string GameId => m_AndroidGameId;
 #elif UNITY_IOS
@@ -27,8 +27,8 @@ namespace HyperCasual.Core
 #else
         public string GameId => m_AndroidGameId; // For testing
 #endif
-        
-        public bool TestMode { get; set; } = true; // Change this for production builds
+
+        public bool TestMode { get; set; } = true;
 
         protected override void Awake()
         {
@@ -44,7 +44,7 @@ namespace HyperCasual.Core
             }
             else
             {
-                Advertisement.Initialize(GameId, TestMode, false, this);
+                Advertisement.Initialize(GameId, TestMode, this);
             }
         }
 
@@ -62,12 +62,14 @@ namespace HyperCasual.Core
         }
 
         public void LoadAd(string adId) => LoadAd(adId, this);
+
         public void LoadAd(string adId, IUnityAdsLoadListener callbackListener)
         {
             Advertisement.Load(adId, callbackListener);
         }
 
         public void ShowAd(string adId) => ShowAd(adId, this);
+
         public void ShowAd(string adId, IUnityAdsShowListener callbackListener)
         {
             Advertisement.Show(adId, callbackListener);
