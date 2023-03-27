@@ -543,6 +543,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2132263741352123941, guid: 7515866bff5ab47e48a3ffd99bfe6507,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132263741352123941, guid: 7515866bff5ab47e48a3ffd99bfe6507,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158046175045629740, guid: 7515866bff5ab47e48a3ffd99bfe6507,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158046175045629740, guid: 7515866bff5ab47e48a3ffd99bfe6507,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2486932130278954091, guid: 7515866bff5ab47e48a3ffd99bfe6507,
         type: 3}
       propertyPath: m_Pivot.x
