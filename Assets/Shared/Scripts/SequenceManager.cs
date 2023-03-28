@@ -196,7 +196,6 @@ namespace HyperCasual.Gameplay
 
         private void OnGameOverScreenDisplayed(IState currentLevel)
         {
-            AudioManager.Instance.StopMusicEffect();
             ShowUI<GameoverScreen>();
             SaveLevel(currentLevel);
         }
@@ -221,8 +220,8 @@ namespace HyperCasual.Gameplay
 
         private void OnLevelSelectionDisplayed()
         {
-            AudioManager.Instance.StopMusicEffect();
             ShowUI<LevelSelectionScreen>();
+            AudioManager.Instance.StopMusicEffect();
             AudioManager.Instance.PlayMusic(SoundID.MenuMusic);
             FindObjectOfType<UIGameOnSimulator>(true).gameObject.SetActive(true);
         }
