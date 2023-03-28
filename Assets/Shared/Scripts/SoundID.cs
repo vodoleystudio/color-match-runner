@@ -9,6 +9,9 @@ namespace HyperCasual.Runner
         CoinSound,
         KeySound,
         ButtonSound,
-        MenuMusic
+        MenuMusic,
+        CloudSound,
+        WindSFX,
+        GameMusic
     }
 }
