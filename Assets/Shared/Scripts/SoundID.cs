@@ -11,6 +11,7 @@ namespace HyperCasual.Runner
         ButtonSound,
         MenuMusic,
         CloudSound,
-        WindSFX
+        WindSFX,
+        GameMusic
     }
 }
