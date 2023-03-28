@@ -34,6 +34,7 @@ namespace HyperCasual.Runner
                 transform.SetParent(PlayerController.Instance.transform);
                 var currentPlayerColor = PlayerController.Instance.GetColor();
                 PlayerController.Instance.SetColor(Color.Lerp(BaseColor, currentPlayerColor, MixValue));
+                AudioManager.Instance.PlayEffect(SoundID.CloudSound);
             }
         }
 

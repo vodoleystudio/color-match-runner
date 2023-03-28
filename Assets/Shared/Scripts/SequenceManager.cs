@@ -189,6 +189,7 @@ namespace HyperCasual.Gameplay
         private void OnMainMenuDisplayed()
         {
             ShowUI<MainMenu>();
+            AudioManager.Instance.StopMusicEffect();
             AudioManager.Instance.PlayMusic(SoundID.MenuMusic);
             FindObjectOfType<UIGameOnSimulator>(true).gameObject.SetActive(true);
         }
@@ -220,6 +221,7 @@ namespace HyperCasual.Gameplay
         private void OnLevelSelectionDisplayed()
         {
             ShowUI<LevelSelectionScreen>();
+            AudioManager.Instance.StopMusicEffect();
             AudioManager.Instance.PlayMusic(SoundID.MenuMusic);
             FindObjectOfType<UIGameOnSimulator>(true).gameObject.SetActive(true);
         }
@@ -228,7 +230,8 @@ namespace HyperCasual.Gameplay
         {
             m_CurrentLevel = current;
             ShowUI<Hud>();
-            AudioManager.Instance.StopMusic();
+            AudioManager.Instance.PlayMusicEffect(SoundID.WindSFX);
+            AudioManager.Instance.ReplayMusic(SoundID.GameMusic);
             FindObjectOfType<UIGameOnSimulator>(true).gameObject.SetActive(false);
         }
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using HyperCasual.Core;
 using UnityEngine;
 using AudioSettings = HyperCasual.Core.AudioSettings;
+using Random = UnityEngine.Random;
 
 namespace HyperCasual.Runner
 {
@@ -16,7 +17,7 @@ namespace HyperCasual.Runner
         private class SoundIDClipPair
         {
             public SoundID m_SoundID;
-            public AudioClip m_AudioClip;
+            public AudioClip[] m_AudioClip;
         }
 
         [SerializeField]
@@ -35,7 +36,7 @@ namespace HyperCasual.Runner
         private SoundIDClipPair[] m_Sounds;
 
         private float m_LastSoundPlayTime;
-        private readonly Dictionary<SoundID, AudioClip> m_Clips = new();
+        private readonly Dictionary<SoundID, List<AudioClip>> m_Clips = new();
 
         private AudioSettings m_AudioSettings = new();
 
@@ -82,7 +83,15 @@ namespace HyperCasual.Runner
         {
             foreach (var sound in m_Sounds)
             {
-                m_Clips.Add(sound.m_SoundID, sound.m_AudioClip);
+                foreach (var soundEfect in sound.m_AudioClip)
+                {
+                    if (!m_Clips.ContainsKey(sound.m_SoundID))
+                    {
+                        m_Clips.Add(sound.m_SoundID, new List<AudioClip>());
+                    }
+
+                    m_Clips[sound.m_SoundID].Add(soundEfect);
+                }
             }
         }
 
@@ -125,6 +134,12 @@ namespace HyperCasual.Runner
             audioSource.Play();
         }
 
+        public void ReplayMusic(SoundID soundID, bool looping = true)
+        {
+            StopMusic();
+            PlayMusic(soundID, looping);
+        }
+
         /// <summary>
         /// Play a music based on its sound ID
         /// </summary>
@@ -132,7 +147,7 @@ namespace HyperCasual.Runner
         /// <param name="looping">Is music looping?</param>
         public void PlayMusic(SoundID soundID, bool looping = true)
         {
-            PlayMusic(m_MusicSource, m_Clips[soundID], looping);
+            PlayMusic(m_MusicSource, ChooseRandomItemFromDictinoryList(soundID), looping);
         }
 
         /// <summary>
@@ -140,7 +155,7 @@ namespace HyperCasual.Runner
         /// </summary>
         public void StopMusic()
         {
-            m_MusicSource.Stop();
+            StopMusic(m_MusicSource);
         }
 
         /// <summary>
@@ -150,7 +165,7 @@ namespace HyperCasual.Runner
         /// <param name="looping">Is music looping?</param>
         public void PlayMusicEffect(SoundID soundID, bool looping = true)
         {
-            PlayMusic(m_MusicEffectSource, m_Clips[soundID], looping);
+            PlayMusic(m_MusicEffectSource, ChooseRandomItemFromDictinoryList(soundID), looping);
         }
 
         /// <summary>
@@ -158,7 +173,12 @@ namespace HyperCasual.Runner
         /// </summary>
         public void StopMusicEffect()
         {
-            m_MusicEffectSource.Stop();
+            StopMusic(m_MusicEffectSource);
+        }
+
+        private void StopMusic(AudioSource audioSource)
+        {
+            audioSource.Stop();
         }
 
         private void PlayEffect(AudioClip audioClip)
@@ -179,7 +199,12 @@ namespace HyperCasual.Runner
             if (soundID == SoundID.None)
                 return;
 
-            PlayEffect(m_Clips[soundID]);
+            PlayEffect(ChooseRandomItemFromDictinoryList(soundID));
+        }
+
+        private AudioClip ChooseRandomItemFromDictinoryList(SoundID soundID)
+        {
+            return m_Clips[soundID][Random.Range(0, m_Clips[soundID].Count)];
         }
     }
 }
