@@ -307,10 +307,14 @@ MonoBehaviour:
   m_MinSoundInterval: 0.075
   m_Sounds:
   - m_SoundID: 4
-    m_AudioClip: {fileID: 8300000, guid: af19dcf2eb2434766b7ebfda2204fdbd, type: 3}
+    m_AudioClip: {fileID: 8300000, guid: 38870477f42e92645910f8053d1238d6, type: 3}
   - m_SoundID: 1
     m_AudioClip: {fileID: 8300000, guid: 7f035bf471a2542c6bcb1d928488c353, type: 3}
   - m_SoundID: 2
     m_AudioClip: {fileID: 8300000, guid: 2746e40e99d6a496d9138c980ca19aa2, type: 3}
   - m_SoundID: 3
     m_AudioClip: {fileID: 8300000, guid: 93827af2766564d40857b36eab1cf07f, type: 3}
+  - m_SoundID: 5
+    m_AudioClip: {fileID: 8300000, guid: a49878c409b7f2946a431271f107c422, type: 3}
+  - m_SoundID: 6
+    m_AudioClip: {fileID: 8300000, guid: cfc3026604c9e5041aa82af3fb29045f, type: 3}
