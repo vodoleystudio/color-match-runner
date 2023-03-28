@@ -12,6 +12,10 @@ namespace HyperCasual.Runner
         MenuMusic,
         CloudSound,
         WindSFX,
-        GameMusic
+        GameMusic,
+        ProgressBarFill,
+        MatchSound,
+        PartialMatchSound,
+        NoMatchSound
     }
 }

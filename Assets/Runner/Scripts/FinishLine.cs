@@ -108,6 +108,8 @@ namespace HyperCasual.Runner
             });
 
             yield return new WaitForSeconds(k_AnimationTime / 2);
+            AudioManager.Instance.StopMusic();
+            AudioManager.Instance.PlayEffect(SoundID.ProgressBarFill);
             m_GameOverScreen.SliderMask.anchorMax = new Vector2(matchData.MatchInPercentage / 100f, 1f);
             DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() => PlayAnimations(matchData));
             StartCoroutine(PlayParticleSystem(matchData));
@@ -126,14 +128,17 @@ namespace HyperCasual.Runner
             {
                 case MatchState.Match:
                     play(AnimationType.Jump);
+                    AudioManager.Instance.PlayMusic(SoundID.MatchSound);
                     break;
 
                 case MatchState.PartialMatch:
                     play(AnimationType.Yes);
+                    AudioManager.Instance.PlayMusic(SoundID.PartialMatchSound);
                     break;
 
                 case MatchState.NotMatch:
                     play(AnimationType.Roar);
+                    AudioManager.Instance.PlayMusic(SoundID.NoMatchSound);
                     break;
 
                 default:
