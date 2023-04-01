@@ -7,9 +7,9 @@ namespace GameCore.Services
 {
     public class MatchService : IMatchService
     {
-        private const float k_MatchBarier = 0.05f;
-        private const float k_PartialMatchBarier = 0.15f;
-        private const float k_NotMatchBarier = 0.85f;
+        private const int k_MatchBarier = 95;
+        private const int k_PartialMatchBarier = 90;
+        private const int k_NotMatchBarier = 85;
 
         public MatchData MatchColors(Color firstColor, Color secondColor)
         {
@@ -21,17 +21,17 @@ namespace GameCore.Services
             colorComponents.Add(Math.Abs(firstColor.g - secondColor.g));
             colorComponents.Add(Math.Abs(firstColor.b - secondColor.b));
 
-            var avarge = (colorComponents[0] + colorComponents[1] + colorComponents[2]) / colorComponents.Count;
+            var matchInProcent = (int)Math.Round((1f - (colorComponents[0] + colorComponents[1] + colorComponents[2]) / colorComponents.Count) * 100);
 
-            if (avarge >= 0.0f && avarge < k_MatchBarier)
+            if (100 >= matchInProcent && matchInProcent >= k_MatchBarier)
             {
                 matchData.MatchState = MatchState.Match;
             }
-            else if (avarge >= k_MatchBarier && avarge < k_PartialMatchBarier)
+            else if (k_MatchBarier > matchInProcent && matchInProcent >= k_PartialMatchBarier)
             {
                 matchData.MatchState = MatchState.PartialMatch;
             }
-            else if (avarge >= k_PartialMatchBarier && avarge <= k_NotMatchBarier)
+            else if (k_PartialMatchBarier > matchInProcent && matchInProcent >= 0)
             {
                 matchData.MatchState = MatchState.NotMatch;
             }
@@ -40,8 +40,8 @@ namespace GameCore.Services
                 Debug.Log("The color value is out of range");
             }
 
-            matchData.MatchInPercentage = (int)Math.Round((1.0f - avarge) * 100);
-            Debug.LogError($"MatchState is {matchData.MatchState}, Match in procent: {(int)Math.Round((1.0f - avarge) * 100)}");
+            matchData.MatchInPercentage = matchInProcent;
+            Debug.LogError($"MatchState is {matchData.MatchState}, Match in procent: {matchInProcent}");
             return matchData;
         }
     }
