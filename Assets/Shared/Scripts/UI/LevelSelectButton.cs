@@ -28,6 +28,9 @@ namespace HyperCasual.Runner
         private Image m_PartialMatchIcon;
 
         [SerializeField]
+        private Image m_PartMatchIcon;
+
+        [SerializeField]
         private Image m_NotMatchIcon;
 
         [SerializeField]
@@ -78,6 +81,7 @@ namespace HyperCasual.Runner
             m_Icons.Add(m_MatchIcon);
             m_Icons.Add(m_PartialMatchIcon);
             m_Icons.Add(m_NotMatchIcon);
+            m_Icons.Add(m_PartMatchIcon);
             m_Icons.Add(m_QuestionIcon);
         }
 
@@ -93,6 +97,10 @@ namespace HyperCasual.Runner
 
                     case MatchState.PartialMatch:
                         ActivateIcon(m_PartialMatchIcon);
+                        break;
+
+                    case MatchState.PartMatch:
+                        ActivateIcon(m_PartMatchIcon);
                         break;
 
                     case MatchState.NotMatch:

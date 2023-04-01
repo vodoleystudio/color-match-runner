@@ -5,6 +5,7 @@ namespace GameCore.Data
         None,
         Match,
         PartialMatch,
+        PartMatch,
         NotMatch
     }
 }

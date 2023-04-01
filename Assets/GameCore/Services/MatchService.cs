@@ -9,7 +9,7 @@ namespace GameCore.Services
     {
         private const int k_MatchBarier = 95;
         private const int k_PartialMatchBarier = 90;
-        private const int k_NotMatchBarier = 85;
+        private const int k_PartMatchBarier = 85;
 
         public MatchData MatchColors(Color firstColor, Color secondColor)
         {
@@ -30,6 +30,10 @@ namespace GameCore.Services
             else if (k_MatchBarier > matchInProcent && matchInProcent >= k_PartialMatchBarier)
             {
                 matchData.MatchState = MatchState.PartialMatch;
+            }
+            else if (k_PartialMatchBarier > matchInProcent && matchInProcent >= k_PartMatchBarier)
+            {
+                matchData.MatchState = MatchState.PartMatch;
             }
             else if (k_PartialMatchBarier > matchInProcent && matchInProcent >= 0)
             {
