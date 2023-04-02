@@ -22,16 +22,16 @@ namespace HyperCasual.Runner
         private Image m_LockerImage;
 
         [SerializeField]
-        private Image m_MatchIcon;
+        private Image m_HeartIcon;
 
         [SerializeField]
-        private Image m_PartialMatchIcon;
+        private Image m_LikeIcon;
 
         [SerializeField]
-        private Image m_PartMatchIcon;
+        private Image m_BrokenHeartIcon;
 
         [SerializeField]
-        private Image m_NotMatchIcon;
+        private Image m_DisLikeIcon;
 
         [SerializeField]
         private Image m_QuestionIcon;
@@ -78,10 +78,10 @@ namespace HyperCasual.Runner
 
         private void Awake()
         {
-            m_Icons.Add(m_MatchIcon);
-            m_Icons.Add(m_PartialMatchIcon);
-            m_Icons.Add(m_NotMatchIcon);
-            m_Icons.Add(m_PartMatchIcon);
+            m_Icons.Add(m_HeartIcon);
+            m_Icons.Add(m_LikeIcon);
+            m_Icons.Add(m_DisLikeIcon);
+            m_Icons.Add(m_BrokenHeartIcon);
             m_Icons.Add(m_QuestionIcon);
         }
 
@@ -91,20 +91,20 @@ namespace HyperCasual.Runner
             {
                 switch (levelData.MatchData.MatchState)
                 {
-                    case MatchState.Match:
-                        ActivateIcon(m_MatchIcon);
+                    case MatchState.Heart:
+                        ActivateIcon(m_HeartIcon);
                         break;
 
-                    case MatchState.PartialMatch:
-                        ActivateIcon(m_PartialMatchIcon);
+                    case MatchState.Like:
+                        ActivateIcon(m_LikeIcon);
                         break;
 
-                    case MatchState.PartMatch:
-                        ActivateIcon(m_PartMatchIcon);
+                    case MatchState.BrokenHeart:
+                        ActivateIcon(m_BrokenHeartIcon);
                         break;
 
-                    case MatchState.NotMatch:
-                        ActivateIcon(m_NotMatchIcon);
+                    case MatchState.DisLike:
+                        ActivateIcon(m_DisLikeIcon);
                         break;
                 }
             }

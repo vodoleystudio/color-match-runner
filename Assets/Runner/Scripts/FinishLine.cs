@@ -126,17 +126,17 @@ namespace HyperCasual.Runner
         {
             switch (matchData.MatchState)
             {
-                case MatchState.Match:
+                case MatchState.Heart:
                     play(AnimationType.Jump);
                     AudioManager.Instance.PlayMusic(SoundID.MatchSound);
                     break;
 
-                case MatchState.PartialMatch:
+                case MatchState.Like:
                     play(AnimationType.Yes);
                     AudioManager.Instance.PlayMusic(SoundID.PartialMatchSound);
                     break;
 
-                case MatchState.NotMatch:
+                case MatchState.DisLike:
                     play(AnimationType.Roar);
                     AudioManager.Instance.PlayMusic(SoundID.NoMatchSound);
                     break;

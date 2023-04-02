@@ -1,15 +1,16 @@
-using UnityEngine;
-using System;
 using GameCore.Data;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace GameCore.Services
 {
     public class MatchService : IMatchService
     {
-        private const int k_MatchBarier = 95;
-        private const int k_PartialMatchBarier = 85;
-        private const int k_PartMatchBarier = 70;
+        private const int k_HeartBarier = 100;
+        private const int k_LikeBarier = 95;
+        private const int k_BrokenHeart = 85;
+        private const int k_DisLikeBarier = 75;
 
         public MatchData MatchColors(Color firstColor, Color secondColor)
         {
@@ -23,21 +24,21 @@ namespace GameCore.Services
 
             var matchInProcent = (int)Math.Round((1f - (colorComponents[0] + colorComponents[1] + colorComponents[2]) / colorComponents.Count) * 100);
 
-            if (100 >= matchInProcent && matchInProcent >= k_MatchBarier)
+            if (k_HeartBarier >= matchInProcent && matchInProcent >= k_LikeBarier)
             {
-                matchData.MatchState = MatchState.Match;
+                matchData.MatchState = MatchState.Heart;
             }
-            else if (k_MatchBarier > matchInProcent && matchInProcent >= k_PartialMatchBarier)
+            else if (k_LikeBarier > matchInProcent && matchInProcent >= k_BrokenHeart)
             {
-                matchData.MatchState = MatchState.PartialMatch;
+                matchData.MatchState = MatchState.Like;
             }
-            else if (k_PartialMatchBarier > matchInProcent && matchInProcent >= k_PartMatchBarier)
+            else if (k_BrokenHeart > matchInProcent && matchInProcent >= k_DisLikeBarier)
             {
-                matchData.MatchState = MatchState.PartMatch;
+                matchData.MatchState = MatchState.BrokenHeart;
             }
-            else if (k_PartialMatchBarier > matchInProcent && matchInProcent >= 0)
+            else if (k_BrokenHeart > matchInProcent && matchInProcent >= 0)
             {
-                matchData.MatchState = MatchState.NotMatch;
+                matchData.MatchState = MatchState.DisLike;
             }
             else
             {
