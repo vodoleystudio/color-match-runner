@@ -96,8 +96,6 @@ namespace HyperCasual.Runner
         private IEnumerator runEndAnimationSequence()
         {
             var matchData = GameManager.Instance.MatchService.MatchColors(Target.BaseColor, PlayerController.Instance.GetColor());
-            matchData.MatchInPercentage = 60;
-            matchData.MatchState = MatchState.BrokenHeart;
             var levelData = new LevelData(LevelManager.Instance.LevelDefinition.name, matchData);
             SaveManager.Instance.SaveLevelData(levelData.LevelId, levelData);
             m_miniCamera.Hide();
