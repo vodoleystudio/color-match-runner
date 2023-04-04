@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 3819265113303391417}
   - component: {fileID: 160658168135040854}
   m_Layer: 5
-  m_Name: PartialMatchImage
+  m_Name: LikeImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 6328301742780339229}
   - component: {fileID: 4552931188253730979}
   m_Layer: 5
-  m_Name: PartMatchImage
+  m_Name: BrokenHeartImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 6258326898470979086}
   - component: {fileID: 2634100767533749754}
   m_Layer: 5
-  m_Name: MatchImage
+  m_Name: HeartImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -663,7 +663,7 @@ GameObject:
   - component: {fileID: 330642727748251071}
   - component: {fileID: 8452988204462524005}
   m_Layer: 5
-  m_Name: NotMatchImage
+  m_Name: DisLikeImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -946,10 +946,10 @@ MonoBehaviour:
   m_ButtonSound: 3
   m_MainImage: {fileID: 1038953630977302486}
   m_LockerImage: {fileID: 1373519606626863859}
-  m_MatchIcon: {fileID: 2634100767533749754}
-  m_PartialMatchIcon: {fileID: 160658168135040854}
-  m_PartMatchIcon: {fileID: 4552931188253730979}
-  m_NotMatchIcon: {fileID: 8452988204462524005}
+  m_HeartIcon: {fileID: 2634100767533749754}
+  m_LikeIcon: {fileID: 160658168135040854}
+  m_BrokenHeartIcon: {fileID: 4552931188253730979}
+  m_DisLikeIcon: {fileID: 8452988204462524005}
   m_QuestionIcon: {fileID: 2727390575373685275}
   m_MatchIconsContainer: {fileID: 1774204133725757582}
 --- !u!1 &8283202576932766224

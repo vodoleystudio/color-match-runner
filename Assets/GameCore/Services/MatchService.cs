@@ -22,21 +22,21 @@ namespace GameCore.Services
             colorComponents.Add(Math.Abs(firstColor.g - secondColor.g));
             colorComponents.Add(Math.Abs(firstColor.b - secondColor.b));
 
-            var matchInProcent = (int)Math.Round((1f - (colorComponents[0] + colorComponents[1] + colorComponents[2]) / colorComponents.Count) * 100);
+            var matchInPercent = (int)Math.Round((1f - (colorComponents[0] + colorComponents[1] + colorComponents[2]) / colorComponents.Count) * 100);
 
-            if (k_HeartBarier >= matchInProcent && matchInProcent >= k_LikeBarier)
+            if (k_HeartBarier >= matchInPercent && matchInPercent >= k_LikeBarier)
             {
                 matchData.MatchState = MatchState.Heart;
             }
-            else if (k_LikeBarier > matchInProcent && matchInProcent >= k_BrokenHeart)
+            else if (k_LikeBarier > matchInPercent && matchInPercent >= k_BrokenHeart)
             {
                 matchData.MatchState = MatchState.Like;
             }
-            else if (k_BrokenHeart > matchInProcent && matchInProcent >= k_DisLikeBarier)
+            else if (k_BrokenHeart > matchInPercent && matchInPercent >= k_DisLikeBarier)
             {
                 matchData.MatchState = MatchState.BrokenHeart;
             }
-            else if (k_BrokenHeart > matchInProcent && matchInProcent >= 0)
+            else if (k_BrokenHeart > matchInPercent && matchInPercent >= 0)
             {
                 matchData.MatchState = MatchState.DisLike;
             }
@@ -45,8 +45,8 @@ namespace GameCore.Services
                 Debug.Log("The color value is out of range");
             }
 
-            matchData.MatchInPercentage = matchInProcent;
-            Debug.LogError($"MatchState is {matchData.MatchState}, Match in procent: {matchInProcent}");
+            matchData.MatchInPercentage = matchInPercent;
+            Debug.LogError($"MatchState is {matchData.MatchState}, Match in procent: {matchInPercent}");
             return matchData;
         }
     }
