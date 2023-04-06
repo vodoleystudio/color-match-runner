@@ -296,7 +296,6 @@ namespace HyperCasual.Runner
             m_LastPosition = m_Transform.position;
 
             m_HasInput = false;
-
             ResetSpeed();
             ResetScale();
         }

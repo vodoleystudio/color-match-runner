@@ -176,11 +176,16 @@ namespace HyperCasual.Runner
             StopMusic(m_MusicEffectSource);
         }
 
+        public void StopEffect()
+        {
+            StopMusic(m_EffectSource);
+        }
+
         private void StopMusic(AudioSource audioSource)
         {
             audioSource.Stop();
         }
-
+        
         private void PlayEffect(AudioClip audioClip)
         {
             if (Time.time - m_LastSoundPlayTime >= m_MinSoundInterval)

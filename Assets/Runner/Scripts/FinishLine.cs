@@ -47,6 +47,8 @@ namespace HyperCasual.Runner
 
         private Target Target => (Target)LevelManager.Instance.ActiveSpawnables.FirstOrDefault(s => s is Target);
 
+        private Tween m_Tween;
+
         private void ResetCameras()
         {
             CameraManager.Instance.Activate();
@@ -70,7 +72,7 @@ namespace HyperCasual.Runner
         {
             if (m_EndGameEvent != null)
             {
-                m_EndGameEvent.EventHandler = ResetCameras;
+                m_EndGameEvent.EventHandler = OnGameEnd; 
             }
             if (m_BackEvent != null)
             {
@@ -85,6 +87,13 @@ namespace HyperCasual.Runner
             {
                 StartCoroutine(runEndAnimationSequence());
             }
+        }
+
+        private void OnGameEnd()
+        {
+            ResetCameras();
+            m_Tween?.Kill(false);
+            AudioManager.Instance.StopEffect();
         }
 
         private void SetupMainCameras()
@@ -111,7 +120,7 @@ namespace HyperCasual.Runner
             AudioManager.Instance.StopMusic();
             AudioManager.Instance.PlayEffect(SoundID.ProgressBarFill);
             m_GameOverScreen.SliderMask.anchorMax = new Vector2(matchData.MatchInPercentage / 100f, 1f);
-            DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() => PlayAnimations(matchData));
+            m_Tween = DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() => PlayAnimations(matchData));
             StartCoroutine(PlayParticleSystem(matchData));
             GameManager.Instance.Lose();
         }
