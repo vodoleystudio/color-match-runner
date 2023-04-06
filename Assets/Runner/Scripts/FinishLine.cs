@@ -7,7 +7,6 @@ using HyperCasual.Core;
 using System.Collections;
 using DG.Tweening;
 using System;
-using CodiceApp.EventTracking.Plastic;
 
 namespace HyperCasual.Runner
 {
@@ -46,9 +45,6 @@ namespace HyperCasual.Runner
         [SerializeField]
         private GenericGameEventListener m_BackEvent;
 
-        //[SerializeField]
-        //private GenericGameEventListener m_StartGameEvent;
-
         private Target Target => (Target)LevelManager.Instance.ActiveSpawnables.FirstOrDefault(s => s is Target);
 
         private Tween m_Tween;
@@ -64,14 +60,12 @@ namespace HyperCasual.Runner
             base.OnEnable();
             m_EndGameEvent?.Subscribe();
             m_BackEvent?.Subscribe();
-            //m_StartGameEvent?.Subscribe();
         }
 
         protected void OnDisable()
         {
             m_EndGameEvent?.Unsubscribe();
             m_BackEvent?.Unsubscribe();
-            // m_StartGameEvent?.Unsubscribe();
         }
 
         private void Start()
