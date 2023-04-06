@@ -3,8 +3,9 @@ namespace GameCore.Data
     public enum MatchState
     {
         None,
-        Match,
-        PartialMatch,
-        NotMatch
+        Heart,
+        Like,
+        BrokenHeart,
+        DisLike
     }
 }
