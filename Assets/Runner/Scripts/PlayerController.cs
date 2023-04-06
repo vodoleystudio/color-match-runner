@@ -296,7 +296,7 @@ namespace HyperCasual.Runner
             m_LastPosition = m_Transform.position;
 
             m_HasInput = false;
-
+            AnimationEntityService.Instance.Play(AnimationType.Fly, m_Animator);
             ResetSpeed();
             ResetScale();
         }
