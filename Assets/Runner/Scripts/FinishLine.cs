@@ -47,7 +47,7 @@ namespace HyperCasual.Runner
 
         private Target Target => (Target)LevelManager.Instance.ActiveSpawnables.FirstOrDefault(s => s is Target);
 
-        private Tween m_IncreeseBarProcentTween;
+        private Tween m_Tween;
 
         private void ResetCameras()
         {
@@ -92,7 +92,7 @@ namespace HyperCasual.Runner
         private void OnGameEnd()
         {
             ResetCameras();
-            m_IncreeseBarProcentTween?.Kill(false);
+            m_Tween?.Kill(false);
             AudioManager.Instance.StopEffect();
         }
 
@@ -120,7 +120,7 @@ namespace HyperCasual.Runner
             AudioManager.Instance.StopMusic();
             AudioManager.Instance.PlayEffect(SoundID.ProgressBarFill);
             m_GameOverScreen.SliderMask.anchorMax = new Vector2(matchData.MatchInPercentage / 100f, 1f);
-            m_IncreeseBarProcentTween = DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() => PlayAnimations(matchData));
+            m_Tween = DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() => PlayAnimations(matchData));
             StartCoroutine(PlayParticleSystem(matchData));
             GameManager.Instance.Lose();
         }
