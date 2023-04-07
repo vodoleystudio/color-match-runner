@@ -22,6 +22,8 @@ namespace HyperCasual.Runner
         private const float k_SliderTextAnimationTime = 2.3f;
 
         private GameoverScreen m_GameOverScreen;
+        private PopUp m_PopUpMassage;
+
         public Transform TargetPosition => m_TargetPosition;
 
         [SerializeField]
@@ -79,6 +81,7 @@ namespace HyperCasual.Runner
                 m_BackEvent.EventHandler = ResetCameras;
             }
             m_GameOverScreen = UIManager.Instance.GetView<GameoverScreen>();
+            m_PopUpMassage = m_GameOverScreen.PopUpMassage;
         }
 
         private void OnTriggerEnter(Collider col)
@@ -94,6 +97,7 @@ namespace HyperCasual.Runner
             ResetCameras();
             m_Tween?.Kill(false);
             AudioManager.Instance.StopEffect();
+            AudioManager.Instance.StopMusic();
         }
 
         private void SetupMainCameras()
@@ -119,6 +123,8 @@ namespace HyperCasual.Runner
             yield return new WaitForSeconds(k_AnimationTime / 2);
             AudioManager.Instance.StopMusic();
             AudioManager.Instance.PlayEffect(SoundID.ProgressBarFill);
+            m_PopUpMassage.Active(true);
+            m_PopUpMassage.MatchMassage(matchData.MatchState);
             m_GameOverScreen.SliderMask.anchorMax = new Vector2(matchData.MatchInPercentage / 100f, 1f);
             m_Tween = DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() => PlayAnimations(matchData));
             StartCoroutine(PlayParticleSystem(matchData));
