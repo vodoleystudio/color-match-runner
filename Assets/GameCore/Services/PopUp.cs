@@ -1,7 +1,6 @@
 using DG.Tweening;
 using GameCore.Data;
 using UnityEngine;
-using TMPro;
 using System;
 using System.Collections.Generic;
 
@@ -16,19 +15,22 @@ public class PopUp : MonoBehaviour
         public MatchState MatchState => m_MatchState;
 
         [SerializeField]
-        private string m_Message;
+        private GameObject m_PopUpMessage;
 
-        public string Message => m_Message;
+        public GameObject PopUpMessage => m_PopUpMessage;
     }
 
     [SerializeField]
     private float m_AnimationTime = 1f;
 
     [SerializeField]
-    private List<MassageData> m_MassageData;
+    private float m_PunchAnimationTime = 10f;
 
     [SerializeField]
-    private TextMeshProUGUI m_Label;
+    private float m_PunchAnimationSize = 1.05f;
+
+    [SerializeField]
+    private List<MassageData> m_MassageData;
 
     public void Active(bool state)
     {
@@ -38,11 +40,7 @@ public class PopUp : MonoBehaviour
     private void OnEnable()
     {
         gameObject.transform.DOScale(1f, m_AnimationTime);
-    }
-
-    private void OnDisable()
-    {
-        gameObject.transform.DOScale(0f, m_AnimationTime);
+        gameObject.transform.DOPunchScale(new Vector3(m_PunchAnimationSize, m_PunchAnimationSize, m_PunchAnimationSize), m_PunchAnimationTime);
     }
 
     public void MatchMassage(MatchState matchState)
@@ -51,7 +49,7 @@ public class PopUp : MonoBehaviour
         {
             if (massage.MatchState == matchState)
             {
-                m_Label.text = massage.Message;
+                massage.PopUpMessage.SetActive(true);
             }
         }
     }
