@@ -1,15 +1,16 @@
-using UnityEngine;
-using System;
 using GameCore.Data;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace GameCore.Services
 {
     public class MatchService : IMatchService
     {
-        private const float k_MatchBarier = 0.05f;
-        private const float k_PartialMatchBarier = 0.15f;
-        private const float k_NotMatchBarier = 0.85f;
+        private const int k_HeartBarier = 100;
+        private const int k_LikeBarier = 95;
+        private const int k_BrokenHeart = 85;
+        private const int k_DisLikeBarier = 75;
 
         public MatchData MatchColors(Color firstColor, Color secondColor)
         {
@@ -21,27 +22,31 @@ namespace GameCore.Services
             colorComponents.Add(Math.Abs(firstColor.g - secondColor.g));
             colorComponents.Add(Math.Abs(firstColor.b - secondColor.b));
 
-            var avarge = (colorComponents[0] + colorComponents[1] + colorComponents[2]) / colorComponents.Count;
+            var matchInPercent = (int)Math.Round((1f - (colorComponents[0] + colorComponents[1] + colorComponents[2]) / colorComponents.Count) * 100);
 
-            if (avarge >= 0.0f && avarge < k_MatchBarier)
+            if (k_HeartBarier >= matchInPercent && matchInPercent >= k_LikeBarier)
             {
-                matchData.MatchState = MatchState.Match;
+                matchData.MatchState = MatchState.Heart;
             }
-            else if (avarge >= k_MatchBarier && avarge < k_PartialMatchBarier)
+            else if (k_LikeBarier > matchInPercent && matchInPercent >= k_BrokenHeart)
             {
-                matchData.MatchState = MatchState.PartialMatch;
+                matchData.MatchState = MatchState.Like;
             }
-            else if (avarge >= k_PartialMatchBarier && avarge <= k_NotMatchBarier)
+            else if (k_BrokenHeart > matchInPercent && matchInPercent >= k_DisLikeBarier)
             {
-                matchData.MatchState = MatchState.NotMatch;
+                matchData.MatchState = MatchState.BrokenHeart;
+            }
+            else if (k_BrokenHeart > matchInPercent && matchInPercent >= 0)
+            {
+                matchData.MatchState = MatchState.DisLike;
             }
             else
             {
                 Debug.Log("The color value is out of range");
             }
 
-            matchData.MatchInPercentage = (int)Math.Round((1.0f - avarge) * 100);
-            Debug.LogError($"MatchState is {matchData.MatchState}, Match in procent: {(int)Math.Round((1.0f - avarge) * 100)}");
+            matchData.MatchInPercentage = matchInPercent;
+            Debug.LogError($"MatchState is {matchData.MatchState}, Match in procent: {matchInPercent}");
             return matchData;
         }
     }

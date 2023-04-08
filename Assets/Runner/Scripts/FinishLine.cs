@@ -49,7 +49,7 @@ namespace HyperCasual.Runner
 
         private Target Target => (Target)LevelManager.Instance.ActiveSpawnables.FirstOrDefault(s => s is Target);
 
-        private Tween m_Tween;
+        private Tween m_IncreeseBarProcentTween;
 
         private void ResetCameras()
         {
@@ -74,7 +74,7 @@ namespace HyperCasual.Runner
         {
             if (m_EndGameEvent != null)
             {
-                m_EndGameEvent.EventHandler = OnGameEnd; 
+                m_EndGameEvent.EventHandler = OnGameEnd;
             }
             if (m_BackEvent != null)
             {
@@ -95,7 +95,7 @@ namespace HyperCasual.Runner
         private void OnGameEnd()
         {
             ResetCameras();
-            m_Tween?.Kill(false);
+            m_IncreeseBarProcentTween?.Kill(false);
             AudioManager.Instance.StopEffect();
             AudioManager.Instance.StopMusic();
         }
@@ -126,7 +126,7 @@ namespace HyperCasual.Runner
             m_PopUpMassage.Active(true);
             m_PopUpMassage.MatchMassage(matchData.MatchState);
             m_GameOverScreen.SliderMask.anchorMax = new Vector2(matchData.MatchInPercentage / 100f, 1f);
-            m_Tween = DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() => PlayAnimations(matchData));
+            m_IncreeseBarProcentTween = DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() => PlayAnimations(matchData));
             StartCoroutine(PlayParticleSystem(matchData));
             GameManager.Instance.Lose();
         }
@@ -141,17 +141,22 @@ namespace HyperCasual.Runner
         {
             switch (matchData.MatchState)
             {
-                case MatchState.Match:
+                case MatchState.Heart:
                     play(AnimationType.Jump);
                     AudioManager.Instance.PlayMusic(SoundID.MatchSound);
                     break;
 
-                case MatchState.PartialMatch:
+                case MatchState.Like:
                     play(AnimationType.Yes);
                     AudioManager.Instance.PlayMusic(SoundID.PartialMatchSound);
                     break;
 
-                case MatchState.NotMatch:
+                case MatchState.BrokenHeart:
+                    play(AnimationType.Sick);
+                    AudioManager.Instance.PlayMusic(SoundID.NoMatchSound);
+                    break;
+
+                case MatchState.DisLike:
                     play(AnimationType.Roar);
                     AudioManager.Instance.PlayMusic(SoundID.NoMatchSound);
                     break;
