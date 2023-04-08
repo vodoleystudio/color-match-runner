@@ -39,7 +39,6 @@ public class PopUp : MonoBehaviour
 
     private void OnEnable()
     {
-        gameObject.transform.DOScale(1f, m_AnimationTime);
         gameObject.transform.DOPunchScale(new Vector3(m_PunchAnimationSize, m_PunchAnimationSize, m_PunchAnimationSize), m_PunchAnimationTime);
     }
 
