@@ -152,7 +152,8 @@ namespace HyperCasual.Runner
                     break;
 
                 case MatchState.BrokenHeart:
-                    play(AnimationType.Sick);
+                    AnimationEntityService.Instance.Play(AnimationType.Sick, PlayerController.Instance.Animator);
+                    AnimationEntityService.Instance.Play(AnimationType.No, Target.Animator);
                     AudioManager.Instance.PlayMusic(SoundID.NoMatchSound);
                     break;
 
