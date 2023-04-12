@@ -25,16 +25,13 @@ public class PopUp : MonoBehaviour
     private float m_AnimationTime = 1f;
 
     [SerializeField]
-    private float m_PunchAnimationTime = 0.1f;
-
-    [SerializeField]
-    private float m_PunchAnimationSize = 0.01f;
-
-    [SerializeField]
     private List<MassageData> m_MassageData;
 
     [SerializeField]
     private TextMeshProUGUI m_Label;
+
+    private float m_PunchAnimationTime = 1f;
+    private float m_PunchAnimationSize = 0.05f;
 
     public void Active(bool state)
     {
@@ -43,7 +40,10 @@ public class PopUp : MonoBehaviour
 
     private void OnEnable()
     {
-        gameObject.transform.DOPunchScale(new Vector3(m_PunchAnimationSize, m_PunchAnimationSize, m_PunchAnimationSize), m_PunchAnimationTime);
+        gameObject.transform.DOScale(1f, 1f).OnComplete(() =>
+        {
+            gameObject.transform.DOPunchScale(new Vector3(m_PunchAnimationSize, m_PunchAnimationSize, m_PunchAnimationSize), m_PunchAnimationTime, 1, 10);
+        });
     }
 
     public void MatchMassage(MatchState matchState)

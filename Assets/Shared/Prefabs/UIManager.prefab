@@ -1559,6 +1559,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5280667181393737275}
     m_Modifications:
+    - target: {fileID: 1192735815643811917, guid: b5fe2d25840564c3a87cba94152464ec,
+        type: 3}
+      propertyPath: m_Name
+      value: PopUpMassage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568568081509785435, guid: b5fe2d25840564c3a87cba94152464ec,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568568081509785435, guid: b5fe2d25840564c3a87cba94152464ec,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568568081509785435, guid: b5fe2d25840564c3a87cba94152464ec,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2139402322738060828, guid: b5fe2d25840564c3a87cba94152464ec,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1673,6 +1693,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269978427841151626, guid: b5fe2d25840564c3a87cba94152464ec,
+        type: 3}
+      propertyPath: m_Name
+      value: PopUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6662091221527362376, guid: b5fe2d25840564c3a87cba94152464ec,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6662091221527362376, guid: b5fe2d25840564c3a87cba94152464ec,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6662091221527362376, guid: b5fe2d25840564c3a87cba94152464ec,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7106873272751535093, guid: b5fe2d25840564c3a87cba94152464ec,
         type: 3}
