@@ -22,7 +22,12 @@ namespace HyperCasual.Runner
         private Animator m_SliderAnimator;
 
         [SerializeField]
-        private TextMeshProUGUI m_Text;
+        private TextMeshProUGUI m_BarText;
+
+        [SerializeField]
+        private PopUp m_PopUpMassage;
+
+        public PopUp PopUpMassage => m_PopUpMassage;
 
         public Animator SliderAnimator
         {
@@ -44,10 +49,10 @@ namespace HyperCasual.Runner
 
         public int MatchInProcentText
         {
-            get => Convert.ToInt32(m_Text.text);
+            get => Convert.ToInt32(m_BarText.text);
             set
             {
-                m_Text.text = $"{value}%";
+                m_BarText.text = $"{value}%";
             }
         }
 
