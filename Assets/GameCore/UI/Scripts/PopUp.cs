@@ -34,9 +34,10 @@ public class PopUp : MonoBehaviour
     private RectTransform m_LabelTransform;
 
     private const float k_PunchAnimationTime = 0.8f;
-    private const float k_PunchAnimationSize = 0.05f;
+    private const float k_PunchAnimationSize = -0.1f;
     private const int k_PunchAnimationVibrtion = 3;
     private const int k_PunchAnimationElasticy = 5;
+    private const float k_ScaleAnimationTime = 0.6f;
 
     public void Active(bool state)
     {
@@ -45,13 +46,14 @@ public class PopUp : MonoBehaviour
 
     private void OnEnable()
     {
-        gameObject.transform.DOScale(1f, 1f).OnComplete(() =>
-        {
-            gameObject.transform.DOPunchScale(new Vector3(k_PunchAnimationSize, k_PunchAnimationSize, k_PunchAnimationSize), k_PunchAnimationTime, k_PunchAnimationVibrtion, k_PunchAnimationElasticy).OnComplete(() =>
-            {
-                m_LabelTransform.DOPunchScale(new Vector3(k_PunchAnimationSize, k_PunchAnimationSize, k_PunchAnimationSize), k_PunchAnimationTime, k_PunchAnimationVibrtion, k_PunchAnimationElasticy);
-            });
-        });
+        var punchSize = new Vector3(k_PunchAnimationSize, k_PunchAnimationSize, k_PunchAnimationSize);
+        var tweenFlow = DOTween.Sequence();
+
+        tweenFlow.Insert(0, gameObject.transform.DOScale(1f, k_ScaleAnimationTime));
+        tweenFlow.Insert(0.8f, gameObject.transform.DOPunchScale(punchSize, k_PunchAnimationTime, k_PunchAnimationVibrtion, k_PunchAnimationElasticy));
+        tweenFlow.Insert(0.7f, m_LabelTransform.DOPunchScale(-punchSize, k_PunchAnimationTime, k_PunchAnimationVibrtion, k_PunchAnimationElasticy));
+        tweenFlow.Insert(2.7f + k_PunchAnimationTime, gameObject.transform.DOScale(0f, k_ScaleAnimationTime));
+        tweenFlow.Play();
     }
 
     private void OnDisable()
