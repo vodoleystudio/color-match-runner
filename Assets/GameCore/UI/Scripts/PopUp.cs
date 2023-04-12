@@ -30,8 +30,13 @@ public class PopUp : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI m_Label;
 
-    private float m_PunchAnimationTime = 1f;
-    private float m_PunchAnimationSize = 0.05f;
+    [SerializeField]
+    private RectTransform m_LabelTransform;
+
+    private const float k_PunchAnimationTime = 0.8f;
+    private const float k_PunchAnimationSize = 0.05f;
+    private const int k_PunchAnimationVibrtion = 3;
+    private const int k_PunchAnimationElasticy = 5;
 
     public void Active(bool state)
     {
@@ -42,8 +47,16 @@ public class PopUp : MonoBehaviour
     {
         gameObject.transform.DOScale(1f, 1f).OnComplete(() =>
         {
-            gameObject.transform.DOPunchScale(new Vector3(m_PunchAnimationSize, m_PunchAnimationSize, m_PunchAnimationSize), m_PunchAnimationTime, 1, 10);
+            gameObject.transform.DOPunchScale(new Vector3(k_PunchAnimationSize, k_PunchAnimationSize, k_PunchAnimationSize), k_PunchAnimationTime, k_PunchAnimationVibrtion, k_PunchAnimationElasticy).OnComplete(() =>
+            {
+                m_LabelTransform.DOPunchScale(new Vector3(k_PunchAnimationSize, k_PunchAnimationSize, k_PunchAnimationSize), k_PunchAnimationTime, k_PunchAnimationVibrtion, k_PunchAnimationElasticy);
+            });
         });
+    }
+
+    private void OnDisable()
+    {
+        gameObject.transform.localScale = Vector3.zero;
     }
 
     public void MatchMassage(MatchState matchState)

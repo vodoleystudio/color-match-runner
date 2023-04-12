@@ -1699,6 +1699,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PopUp
       objectReference: {fileID: 0}
+    - target: {fileID: 6608431423635164218, guid: b5fe2d25840564c3a87cba94152464ec,
+        type: 3}
+      propertyPath: m_LabelTransform
+      value: 
+      objectReference: {fileID: 799467370311852018}
     - target: {fileID: 6662091221527362376, guid: b5fe2d25840564c3a87cba94152464ec,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1761,6 +1766,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5fe2d25840564c3a87cba94152464ec, type: 3}
+--- !u!224 &799467370311852018 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8426847747958025745, guid: b5fe2d25840564c3a87cba94152464ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 9217296373058286051}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7087193724711612415 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2139402322738060828, guid: b5fe2d25840564c3a87cba94152464ec,
