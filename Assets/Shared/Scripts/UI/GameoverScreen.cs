@@ -7,6 +7,7 @@ using GameCore.Data;
 using System.Linq;
 using TMPro;
 using System;
+using DG.Tweening;
 
 namespace HyperCasual.Runner
 {
@@ -26,6 +27,9 @@ namespace HyperCasual.Runner
 
         [SerializeField]
         private PopUp m_PopUpMassage;
+
+        [SerializeField]
+        private GameObject m_Buttons;
 
         public PopUp PopUpMassage => m_PopUpMassage;
 
@@ -67,6 +71,11 @@ namespace HyperCasual.Runner
 
         [SerializeField]
         private AbstractGameEvent m_GoToMainMenuEvent;
+
+        public void ActivePhaseTwo(bool state)
+        {
+            m_Buttons.SetActive(state);
+        }
 
         private void OnEnable()
         {
