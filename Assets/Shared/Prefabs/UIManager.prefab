@@ -1574,6 +1574,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2139402321948974054, guid: b5fe2d25840564c3a87cba94152464ec,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2139402322161695762, guid: b5fe2d25840564c3a87cba94152464ec,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1587,6 +1592,11 @@ PrefabInstance:
     - target: {fileID: 2139402322161695762, guid: b5fe2d25840564c3a87cba94152464ec,
         type: 3}
       propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139402322161695763, guid: b5fe2d25840564c3a87cba94152464ec,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2139402322738060816, guid: b5fe2d25840564c3a87cba94152464ec,
@@ -1704,6 +1714,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameoverScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 2139402322738060831, guid: b5fe2d25840564c3a87cba94152464ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6608431423635164218, guid: b5fe2d25840564c3a87cba94152464ec,
         type: 3}
       propertyPath: m_MessageData.Array.size
@@ -1769,6 +1784,11 @@ PrefabInstance:
       propertyPath: m_MessageData.Array.data[5].m_PopUpMessage
       value: No Match!
       objectReference: {fileID: 0}
+    - target: {fileID: 6979753015553509860, guid: b5fe2d25840564c3a87cba94152464ec,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8956328314851336314, guid: b5fe2d25840564c3a87cba94152464ec,
         type: 3}
       propertyPath: m_IsActive
@@ -1795,20 +1815,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_buttons:
-  - {fileID: 7087193726286908913}
-  - {fileID: 7087193726036519483}
+  - m_ButtonTransform: {fileID: 7087193726286908913}
+    m_ImageTransform: {fileID: 804530237071679498}
+    m_ButtonComponent: {fileID: 7087193726286908912}
+  - m_ButtonTransform: {fileID: 7087193726036519483}
+    m_ImageTransform: {fileID: 315899655885918627}
+    m_ButtonComponent: {fileID: 7087193726036519429}
+--- !u!224 &315899655885918627 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8901407714037276736, guid: b5fe2d25840564c3a87cba94152464ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 9217296373058286051}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &804530237071679498 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8412770058569601513, guid: b5fe2d25840564c3a87cba94152464ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 9217296373058286051}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7087193724711612415 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2139402322738060828, guid: b5fe2d25840564c3a87cba94152464ec,
     type: 3}
   m_PrefabInstance: {fileID: 9217296373058286051}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7087193726036519429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2139402321948974054, guid: b5fe2d25840564c3a87cba94152464ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 9217296373058286051}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7087193726036519483 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2139402321948974040, guid: b5fe2d25840564c3a87cba94152464ec,
     type: 3}
   m_PrefabInstance: {fileID: 9217296373058286051}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7087193726286908912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2139402322161695763, guid: b5fe2d25840564c3a87cba94152464ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 9217296373058286051}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7087193726286908913 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2139402322161695762, guid: b5fe2d25840564c3a87cba94152464ec,
