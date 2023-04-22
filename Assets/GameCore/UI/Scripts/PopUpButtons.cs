@@ -2,12 +2,11 @@ using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PopUpButtons : MonoBehaviour
 {
-    private const float k_ScaleAnimationTime = 0.6f;
-    private const float k_PunchAnimation = 0.6f;
+    private const float k_ScaleAnimationTime = 0.5f;
+    private const float k_PunchAnimation = 0.5f;
 
     private const float k_OpenScalehAnimationSize = 1f;
     private const float k_CloseScaleAnimationSize = 0f;
@@ -32,11 +31,6 @@ public class PopUpButtons : MonoBehaviour
         private RectTransform m_ImageTransform;
 
         public RectTransform ImageTransform => m_ImageTransform;
-
-        [SerializeField]
-        private Button m_ButtonComponent;
-
-        public Button ButtonComponent => m_ButtonComponent;
     }
 
     [SerializeField]
@@ -52,7 +46,6 @@ public class PopUpButtons : MonoBehaviour
         foreach (var ButtonData in m_buttons)
         {
             ButtonData.ButtonTransform.DOScale(k_CloseScaleAnimationSize, k_ScaleAnimationTime);
-            ActivateButtonComponent(ButtonData, false);
         }
     }
 
@@ -65,16 +58,8 @@ public class PopUpButtons : MonoBehaviour
         {
             tweenSequance.Insert(k_StartButtonScaleAnimation, buttonData.ButtonTransform.DOScale(scaleSize, k_ScaleAnimationTime));
             tweenSequance.Insert(k_StattButtonPunchAnimation, buttonData.ButtonTransform.DOPunchScale(punch, k_PunchAnimation, k_PunchAnimationVibrtion, k_PunchAnimationElasticy));
-            tweenSequance.Insert(k_StattImagePunchAnimation, buttonData.ImageTransform.DOPunchScale(punch, k_PunchAnimation, k_PunchAnimationVibrtion, k_PunchAnimationElasticy).OnComplete(() =>
-            {
-                ActivateButtonComponent(buttonData, true);
-            }));
+            tweenSequance.Insert(k_StattImagePunchAnimation, buttonData.ImageTransform.DOPunchScale(punch, k_PunchAnimation, k_PunchAnimationVibrtion, k_PunchAnimationElasticy));
             tweenSequance.Play();
         }
-    }
-
-    private void ActivateButtonComponent(ButtonData buttonData, bool state)
-    {
-        buttonData.ButtonComponent.enabled = state;
     }
 }
