@@ -222,6 +222,7 @@ namespace HyperCasual.Gameplay
         {
             ShowUI<LevelSelectionScreen>();
             AudioManager.Instance.StopMusicEffect();
+            AudioManager.Instance.StopMusic();
             AudioManager.Instance.PlayMusic(SoundID.MenuMusic);
             FindObjectOfType<UIGameOnSimulator>(true).gameObject.SetActive(true);
         }
