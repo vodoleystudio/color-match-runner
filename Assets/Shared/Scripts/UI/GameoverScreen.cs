@@ -67,10 +67,16 @@ namespace HyperCasual.Runner
         private HyperCasualButton m_GoToMainMenuButton;
 
         [SerializeField]
+        private HyperCasualButton m_NextLevelButton;
+
+        [SerializeField]
         private AbstractGameEvent m_PlayAgainEvent;
 
         [SerializeField]
         private AbstractGameEvent m_GoToMainMenuEvent;
+
+        [SerializeField]
+        private AbstractGameEvent m_NextLevelEvent;
 
         public void ActivePhaseTwo(bool state)
         {
@@ -81,12 +87,14 @@ namespace HyperCasual.Runner
         {
             m_PlayAgainButton.AddListener(OnPlayAgainButtonClick);
             m_GoToMainMenuButton.AddListener(OnGoToMainMenuButtonClick);
+            m_NextLevelButton.AddListener(OnNextLevelButtonClick);
         }
 
         private void OnDisable()
         {
             m_PlayAgainButton.RemoveListener(OnPlayAgainButtonClick);
             m_GoToMainMenuButton.RemoveListener(OnGoToMainMenuButtonClick);
+            m_NextLevelButton.RemoveListener(OnNextLevelButtonClick);
         }
 
         private void OnPlayAgainButtonClick()
@@ -97,6 +105,11 @@ namespace HyperCasual.Runner
         private void OnGoToMainMenuButtonClick()
         {
             m_GoToMainMenuEvent.Raise();
+        }
+
+        private void OnNextLevelButtonClick()
+        {
+            m_NextLevelEvent.Raise();
         }
     }
 }
