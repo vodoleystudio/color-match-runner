@@ -194,7 +194,7 @@ namespace HyperCasual.Runner
                 {
                     if (spawnable is Block block)
                     {
-                        var blockData = GenerateBlockData(levelDefinition.NumberOfGates, levelDefinition.NumberOfColors, levelDefinition);
+                        var blockData = GenerateBlockData(levelDefinition);
 
                         for (int j = 0; j < blockData.GateColors.Count; j++)
                         {
@@ -361,12 +361,12 @@ namespace HyperCasual.Runner
             }
         }
 
-        private static BlockData GenerateBlockData(int numberOfGates, int numberOfColors, LevelDefinition levelDefinition)
+        private static BlockData GenerateBlockData(LevelDefinition levelDefinition)
         {
             var gateData = new BlockData();
             var colors = s_LevelColors.ToList();
 
-            for (int i = 0; i < numberOfGates; i++)
+            for (int i = 0; i < levelDefinition.NumberOfGates; i++)
             {
                 if (levelDefinition.IsRandomOrder)
                 {

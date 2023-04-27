@@ -12,17 +12,20 @@ namespace HyperCasual.Runner
     /// </summary>
     public class Block : Spawnable
     {
-        const string k_PlayerTag = "Player";
+        private const string k_PlayerTag = "Player";
+
+        //[SerializeField]
+        //private float m_Value;
+        //[SerializeField]
+        //private RectTransform m_Text;
+        [SerializeField]
+        private List<Gate> m_Gates;
 
         [SerializeField]
-        float m_Value;
-        [SerializeField]
-        RectTransform m_Text;
-        [SerializeField]
-        List<Gate> m_Gates;
+        private GameObject m_Gate;
 
-        bool m_Applied;
-        Vector3 m_TextInitialScale;
+        private bool m_Applied;
+        //private Vector3 m_TextInitialScale;
 
         public List<Gate> Gates => m_Gates;
 
@@ -42,14 +45,14 @@ namespace HyperCasual.Runner
         public override void SetScale(Vector3 scale)
         {
             // Ensure the text does not get scaled
-            if (m_Text != null)
-            {
-                float xFactor = Mathf.Min(scale.y / scale.x, 1.0f);
-                float yFactor = Mathf.Min(scale.x / scale.y, 1.0f);
-                m_Text.localScale = Vector3.Scale(m_TextInitialScale, new Vector3(xFactor, yFactor, 1.0f));
+            //if (m_Text != null)
+            //{
+            //    float xFactor = Mathf.Min(scale.y / scale.x, 1.0f);
+            //    float yFactor = Mathf.Min(scale.x / scale.y, 1.0f);
+            //    m_Text.localScale = Vector3.Scale(m_TextInitialScale, new Vector3(xFactor, yFactor, 1.0f));
 
-                m_Transform.localScale = scale;
-            }
+            //    m_Transform.localScale = scale;
+            //}
         }
 
         /// <summary>
@@ -69,17 +72,25 @@ namespace HyperCasual.Runner
         {
             base.Awake();
 
-            if (m_Text != null)
-            {
-                m_TextInitialScale = m_Text.localScale;
-            }
+            //if (m_Text != null)
+            //{
+            //    m_TextInitialScale = m_Text.localScale;
+            //}
         }
 
-        void OnTriggerEnter(Collider col)
+        private void OnTriggerEnter(Collider col)
         {
             if (col.CompareTag(k_PlayerTag) && !m_Applied)
             {
                 m_Applied = true;
+            }
+        }
+
+        public void BuildBlocks(int numberOfGates, float offset)
+        {
+            for (int i = 0; i < numberOfGates; i++)
+            {
+                Instantiate(m_Gate, new Vector3(i * offset, 0f, 0f), Quaternion.identity, gameObject.transform);
             }
         }
     }
