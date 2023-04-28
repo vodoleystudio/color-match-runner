@@ -56,14 +56,6 @@ namespace HyperCasual.Runner
         private const float k_MinimumScale = 0.1f;
         private static readonly string s_Speed = "Speed";
 
-        private enum PlayerSpeedPreset
-        {
-            Slow,
-            Medium,
-            Fast,
-            Custom
-        }
-
         private Transform m_Transform;
         private Vector3 m_StartPosition;
         private bool m_HasInput;
@@ -121,7 +113,7 @@ namespace HyperCasual.Runner
 
             s_Instance = this;
 
-            Initialize();
+            Initialize(PlayerSpeedPreset.Medium);
         }
 
         /// <summary>
@@ -141,7 +133,7 @@ namespace HyperCasual.Runner
             m_Transform.DORotateQuaternion(endPositionTransform.rotation, animationTime);
         }
 
-        public void Initialize()
+        public void Initialize(PlayerSpeedPreset playerSpeed)
         {
             m_IsTweenControl = false;
             m_Transform = transform;
@@ -159,7 +151,7 @@ namespace HyperCasual.Runner
                 m_StartHeight = 1.0f;
             }
 
-            ResetSpeed();
+            ResetSpeed(playerSpeed);
             AnimationEntityService.Instance.Play(AnimationType.Fly, m_Animator);
         }
 
@@ -167,8 +159,9 @@ namespace HyperCasual.Runner
         /// Returns the current default speed based on the currently
         /// selected PlayerSpeed preset.
         /// </summary>
-        public float GetDefaultSpeed()
+        public float GetDefaultSpeed(PlayerSpeedPreset playerSpeed)
         {
+            m_PlayerSpeed = playerSpeed;
             switch (m_PlayerSpeed)
             {
                 case PlayerSpeedPreset.Slow:
@@ -196,10 +189,10 @@ namespace HyperCasual.Runner
         /// <summary>
         /// Reset the player's current speed to their default speed
         /// </summary>
-        public void ResetSpeed()
+        public void ResetSpeed(PlayerSpeedPreset playerSpeed)
         {
             m_Speed = 0.0f;
-            m_TargetSpeed = GetDefaultSpeed();
+            m_TargetSpeed = GetDefaultSpeed(playerSpeed);
         }
 
         public void StopPlayer()
@@ -285,7 +278,7 @@ namespace HyperCasual.Runner
         /// <summary>
         /// Returns player to their starting position
         /// </summary>
-        public void ResetPlayer()
+        public void ResetPlayer(PlayerSpeedPreset playerSpeed)
         {
             m_IsTweenControl = false;
             m_Transform.position = m_StartPosition;
@@ -296,7 +289,7 @@ namespace HyperCasual.Runner
             m_LastPosition = m_Transform.position;
 
             m_HasInput = false;
-            ResetSpeed();
+            ResetSpeed(playerSpeed);
             ResetScale();
         }
 

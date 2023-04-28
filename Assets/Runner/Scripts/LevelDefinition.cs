@@ -80,6 +80,8 @@ namespace HyperCasual.Runner
 
         public Vector2 StartPositionOnYAndZ = Vector2.zero;
 
+        public PlayerSpeedPreset PlayerSpeed = PlayerSpeedPreset.Medium;
+
         /// <summary>
         /// An array of all SpawnableObjects that exist in this level.
         /// </summary>
@@ -150,6 +152,7 @@ namespace HyperCasual.Runner
             OffsetOnXBetweenTheGates = updatedLevel.OffsetOnXBetweenTheGates;
             StartGateRotation = updatedLevel.StartGateRotation;
             StartPositionOnYAndZ = updatedLevel.StartPositionOnYAndZ;
+            PlayerSpeed = updatedLevel.PlayerSpeed;
         }
     }
 }

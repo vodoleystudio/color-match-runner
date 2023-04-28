@@ -74,7 +74,7 @@ namespace HyperCasual.Runner
             // If LevelManager already exists, user is in the LevelEditorWindow
             if (LevelManager.Instance != null)
             {
-                StartGame();
+                //StartGame();
                 m_LevelEditorMode = true;
             }
 #endif
@@ -90,18 +90,18 @@ namespace HyperCasual.Runner
             LoadLevel(m_CurrentLevel, ref m_CurrentLevelGO);
             CreateTerrain(m_CurrentLevel, ref m_CurrentTerrainGO);
             PlaceLevelMarkers(m_CurrentLevel, ref m_LevelMarkersGO);
-            StartGame();
+            StartGame(levelDefinition.PlayerSpeed);
         }
 
         /// <summary>
         /// This method calls all methods necessary to restart a level,
         /// including resetting the player to their starting position
         /// </summary>
-        public void ResetLevel()
+        public void ResetLevel(PlayerSpeedPreset playerSpeed)
         {
             if (PlayerController.Instance != null)
             {
-                PlayerController.Instance.ResetPlayer();
+                PlayerController.Instance.ResetPlayer(playerSpeed);
             }
 
             CameraManager.Instance.ResetCamera();
@@ -251,9 +251,9 @@ namespace HyperCasual.Runner
             m_CurrentLevel = null;
         }
 
-        private void StartGame()
+        private void StartGame(PlayerSpeedPreset playerSpeed)
         {
-            ResetLevel();
+            ResetLevel(playerSpeed);
         }
 
         /// <summary>
@@ -333,10 +333,10 @@ namespace HyperCasual.Runner
             m_WinEvent.Raise();
 
 #if UNITY_EDITOR
-            if (m_LevelEditorMode)
-            {
-                ResetLevel();
-            }
+            //if (m_LevelEditorMode)
+            //{
+            //    ResetLevel();
+            //}
 #endif
         }
 
@@ -345,10 +345,10 @@ namespace HyperCasual.Runner
             m_LoseEvent.Raise();
 
 #if UNITY_EDITOR
-            if (m_LevelEditorMode)
-            {
-                ResetLevel();
-            }
+            //if (m_LevelEditorMode)
+            //{
+            //    ResetLevel();
+            //}
 #endif
         }
 
