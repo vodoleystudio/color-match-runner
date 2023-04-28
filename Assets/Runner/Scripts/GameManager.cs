@@ -194,6 +194,7 @@ namespace HyperCasual.Runner
                 {
                     if (spawnable is Block block)
                     {
+                        block.BuildGates(levelDefinition);
                         var blockData = GenerateBlockData(levelDefinition);
 
                         for (int j = 0; j < blockData.GateColors.Count; j++)

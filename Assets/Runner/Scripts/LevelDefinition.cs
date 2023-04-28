@@ -74,6 +74,12 @@ namespace HyperCasual.Runner
 
         public int NumberOfGates = 4;
 
+        public float OffsetOnXBetweenTheGates = 3f;
+
+        public Vector3 StartGateRotation = new(0f, 90f, 0f);
+
+        public Vector2 StartPositionOnYAndZ = Vector2.zero;
+
         /// <summary>
         /// An array of all SpawnableObjects that exist in this level.
         /// </summary>
@@ -141,6 +147,9 @@ namespace HyperCasual.Runner
             IsRandomOrder = updatedLevel.IsRandomOrder;
             Spawnables = updatedLevel.Spawnables;
             NumberOfColors = updatedLevel.NumberOfColors;
+            OffsetOnXBetweenTheGates = updatedLevel.OffsetOnXBetweenTheGates;
+            StartGateRotation = updatedLevel.StartGateRotation;
+            StartPositionOnYAndZ = updatedLevel.StartPositionOnYAndZ;
         }
     }
 }

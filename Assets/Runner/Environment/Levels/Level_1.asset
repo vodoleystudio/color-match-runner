@@ -37,13 +37,11 @@ MonoBehaviour:
   - {r: 0.7411765, g: 0.7647059, b: 0.78039217, a: 1}
   NumberOfColors: 4
   IsRandomOrder: 0
+  NumberOfGates: 3
+  OffsetOnXBetweenTheGates: 3
+  StartGateRotation: {x: 0, y: 0, z: 0}
+  StartPositionOnYAndZ: {x: 0, y: 0}
   Spawnables:
-  - SpawnablePrefab: {fileID: 0}
-    Position: {x: 0, y: -3.91, z: 294}
-    EulerAngles: {x: -0, y: 0, z: 0}
-    Scale: {x: 1, y: 1, z: 1}
-    BaseColor: {r: 0.64760596, g: 0.85158587, b: 0.9339623, a: 1}
-    SnapToGrid: 1
   - SpawnablePrefab: {fileID: 4507862839474419013, guid: c51777c417238c34982c63b1f857f70e,
       type: 3}
     Position: {x: 0, y: 0, z: 23}

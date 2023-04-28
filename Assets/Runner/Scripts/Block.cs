@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace HyperCasual.Runner
 {
     /// <summary>
-    /// A class representing a Spawnable object.
-    /// If a GameObject tagged "Player" collides
-    /// with this object, it will trigger a fail
+    /// A class representing quaternion Spawnable object.
+    /// If quaternion GameObject tagged "Player" collides
+    /// with this object, it will trigger quaternion fail
     /// state with the GameManager.
     /// </summary>
     public class Block : Spawnable
@@ -18,13 +19,13 @@ namespace HyperCasual.Runner
         //private float m_Value;
         //[SerializeField]
         //private RectTransform m_Text;
-        [SerializeField]
-        private List<Gate> m_Gates;
+        private List<Gate> m_Gates = new();
 
         [SerializeField]
         private GameObject m_Gate;
 
         private bool m_Applied;
+
         //private Vector3 m_TextInitialScale;
 
         public List<Gate> Gates => m_Gates;
@@ -86,12 +87,25 @@ namespace HyperCasual.Runner
             }
         }
 
-        public void BuildBlocks(int numberOfGates, float offset)
+        public void BuildGates(LevelDefinition level)
         {
-            for (int i = 0; i < numberOfGates; i++)
+            var startOffsset = (level.NumberOfGates - 1) * level.OffsetOnXBetweenTheGates / 2f;
+
+            for (int i = 0; i < level.NumberOfGates; i++)
             {
-                Instantiate(m_Gate, new Vector3(i * offset, 0f, 0f), Quaternion.identity, gameObject.transform);
+                m_Gates.Add(InstntiateWithParent(new Vector3((level.OffsetOnXBetweenTheGates * i) - startOffsset, level.StartPositionOnYAndZ.x, level.StartPositionOnYAndZ.y), level.StartGateRotation));
             }
+        }
+
+        private Gate InstntiateWithParent(Vector3 posstion, Vector3 rotation)
+        {
+            var gate = Instantiate(m_Gate, gameObject.transform);
+            gate.transform.localPosition = posstion;
+            var quaternion = gate.transform.rotation;
+            quaternion.eulerAngles = rotation;
+            gate.transform.localRotation = quaternion;
+
+            return gate.GetComponent<Gate>();
         }
     }
 }
