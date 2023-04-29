@@ -7,34 +7,37 @@ using UnityEngine;
 namespace HyperCasual.Core
 {
     /// <summary>
-    /// A singleton that manages display state and access to UI Views 
+    /// A singleton that manages display state and access to UI Views
     /// </summary>
     public class UIManager : AbstractSingleton<UIManager>
     {
         [SerializeField]
-        Canvas m_Canvas;
+        private Canvas m_Canvas;
+
         [SerializeField]
-        RectTransform m_Root;
+        private RectTransform m_Root;
+
         [SerializeField]
-        RectTransform m_BackgroundLayer;
+        private RectTransform m_BackgroundLayer;
+
         [SerializeField]
-        RectTransform m_ViewLayer;
+        private RectTransform m_ViewLayer;
 
-        List<View> m_Views;
+        private List<View> m_Views;
 
-        View m_CurrentView;
+        private View m_CurrentView;
 
-        readonly Stack<View> m_History = new ();
+        private readonly Stack<View> m_History = new();
 
-        void Start()
+        private void Start()
         {
             m_Views = m_Root.GetComponentsInChildren<View>(true).ToList();
             Init();
-            
+
             m_ViewLayer.ResizeToSafeArea(m_Canvas);
         }
 
-        void Init()
+        private void Init()
         {
             foreach (var view in m_Views)
                 view.Hide();

@@ -78,7 +78,7 @@ namespace HyperCasual.Runner
 
         public Vector3 StartGateRotation = new(0f, 90f, 0f);
 
-        public PlayerSpeedPreset PlayerSpeed = PlayerSpeedPreset.Medium;
+        public float PlayerSpeed = 100f;
 
         /// <summary>
         /// An array of all SpawnableObjects that exist in this level.

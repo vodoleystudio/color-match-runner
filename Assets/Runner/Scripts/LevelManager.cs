@@ -30,7 +30,9 @@ namespace HyperCasual.Runner
 
                 if (m_LevelDefinition != null && PlayerController.Instance != null)
                 {
+                    PlayerController.Instance.SetCustomSpeed(m_LevelDefinition.PlayerSpeed);
                     PlayerController.Instance.SetMaxXPosition(m_LevelDefinition.LevelWidth);
+                    PlayerController.Instance.SetupPlayer();
                 }
             }
         }

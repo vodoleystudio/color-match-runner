@@ -74,7 +74,7 @@ namespace HyperCasual.Runner
             // If LevelManager already exists, user is in the LevelEditorWindow
             if (LevelManager.Instance != null)
             {
-                StartGame(s_LevelManager.LevelDefinition.PlayerSpeed);
+                StartGame();
                 m_LevelEditorMode = true;
             }
 #endif
@@ -90,18 +90,18 @@ namespace HyperCasual.Runner
             LoadLevel(m_CurrentLevel, ref m_CurrentLevelGO);
             CreateTerrain(m_CurrentLevel, ref m_CurrentTerrainGO);
             PlaceLevelMarkers(m_CurrentLevel, ref m_LevelMarkersGO);
-            StartGame(levelDefinition.PlayerSpeed);
+            StartGame();
         }
 
         /// <summary>
         /// This method calls all methods necessary to restart a level,
         /// including resetting the player to their starting position
         /// </summary>
-        public void ResetLevel(PlayerSpeedPreset playerSpeed)
+        public void SetupLevel()
         {
             if (PlayerController.Instance != null)
             {
-                PlayerController.Instance.ResetPlayer(playerSpeed);
+                PlayerController.Instance.SetupPlayer();
             }
 
             CameraManager.Instance.ResetCamera();
@@ -251,9 +251,9 @@ namespace HyperCasual.Runner
             m_CurrentLevel = null;
         }
 
-        private void StartGame(PlayerSpeedPreset playerSpeed)
+        private void StartGame()
         {
-            ResetLevel(playerSpeed);
+            SetupLevel();
         }
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace HyperCasual.Runner
 #if UNITY_EDITOR
             if (m_LevelEditorMode)
             {
-                ResetLevel(s_LevelManager.LevelDefinition.PlayerSpeed);
+                SetupLevel();
             }
 #endif
         }
@@ -347,7 +347,7 @@ namespace HyperCasual.Runner
 #if UNITY_EDITOR
             if (m_LevelEditorMode)
             {
-                ResetLevel(s_LevelManager.LevelDefinition.PlayerSpeed);
+                SetupLevel();
             }
 #endif
         }

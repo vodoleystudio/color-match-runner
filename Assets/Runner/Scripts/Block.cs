@@ -92,11 +92,15 @@ namespace HyperCasual.Runner
 
         public void BuildGates(LevelDefinition level)
         {
-            var startOffsetOnXForCenterizeAllBlocks = new Vector3((level.NumberOfGates - 1) * level.OffsetBetweenTheGates.x / 2f, (level.NumberOfGates - 1) * level.OffsetBetweenTheGates.y / 2f, (level.NumberOfGates - 1) * level.OffsetBetweenTheGates.z / 2f);
+            var totalAmountOfSpacesBetweenGates = (level.NumberOfGates - 1);
+            var startOffsetForCenterizeAllBlocks = new Vector3(totalAmountOfSpacesBetweenGates * level.OffsetBetweenTheGates.x, totalAmountOfSpacesBetweenGates * level.OffsetBetweenTheGates.y, totalAmountOfSpacesBetweenGates * level.OffsetBetweenTheGates.z) / 2f;
 
             for (int i = 0; i < level.NumberOfGates; i++)
             {
-                m_Gates.Add(InstntiateWithParent(new Vector3((level.OffsetBetweenTheGates.x * i) - startOffsetOnXForCenterizeAllBlocks.x, startOffsetOnXForCenterizeAllBlocks.y, startOffsetOnXForCenterizeAllBlocks.z), level.StartGateRotation));
+                m_Gates.Add(InstntiateWithParent(new Vector3((level.OffsetBetweenTheGates.x * i) - startOffsetForCenterizeAllBlocks.x,
+                    (level.OffsetBetweenTheGates.y * i) - startOffsetForCenterizeAllBlocks.y,
+                    (level.OffsetBetweenTheGates.z * i) - startOffsetForCenterizeAllBlocks.z),
+                    level.StartGateRotation));
             }
         }
 

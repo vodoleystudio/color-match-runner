@@ -38,11 +38,16 @@ MonoBehaviour:
   NumberOfColors: 4
   IsRandomOrder: 0
   NumberOfGates: 3
-  OffsetOnXBetweenTheGates: 3
+  OffsetBetweenTheGates: {x: 3, y: 0, z: 0}
   StartGateRotation: {x: 0, y: 90, z: 0}
-  StartPositionOnYAndZ: {x: 0, y: 0}
-  PlayerSpeed: 2
+  PlayerSpeed: 1000
   Spawnables:
+  - SpawnablePrefab: {fileID: 0}
+    Position: {x: 0, y: -3.91, z: 50}
+    EulerAngles: {x: -0, y: 0, z: 0}
+    Scale: {x: 1, y: 1, z: 1}
+    BaseColor: {r: 0.64760596, g: 0.85158587, b: 0.9339623, a: 1}
+    SnapToGrid: 1
   - SpawnablePrefab: {fileID: 4507862839474419013, guid: c51777c417238c34982c63b1f857f70e,
       type: 3}
     Position: {x: 0, y: 0, z: 23}
@@ -55,5 +60,5 @@ MonoBehaviour:
     Position: {x: 0, y: 0.3299997, z: 51.5}
     EulerAngles: {x: -0, y: 180, z: -0}
     Scale: {x: 1, y: 1, z: 1}
-    BaseColor: {r: 0.8172549, g: 0.9254902, b: 0.90431374, a: 1}
+    BaseColor: {r: 0.98901963, g: 0.9537255, b: 0.8117647, a: 1}
     SnapToGrid: 1
