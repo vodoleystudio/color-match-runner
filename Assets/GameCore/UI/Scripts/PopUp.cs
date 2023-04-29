@@ -1,14 +1,14 @@
 using DG.Tweening;
 using GameCore.Data;
-using UnityEngine;
 using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 
 public class PopUp : MonoBehaviour
 {
     [Serializable]
-    private class MassageData
+    private class MessageData
     {
         [SerializeField]
         private MatchState m_MatchState;
@@ -22,10 +22,7 @@ public class PopUp : MonoBehaviour
     }
 
     [SerializeField]
-    private float m_AnimationTime = 1f;
-
-    [SerializeField]
-    private List<MassageData> m_MassageData;
+    private List<MessageData> m_MessageData;
 
     [SerializeField]
     private TextMeshProUGUI m_Label;
@@ -34,9 +31,16 @@ public class PopUp : MonoBehaviour
     private RectTransform m_LabelTransform;
 
     private const float k_PunchAnimationTime = 0.8f;
-    private const float k_PunchAnimationSize = 0.05f;
+    private const float k_PunchAnimationSize = -0.1f;
     private const int k_PunchAnimationVibrtion = 3;
     private const int k_PunchAnimationElasticy = 5;
+    private const float k_ScaleAnimationTime = 0.6f;
+
+    private const float k_StartBackGroundScaleAnimationTime = 0f;
+    private const float k_StartMessagePunchAnimationTime = 0.7f;
+    private const float k_StartBackGroundPunchAnimationTime = 0.8f;
+
+    private const float k_StartBackGroundCloseAnimationTime = 2.7f;
 
     public void Active(bool state)
     {
@@ -45,13 +49,14 @@ public class PopUp : MonoBehaviour
 
     private void OnEnable()
     {
-        gameObject.transform.DOScale(1f, 1f).OnComplete(() =>
-        {
-            gameObject.transform.DOPunchScale(new Vector3(k_PunchAnimationSize, k_PunchAnimationSize, k_PunchAnimationSize), k_PunchAnimationTime, k_PunchAnimationVibrtion, k_PunchAnimationElasticy).OnComplete(() =>
-            {
-                m_LabelTransform.DOPunchScale(new Vector3(k_PunchAnimationSize, k_PunchAnimationSize, k_PunchAnimationSize), k_PunchAnimationTime, k_PunchAnimationVibrtion, k_PunchAnimationElasticy);
-            });
-        });
+        var punchSize = new Vector3(k_PunchAnimationSize, k_PunchAnimationSize, k_PunchAnimationSize);
+        var tweenFlow = DOTween.Sequence();
+
+        tweenFlow.Insert(k_StartBackGroundScaleAnimationTime, gameObject.transform.DOScale(1f, k_ScaleAnimationTime));
+        tweenFlow.Insert(k_StartMessagePunchAnimationTime, m_LabelTransform.DOPunchScale(-punchSize, k_PunchAnimationTime, k_PunchAnimationVibrtion, k_PunchAnimationElasticy));
+        tweenFlow.Insert(k_StartBackGroundPunchAnimationTime, gameObject.transform.DOPunchScale(punchSize, k_PunchAnimationTime, k_PunchAnimationVibrtion, k_PunchAnimationElasticy));
+        tweenFlow.Insert(k_StartBackGroundCloseAnimationTime + k_PunchAnimationTime, gameObject.transform.DOScale(0f, k_ScaleAnimationTime));
+        tweenFlow.Play();
     }
 
     private void OnDisable()
@@ -61,11 +66,11 @@ public class PopUp : MonoBehaviour
 
     public void MatchMassage(MatchState matchState)
     {
-        foreach (var massage in m_MassageData)
+        foreach (var message in m_MessageData)
         {
-            if (massage.MatchState == matchState)
+            if (message.MatchState == matchState)
             {
-                m_Label.text = massage.PopUpMessage;
+                m_Label.text = message.PopUpMessage;
             }
         }
     }

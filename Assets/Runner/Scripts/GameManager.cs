@@ -97,11 +97,11 @@ namespace HyperCasual.Runner
         /// This method calls all methods necessary to restart a level,
         /// including resetting the player to their starting position
         /// </summary>
-        public void ResetLevel()
+        public void SetupLevel()
         {
             if (PlayerController.Instance != null)
             {
-                PlayerController.Instance.ResetPlayer();
+                PlayerController.Instance.SetupPlayer();
             }
 
             CameraManager.Instance.ResetCamera();
@@ -194,7 +194,8 @@ namespace HyperCasual.Runner
                 {
                     if (spawnable is Block block)
                     {
-                        var blockData = GenerateBlockData(levelDefinition.NumberOfGates, levelDefinition.NumberOfColors, levelDefinition);
+                        block.BuildGates(levelDefinition);
+                        var blockData = GenerateBlockData(levelDefinition);
 
                         for (int j = 0; j < blockData.GateColors.Count; j++)
                         {
@@ -252,7 +253,7 @@ namespace HyperCasual.Runner
 
         private void StartGame()
         {
-            ResetLevel();
+            SetupLevel();
         }
 
         /// <summary>
@@ -334,7 +335,7 @@ namespace HyperCasual.Runner
 #if UNITY_EDITOR
             if (m_LevelEditorMode)
             {
-                ResetLevel();
+                SetupLevel();
             }
 #endif
         }
@@ -346,7 +347,7 @@ namespace HyperCasual.Runner
 #if UNITY_EDITOR
             if (m_LevelEditorMode)
             {
-                ResetLevel();
+                SetupLevel();
             }
 #endif
         }
@@ -361,12 +362,12 @@ namespace HyperCasual.Runner
             }
         }
 
-        private static BlockData GenerateBlockData(int numberOfGates, int numberOfColors, LevelDefinition levelDefinition)
+        private static BlockData GenerateBlockData(LevelDefinition levelDefinition)
         {
             var gateData = new BlockData();
             var colors = s_LevelColors.ToList();
 
-            for (int i = 0; i < numberOfGates; i++)
+            for (int i = 0; i < levelDefinition.NumberOfGates; i++)
             {
                 if (levelDefinition.IsRandomOrder)
                 {

@@ -72,10 +72,13 @@ namespace HyperCasual.Runner
 
         public bool IsRandomOrder = false;
 
-        //currently the system doesnt support any other number of gates except 4
-        private const int m_NumberOfGates = 4;
+        public int NumberOfGates = 4;
 
-        public int NumberOfGates => m_NumberOfGates;
+        public Vector3 OffsetBetweenTheGates = new(3f, 0f, 0f);
+
+        public Vector3 StartGateRotation = new(0f, 90f, 0f);
+
+        public float PlayerSpeed = 100f;
 
         /// <summary>
         /// An array of all SpawnableObjects that exist in this level.
@@ -143,6 +146,10 @@ namespace HyperCasual.Runner
             NumberOfColors = updatedLevel.NumberOfColors;
             IsRandomOrder = updatedLevel.IsRandomOrder;
             Spawnables = updatedLevel.Spawnables;
+            NumberOfColors = updatedLevel.NumberOfColors;
+            OffsetBetweenTheGates = updatedLevel.OffsetBetweenTheGates;
+            StartGateRotation = updatedLevel.StartGateRotation;
+            PlayerSpeed = updatedLevel.PlayerSpeed;
         }
     }
 }

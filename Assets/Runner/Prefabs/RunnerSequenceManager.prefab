@@ -71,6 +71,7 @@ MonoBehaviour:
   m_WinEvent: {fileID: 11400000, guid: 4facc4ba26e884ef88b6c2506fa5ae2c, type: 2}
   m_LoseEvent: {fileID: 11400000, guid: 2b6d3353ba4d84d3ca725ef1835ca96f, type: 2}
   m_PauseEvent: {fileID: 11400000, guid: 4bbf7a853b87f44299489a25eb0d9ce5, type: 2}
+  m_NextLevelEvent: {fileID: 11400000, guid: 1b92665cb937e5e43bd9ec00b3e404ab, type: 2}
   m_SplashDelay: 0.01
 --- !u!114 &3832517329008096586
 MonoBehaviour:

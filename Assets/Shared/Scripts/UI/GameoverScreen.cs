@@ -7,6 +7,7 @@ using GameCore.Data;
 using System.Linq;
 using TMPro;
 using System;
+using DG.Tweening;
 
 namespace HyperCasual.Runner
 {
@@ -26,6 +27,9 @@ namespace HyperCasual.Runner
 
         [SerializeField]
         private PopUp m_PopUpMassage;
+
+        [SerializeField]
+        private GameObject m_Buttons;
 
         public PopUp PopUpMassage => m_PopUpMassage;
 
@@ -63,21 +67,34 @@ namespace HyperCasual.Runner
         private HyperCasualButton m_GoToMainMenuButton;
 
         [SerializeField]
+        private HyperCasualButton m_NextLevelButton;
+
+        [SerializeField]
         private AbstractGameEvent m_PlayAgainEvent;
 
         [SerializeField]
         private AbstractGameEvent m_GoToMainMenuEvent;
 
+        [SerializeField]
+        private AbstractGameEvent m_NextLevelEvent;
+
+        public void ShowControlButtons(bool state)
+        {
+            m_Buttons.SetActive(state);
+        }
+
         private void OnEnable()
         {
             m_PlayAgainButton.AddListener(OnPlayAgainButtonClick);
             m_GoToMainMenuButton.AddListener(OnGoToMainMenuButtonClick);
+            m_NextLevelButton.AddListener(OnNextLevelButtonClick);
         }
 
         private void OnDisable()
         {
             m_PlayAgainButton.RemoveListener(OnPlayAgainButtonClick);
             m_GoToMainMenuButton.RemoveListener(OnGoToMainMenuButtonClick);
+            m_NextLevelButton.RemoveListener(OnNextLevelButtonClick);
         }
 
         private void OnPlayAgainButtonClick()
@@ -88,6 +105,11 @@ namespace HyperCasual.Runner
         private void OnGoToMainMenuButtonClick()
         {
             m_GoToMainMenuEvent.Raise();
+        }
+
+        private void OnNextLevelButtonClick()
+        {
+            m_NextLevelEvent.Raise();
         }
     }
 }

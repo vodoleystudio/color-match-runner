@@ -30,7 +30,7 @@ namespace HyperCasual.Runner
         private SkinnedMeshRenderer m_SkinnedMeshRenderer;
 
         [SerializeField]
-        private PlayerSpeedPreset m_PlayerSpeed = PlayerSpeedPreset.Medium;
+        private PlayerSpeedPreset m_PlayerSpeed = PlayerSpeedPreset.Custom;
 
         [SerializeField]
         private float m_CustomPlayerSpeed = 10.0f;
@@ -55,14 +55,6 @@ namespace HyperCasual.Runner
 
         private const float k_MinimumScale = 0.1f;
         private static readonly string s_Speed = "Speed";
-
-        private enum PlayerSpeedPreset
-        {
-            Slow,
-            Medium,
-            Fast,
-            Custom
-        }
 
         private Transform m_Transform;
         private Vector3 m_StartPosition;
@@ -159,7 +151,7 @@ namespace HyperCasual.Runner
                 m_StartHeight = 1.0f;
             }
 
-            ResetSpeed();
+            SetSpeed();
             AnimationEntityService.Instance.Play(AnimationType.Fly, m_Animator);
         }
 
@@ -196,10 +188,15 @@ namespace HyperCasual.Runner
         /// <summary>
         /// Reset the player's current speed to their default speed
         /// </summary>
-        public void ResetSpeed()
+        public void SetSpeed()
         {
             m_Speed = 0.0f;
             m_TargetSpeed = GetDefaultSpeed();
+        }
+
+        public void SetCustomSpeed(float speed)
+        {
+            m_CustomPlayerSpeed = speed;
         }
 
         public void StopPlayer()
@@ -285,7 +282,7 @@ namespace HyperCasual.Runner
         /// <summary>
         /// Returns player to their starting position
         /// </summary>
-        public void ResetPlayer()
+        public void SetupPlayer()
         {
             m_IsTweenControl = false;
             m_Transform.position = m_StartPosition;
@@ -296,7 +293,7 @@ namespace HyperCasual.Runner
             m_LastPosition = m_Transform.position;
 
             m_HasInput = false;
-            ResetSpeed();
+            SetSpeed();
             ResetScale();
         }
 

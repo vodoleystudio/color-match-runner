@@ -98,6 +98,7 @@ namespace HyperCasual.Runner
             m_IncreeseBarProcentTween?.Kill(false);
             AudioManager.Instance.StopEffect();
             AudioManager.Instance.StopMusic();
+            m_GameOverScreen.ShowControlButtons(false);
         }
 
         private void SetupMainCameras()
@@ -126,7 +127,11 @@ namespace HyperCasual.Runner
             m_PopUpMassage.Active(true);
             m_PopUpMassage.MatchMassage(matchData.MatchState);
             m_GameOverScreen.SliderMask.anchorMax = new Vector2(matchData.MatchInPercentage / 100f, 1f);
-            m_IncreeseBarProcentTween = DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() => PlayAnimations(matchData));
+            m_IncreeseBarProcentTween = DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() =>
+            {
+                PlayAnimations(matchData);
+                m_GameOverScreen.ShowControlButtons(true);
+            });
             StartCoroutine(PlayParticleSystem(matchData));
             GameManager.Instance.Lose();
         }
