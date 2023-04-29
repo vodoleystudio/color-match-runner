@@ -40,8 +40,9 @@ MonoBehaviour:
   IsRandomOrder: 1
   NumberOfGates: 4
   OffsetOnXBetweenTheGates: 3
-  StartGateRotation: {x: 0, y: 0, z: 0}
+  StartGateRotation: {x: 0, y: 90, z: 0}
   StartPositionOnYAndZ: {x: 0, y: 0}
+  PlayerSpeed: 1
   Spawnables:
   - SpawnablePrefab: {fileID: 5580896082165009579, guid: 7e0880b34202e6148964b3a6f4de175f,
       type: 3}
