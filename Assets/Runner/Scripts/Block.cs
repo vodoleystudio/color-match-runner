@@ -1,3 +1,4 @@
+using log4net.Core;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -91,11 +92,11 @@ namespace HyperCasual.Runner
 
         public void BuildGates(LevelDefinition level)
         {
-            var startOffsetForCenterizeAllBlocks = (level.NumberOfGates - 1) * level.OffsetOnXBetweenTheGates / 2f;
+            var startOffsetOnXForCenterizeAllBlocks = new Vector3((level.NumberOfGates - 1) * level.OffsetBetweenTheGates.x / 2f, (level.NumberOfGates - 1) * level.OffsetBetweenTheGates.y / 2f, (level.NumberOfGates - 1) * level.OffsetBetweenTheGates.z / 2f);
 
             for (int i = 0; i < level.NumberOfGates; i++)
             {
-                m_Gates.Add(InstntiateWithParent(new Vector3((level.OffsetOnXBetweenTheGates * i) - startOffsetForCenterizeAllBlocks, level.StartPositionOnYAndZ.x, level.StartPositionOnYAndZ.y), level.StartGateRotation));
+                m_Gates.Add(InstntiateWithParent(new Vector3((level.OffsetBetweenTheGates.x * i) - startOffsetOnXForCenterizeAllBlocks.x, startOffsetOnXForCenterizeAllBlocks.y, startOffsetOnXForCenterizeAllBlocks.z), level.StartGateRotation));
             }
         }
 

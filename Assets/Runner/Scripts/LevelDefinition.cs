@@ -74,11 +74,9 @@ namespace HyperCasual.Runner
 
         public int NumberOfGates = 4;
 
-        public float OffsetOnXBetweenTheGates = 3f;
+        public Vector3 OffsetBetweenTheGates = new(3f, 0f, 0f);
 
         public Vector3 StartGateRotation = new(0f, 90f, 0f);
-
-        public Vector2 StartPositionOnYAndZ = Vector2.zero;
 
         public PlayerSpeedPreset PlayerSpeed = PlayerSpeedPreset.Medium;
 
@@ -149,9 +147,8 @@ namespace HyperCasual.Runner
             IsRandomOrder = updatedLevel.IsRandomOrder;
             Spawnables = updatedLevel.Spawnables;
             NumberOfColors = updatedLevel.NumberOfColors;
-            OffsetOnXBetweenTheGates = updatedLevel.OffsetOnXBetweenTheGates;
+            OffsetBetweenTheGates = updatedLevel.OffsetBetweenTheGates;
             StartGateRotation = updatedLevel.StartGateRotation;
-            StartPositionOnYAndZ = updatedLevel.StartPositionOnYAndZ;
             PlayerSpeed = updatedLevel.PlayerSpeed;
         }
     }

@@ -72,11 +72,11 @@ namespace HyperCasual.Runner
 
 #if UNITY_EDITOR
             // If LevelManager already exists, user is in the LevelEditorWindow
-            //if (LevelManager.Instance != null)
-            //{
-            //    StartGame();
-            //    m_LevelEditorMode = true;
-            //}
+            if (LevelManager.Instance != null)
+            {
+                StartGame(s_LevelManager.LevelDefinition.PlayerSpeed);
+                m_LevelEditorMode = true;
+            }
 #endif
         }
 
@@ -333,10 +333,10 @@ namespace HyperCasual.Runner
             m_WinEvent.Raise();
 
 #if UNITY_EDITOR
-            //if (m_LevelEditorMode)
-            //{
-            //    ResetLevel();
-            //}
+            if (m_LevelEditorMode)
+            {
+                ResetLevel(s_LevelManager.LevelDefinition.PlayerSpeed);
+            }
 #endif
         }
 
@@ -345,10 +345,10 @@ namespace HyperCasual.Runner
             m_LoseEvent.Raise();
 
 #if UNITY_EDITOR
-            //if (m_LevelEditorMode)
-            //{
-            //    ResetLevel();
-            //}
+            if (m_LevelEditorMode)
+            {
+                ResetLevel(s_LevelManager.LevelDefinition.PlayerSpeed);
+            }
 #endif
         }
 
