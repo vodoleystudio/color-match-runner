@@ -15,10 +15,12 @@ namespace HyperCasual.Runner
     {
         private const string k_PlayerTag = "Player";
 
-        //[SerializeField]
-        //private float m_Value;
-        //[SerializeField]
-        //private RectTransform m_Text;
+        [SerializeField]
+        private float m_Value;
+
+        [SerializeField]
+        private RectTransform m_Text;
+
         private List<Gate> m_Gates = new();
 
         [SerializeField]
@@ -26,7 +28,7 @@ namespace HyperCasual.Runner
 
         private bool m_Applied;
 
-        //private Vector3 m_TextInitialScale;
+        private Vector3 m_TextInitialScale;
 
         public List<Gate> Gates => m_Gates;
 
@@ -45,15 +47,15 @@ namespace HyperCasual.Runner
         /// </param>
         public override void SetScale(Vector3 scale)
         {
-            // Ensure the text does not get scaled
-            //if (m_Text != null)
-            //{
-            //    float xFactor = Mathf.Min(scale.y / scale.x, 1.0f);
-            //    float yFactor = Mathf.Min(scale.x / scale.y, 1.0f);
-            //    m_Text.localScale = Vector3.Scale(m_TextInitialScale, new Vector3(xFactor, yFactor, 1.0f));
+            //Ensure the text does not get scaled
+            if (m_Text != null)
+            {
+                float xFactor = Mathf.Min(scale.y / scale.x, 1.0f);
+                float yFactor = Mathf.Min(scale.x / scale.y, 1.0f);
+                m_Text.localScale = Vector3.Scale(m_TextInitialScale, new Vector3(xFactor, yFactor, 1.0f));
 
-            //    m_Transform.localScale = scale;
-            //}
+                m_Transform.localScale = scale;
+            }
         }
 
         /// <summary>
@@ -73,10 +75,10 @@ namespace HyperCasual.Runner
         {
             base.Awake();
 
-            //if (m_Text != null)
-            //{
-            //    m_TextInitialScale = m_Text.localScale;
-            //}
+            if (m_Text != null)
+            {
+                m_TextInitialScale = m_Text.localScale;
+            }
         }
 
         private void OnTriggerEnter(Collider col)
@@ -89,11 +91,11 @@ namespace HyperCasual.Runner
 
         public void BuildGates(LevelDefinition level)
         {
-            var startOffsset = (level.NumberOfGates - 1) * level.OffsetOnXBetweenTheGates / 2f;
+            var startOffsetForCenterizeAllBlocks = (level.NumberOfGates - 1) * level.OffsetOnXBetweenTheGates / 2f;
 
             for (int i = 0; i < level.NumberOfGates; i++)
             {
-                m_Gates.Add(InstntiateWithParent(new Vector3((level.OffsetOnXBetweenTheGates * i) - startOffsset, level.StartPositionOnYAndZ.x, level.StartPositionOnYAndZ.y), level.StartGateRotation));
+                m_Gates.Add(InstntiateWithParent(new Vector3((level.OffsetOnXBetweenTheGates * i) - startOffsetForCenterizeAllBlocks, level.StartPositionOnYAndZ.x, level.StartPositionOnYAndZ.y), level.StartGateRotation));
             }
         }
 

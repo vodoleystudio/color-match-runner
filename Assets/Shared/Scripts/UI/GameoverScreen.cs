@@ -78,7 +78,7 @@ namespace HyperCasual.Runner
         [SerializeField]
         private AbstractGameEvent m_NextLevelEvent;
 
-        public void ActivePhaseTwo(bool state)
+        public void ShowControlButtons(bool state)
         {
             m_Buttons.SetActive(state);
         }

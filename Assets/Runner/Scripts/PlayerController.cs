@@ -151,7 +151,7 @@ namespace HyperCasual.Runner
                 m_StartHeight = 1.0f;
             }
 
-            ResetSpeed(playerSpeed);
+            SetSpeed(playerSpeed);
             AnimationEntityService.Instance.Play(AnimationType.Fly, m_Animator);
         }
 
@@ -189,7 +189,7 @@ namespace HyperCasual.Runner
         /// <summary>
         /// Reset the player's current speed to their default speed
         /// </summary>
-        public void ResetSpeed(PlayerSpeedPreset playerSpeed)
+        public void SetSpeed(PlayerSpeedPreset playerSpeed)
         {
             m_Speed = 0.0f;
             m_TargetSpeed = GetDefaultSpeed(playerSpeed);
@@ -289,7 +289,7 @@ namespace HyperCasual.Runner
             m_LastPosition = m_Transform.position;
 
             m_HasInput = false;
-            ResetSpeed(playerSpeed);
+            SetSpeed(playerSpeed);
             ResetScale();
         }
 

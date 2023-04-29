@@ -98,7 +98,7 @@ namespace HyperCasual.Runner
             m_IncreeseBarProcentTween?.Kill(false);
             AudioManager.Instance.StopEffect();
             AudioManager.Instance.StopMusic();
-            m_GameOverScreen.ActivePhaseTwo(false);
+            m_GameOverScreen.ShowControlButtons(false);
         }
 
         private void SetupMainCameras()
@@ -130,7 +130,7 @@ namespace HyperCasual.Runner
             m_IncreeseBarProcentTween = DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() =>
             {
                 PlayAnimations(matchData);
-                m_GameOverScreen.ActivePhaseTwo(true);
+                m_GameOverScreen.ShowControlButtons(true);
             });
             StartCoroutine(PlayParticleSystem(matchData));
             GameManager.Instance.Lose();
