@@ -1,13 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using HyperCasual.Core;
 using UnityEngine;
-using UnityEngine.UI;
-using GameCore.Data;
-using System.Linq;
 using TMPro;
 using System;
-using DG.Tweening;
 
 namespace HyperCasual.Runner
 {
@@ -26,12 +20,12 @@ namespace HyperCasual.Runner
         private TextMeshProUGUI m_BarText;
 
         [SerializeField]
-        private PopUp m_PopUpMassage;
+        private PopUp m_PopUpMessage;
 
         [SerializeField]
         private GameObject m_Buttons;
 
-        public PopUp PopUpMassage => m_PopUpMassage;
+        public PopUp PopUpMessage => m_PopUpMessage;
 
         public Animator SliderAnimator
         {

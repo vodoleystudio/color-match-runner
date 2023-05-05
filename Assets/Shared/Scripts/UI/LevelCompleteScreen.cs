@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using HyperCasual.Core;
 using TMPro;
 using UnityEngine;
@@ -14,23 +11,27 @@ namespace HyperCasual.Runner
     public class LevelCompleteScreen : View
     {
         [SerializeField]
-        HyperCasualButton m_NextButton;
+        private HyperCasualButton m_NextButton;
+
         [SerializeField]
-        Image[] m_Stars;
+        private Image[] m_Stars;
+
         [SerializeField]
-        AbstractGameEvent m_NextLevelEvent;
+        private AbstractGameEvent m_NextLevelEvent;
+
         [SerializeField]
-        TextMeshProUGUI m_GoldText;
+        private TextMeshProUGUI m_GoldText;
+
         [SerializeField]
-        Slider m_XpSlider;
-        
+        private Slider m_XpSlider;
+
         /// <summary>
-        /// The slider that displays the XP value 
+        /// The slider that displays the XP value
         /// </summary>
         public Slider XpSlider => m_XpSlider;
 
-        int m_GoldValue;
-        
+        private int m_GoldValue;
+
         /// <summary>
         /// The amount of gold to display on the celebration screen.
         /// The setter method also sets the celebration screen text.
@@ -48,8 +49,8 @@ namespace HyperCasual.Runner
             }
         }
 
-        float m_XpValue;
-        
+        private float m_XpValue;
+
         /// <summary>
         /// The amount of XP to display on the celebration screen.
         /// The setter method also sets the celebration screen slider value.
@@ -67,8 +68,8 @@ namespace HyperCasual.Runner
             }
         }
 
-        int m_StarCount = -1;
-        
+        private int m_StarCount = -1;
+
         /// <summary>
         /// The number of stars to display on the celebration screen.
         /// </summary>
@@ -85,22 +86,22 @@ namespace HyperCasual.Runner
             }
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             m_NextButton.AddListener(OnNextButtonClicked);
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             m_NextButton.RemoveListener(OnNextButtonClicked);
         }
 
-        void OnNextButtonClicked()
+        private void OnNextButtonClicked()
         {
             m_NextLevelEvent.Raise();
         }
 
-        void DisplayStars(int count)
+        private void DisplayStars(int count)
         {
             count = Mathf.Clamp(count, 0, m_Stars.Length);
 
