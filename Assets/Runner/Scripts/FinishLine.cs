@@ -134,7 +134,7 @@ namespace HyperCasual.Runner
             AudioManager.Instance.StopMusic();
             AudioManager.Instance.PlayEffect(SoundID.ProgressBarFill);
             m_PopUpMessage.Active(true);
-            m_PopUpMessage.MatchMassage(matchData.MatchState);
+            m_PopUpMessage.MatchMessage(matchData.MatchState);
             m_GameOverScreen.SliderMask.anchorMax = new Vector2(matchData.MatchInPercentage / 100f, 1f);
             m_IncreeseBarProcentTween = DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() =>
             {
