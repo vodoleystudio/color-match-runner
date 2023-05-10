@@ -35,12 +35,20 @@ MonoBehaviour:
   - {r: 0.827451, g: 0.32941177, b: 0, a: 1}
   - {r: 0.90588236, g: 0.29803923, b: 0.23529412, a: 1}
   - {r: 0.7411765, g: 0.7647059, b: 0.78039217, a: 1}
-  NumberOfColors: 4
+  NumberOfColors: 5
   IsRandomOrder: 0
-  NumberOfGates: 3
+  NumberOfGates: 5
   OffsetBetweenTheGates: {x: 3, y: 0, z: 0}
   StartGateRotation: {x: 0, y: 90, z: 0}
-  PlayerSpeed: 1000
+  PlayerSpeed: 1
+  GatesMovment:
+    MovmentOffset: {x: 1.5, y: 0, z: 0}
+    Duration: 2
+    WaitTime: 1
+    NumberOfGatesMoving: 2
+    IsTheGatesCentrade: 1
+    IsTheMovingGatesAreInRandomOrder: 1
+    MaxAndMinStartTimeRange: {x: 1, y: 0.2}
   Spawnables:
   - SpawnablePrefab: {fileID: 0}
     Position: {x: 0, y: -3.91, z: 50}

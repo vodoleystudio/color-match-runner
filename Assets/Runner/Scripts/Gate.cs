@@ -1,4 +1,7 @@
+using Codice.Client.BaseCommands.Differences;
+using Codice.CM.SEIDInfo;
 using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 namespace HyperCasual.Runner
@@ -13,6 +16,10 @@ namespace HyperCasual.Runner
     {
         private const string k_PlayerTag = "Player";
         private const float HideDuration = 0.2f;
+
+        private const float k_HalfRangeTimeModificator = 0.5f;
+        private const float k_HalfRangePositionMadificator = 0.5f;
+        private const float k_FullRangeTimeMadificator = 1f;
         private Vector3 defaultScale;
 
         public bool IsUsed { get; private set; }
@@ -43,6 +50,33 @@ namespace HyperCasual.Runner
             IsUsed = false;
             transform.localScale = defaultScale;
             transform.SetParent(_parent);
+        }
+
+        public void Movment(LevelDefinition level)
+        {
+            StartCoroutine(MoveForSideToSide(level));
+        }
+
+        private IEnumerator MoveForSideToSide(LevelDefinition level)
+        {
+            yield return new WaitForSeconds(Random.Range(level.GatesMovment.MaxAndMinStartTimeRange.y, level.GatesMovment.MaxAndMinStartTimeRange.x));
+
+            if (level.GatesMovment.IsTheGatesCentrade)
+            {
+                yield return Move(level.GatesMovment.MovmentOffset * k_HalfRangePositionMadificator + transform.position, k_HalfRangeTimeModificator);
+            }
+
+            while (true)
+            {
+                yield return Move(-level.GatesMovment.MovmentOffset + transform.position, k_FullRangeTimeMadificator);
+                yield return Move(level.GatesMovment.MovmentOffset + transform.position, k_FullRangeTimeMadificator);
+            }
+
+            IEnumerator Move(Vector3 offset, float timeModificator)
+            {
+                transform.DOMove(offset, level.GatesMovment.Duration * timeModificator);
+                yield return new WaitForSeconds((level.GatesMovment.Duration * timeModificator + level.GatesMovment.WaitTime));
+            }
         }
     }
 }
