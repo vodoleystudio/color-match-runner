@@ -59,17 +59,27 @@ namespace HyperCasual.Runner
 
         private IEnumerator MoveForSideToSide(LevelDefinition level)
         {
+            var index = Random.Range(0, level.GatesMovment.AllThePossibleDirections.Count);
+            Vector3 movmentDirection = level.GatesMovment.AllThePossibleDirections[index].MovmentOffset;
+
             yield return new WaitForSeconds(Random.Range(level.GatesMovment.MaxAndMinStartTimeRange.y, level.GatesMovment.MaxAndMinStartTimeRange.x));
 
             if (level.GatesMovment.IsTheGatesCentrade)
             {
-                yield return Move(level.GatesMovment.MovmentOffset * k_HalfRangePositionMadificator + transform.position, k_HalfRangeTimeModificator);
+                yield return Move(level.GatesMovment.AllThePossibleDirections[index].MovmentOffset * k_HalfRangePositionMadificator + transform.position, k_HalfRangeTimeModificator);
             }
 
             while (true)
             {
-                yield return Move(-level.GatesMovment.MovmentOffset + transform.position, k_FullRangeTimeMadificator);
-                yield return Move(level.GatesMovment.MovmentOffset + transform.position, k_FullRangeTimeMadificator);
+                yield return Move(-movmentDirection + transform.position, k_FullRangeTimeMadificator);
+                yield return Move(movmentDirection + transform.position, k_FullRangeTimeMadificator);
+
+                if (Random.Range(0, 101) < level.GatesMovment.ProbabilityToChabgeDirectionInProcent)
+                {
+                    yield return Move(-movmentDirection * k_HalfRangePositionMadificator + transform.position, k_HalfRangeTimeModificator);
+                    movmentDirection = level.GatesMovment.AllThePossibleDirections[Random.Range(0, level.GatesMovment.AllThePossibleDirections.Count)].MovmentOffset;
+                    yield return Move(movmentDirection * k_HalfRangePositionMadificator + transform.position, k_HalfRangeTimeModificator);
+                }
             }
 
             IEnumerator Move(Vector3 offset, float timeModificator)

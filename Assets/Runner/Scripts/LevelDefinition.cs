@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using HyperCasual.Core;
 using UnityEngine;
@@ -86,8 +85,6 @@ namespace HyperCasual.Runner
         [Serializable]
         public class Movment
         {
-            public Vector3 MovmentOffset = Vector3.zero;
-
             public float Duration = 0.0f;
 
             public float WaitTime = 0.0f;
@@ -99,6 +96,16 @@ namespace HyperCasual.Runner
             public bool IsTheMovingGatesAreInRandomOrder = false;
 
             public Vector2 MaxAndMinStartTimeRange = Vector2.zero;
+
+            [Serializable]
+            public class MovmentDirections
+            {
+                public Vector3 MovmentOffset = Vector3.zero;
+            }
+
+            public List<MovmentDirections> AllThePossibleDirections = new();
+
+            public int ProbabilityToChabgeDirectionInProcent = 50;
         }
 
         /// <summary>
