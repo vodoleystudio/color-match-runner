@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using HyperCasual.Core;
 using UnityEngine;
 
@@ -101,9 +102,11 @@ namespace HyperCasual.Runner
             public class MovmentDirections
             {
                 public Vector3 MovmentOffset = Vector3.zero;
+
+                public Ease Ease = Ease.Linear;
             }
 
-            public List<MovmentDirections> AllThePossibleDirections = new();
+            public List<MovmentDirections> Directions = new();
 
             public int ProbabilityToChabgeDirectionInProcent = 50;
         }

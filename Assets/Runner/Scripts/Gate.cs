@@ -1,8 +1,12 @@
 using Codice.Client.BaseCommands.Differences;
 using Codice.CM.SEIDInfo;
 using DG.Tweening;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using static HyperCasual.Runner.LevelDefinition.Movment;
+using Random = UnityEngine.Random;
 
 namespace HyperCasual.Runner
 {
@@ -59,14 +63,19 @@ namespace HyperCasual.Runner
 
         private IEnumerator MoveForSideToSide(LevelDefinition level)
         {
-            var index = Random.Range(0, level.GatesMovment.AllThePossibleDirections.Count);
-            Vector3 movmentDirection = level.GatesMovment.AllThePossibleDirections[index].MovmentOffset;
+            if (level.GatesMovment.Directions.Count == 0)
+            {
+                throw new Exception("The number of directions can't be zero");
+            }
+
+            var couranteDirectionIndex = Random.Range(0, level.GatesMovment.Directions.Count);
+            Vector3 movmentDirection = level.GatesMovment.Directions[couranteDirectionIndex].MovmentOffset;
 
             yield return new WaitForSeconds(Random.Range(level.GatesMovment.MaxAndMinStartTimeRange.y, level.GatesMovment.MaxAndMinStartTimeRange.x));
 
             if (level.GatesMovment.IsTheGatesCentrade)
             {
-                yield return Move(level.GatesMovment.AllThePossibleDirections[index].MovmentOffset * k_HalfRangePositionMadificator + transform.position, k_HalfRangeTimeModificator);
+                yield return Move(level.GatesMovment.Directions[couranteDirectionIndex].MovmentOffset * k_HalfRangePositionMadificator + transform.position, k_HalfRangeTimeModificator);
             }
 
             while (true)
@@ -77,15 +86,29 @@ namespace HyperCasual.Runner
                 if (Random.Range(0, 101) < level.GatesMovment.ProbabilityToChabgeDirectionInProcent)
                 {
                     yield return Move(-movmentDirection * k_HalfRangePositionMadificator + transform.position, k_HalfRangeTimeModificator);
-                    movmentDirection = level.GatesMovment.AllThePossibleDirections[Random.Range(0, level.GatesMovment.AllThePossibleDirections.Count)].MovmentOffset;
+                    movmentDirection = ChooseRandomItemWithOutChosingTheActive(level.GatesMovment.Directions, movmentDirection);
                     yield return Move(movmentDirection * k_HalfRangePositionMadificator + transform.position, k_HalfRangeTimeModificator);
                 }
             }
 
             IEnumerator Move(Vector3 offset, float timeModificator)
             {
-                transform.DOMove(offset, level.GatesMovment.Duration * timeModificator);
-                yield return new WaitForSeconds((level.GatesMovment.Duration * timeModificator + level.GatesMovment.WaitTime));
+                transform.DOMove(offset, level.GatesMovment.Duration * timeModificator).SetEase(level.GatesMovment.Directions[couranteDirectionIndex].Ease);
+                yield return new WaitForSeconds(level.GatesMovment.Duration * timeModificator + level.GatesMovment.WaitTime);
+            }
+
+            Vector3 ChooseRandomItemWithOutChosingTheActive(List<MovmentDirections> list, Vector3 activeItem)
+            {
+                int index = Random.Range(0, list.Count);
+
+                while (true)
+                {
+                    if (list[index].MovmentOffset != activeItem)
+                    {
+                        return list[index].MovmentOffset;
+                    }
+                    index = Random.Range(0, list.Count);
+                }
             }
         }
     }
