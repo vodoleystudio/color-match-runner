@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998452e8577ff4bb78b32585432cf5a3, type: 3}
   m_Name: Level_14
   m_EditorClassIdentifier: 
-  LevelLength: 238
+  LevelLength: 218
   LevelLengthBufferStart: 9
   LevelLengthBufferEnd: 5
-  LevelWidth: 11
+  LevelWidth: 16
   LevelThickness: 0.1
   SnapToGrid: 1
   GridSize: 0.5
@@ -24,7 +24,7 @@ MonoBehaviour:
     type: 3}
   EndPrefab: {fileID: 1865139757532878011, guid: 979b2618b08ac20459dd7568017d0c90,
     type: 3}
-  Offset: {x: 0, y: 0, z: 0}
+  Offset: {x: 1.5, y: 0, z: 2}
   LevelColors:
   - {r: 0, g: 0.65882355, b: 1, a: 1}
   - {r: 0.54901963, g: 0.47843137, b: 0.9019608, a: 1}
@@ -36,32 +36,34 @@ MonoBehaviour:
   - {r: 0.49803922, g: 0.56078434, b: 0.6509804, a: 1}
   - {r: 0.15294118, g: 0.23529412, b: 0.45882353, a: 1}
   - {r: 0.18431373, g: 0.21176471, b: 0.2509804, a: 1}
-  NumberOfColors: 5
+  NumberOfColors: 6
   IsRandomOrder: 0
   NumberOfGates: 4
-  OffsetBetweenTheGates: {x: 3, y: 0, z: 0}
+  OffsetBetweenTheGates: {x: 4, y: 0, z: 0}
   StartGateRotation: {x: 0, y: 90, z: 0}
-  PlayerSpeed: 14
+  PlayerSpeed: 10
+  GatesMovment:
+    Duration: 0
+    WaitTime: 0
+    NumberOfGatesMoving: 0
+    IsTheGatesCentrade: 1
+    IsTheMovingGatesAreInRandomOrder: 0
+    MaxAndMinStartTimeRange: {x: 0, y: 0}
+    Directions: []
+    ProbabilityToChabgeDirectionInProcent: 50
   Spawnables:
-  - SpawnablePrefab: {fileID: 5580896082165009579, guid: e543aff426a5b1d40a07f41f1346e100,
-      type: 3}
-    Position: {x: -3.4207916, y: 0, z: 235.53856}
-    EulerAngles: {x: -0, y: 180, z: -0}
-    Scale: {x: 1, y: 1, z: 1}
-    BaseColor: {r: 0, g: 0, b: 0, a: 0}
-    SnapToGrid: 1
   - SpawnablePrefab: {fileID: 0}
-    Position: {x: 0, y: -3.91, z: 238}
+    Position: {x: 0, y: -3.91, z: 218}
     EulerAngles: {x: -0, y: 0, z: 0}
     Scale: {x: 1, y: 1, z: 1}
     BaseColor: {r: 0.64760596, g: 0.85158587, b: 0.9339623, a: 1}
     SnapToGrid: 1
-  - SpawnablePrefab: {fileID: 4507862839474419013, guid: c51777c417238c34982c63b1f857f70e,
+  - SpawnablePrefab: {fileID: 5580896082165009579, guid: e543aff426a5b1d40a07f41f1346e100,
       type: 3}
-    Position: {x: 0, y: 0, z: 220}
-    EulerAngles: {x: -0, y: 0, z: 0}
+    Position: {x: 0, y: 0.3299997, z: 219.5}
+    EulerAngles: {x: -0, y: 180, z: -0}
     Scale: {x: 1, y: 1, z: 1}
-    BaseColor: {r: 0, g: 0, b: 0, a: 0}
+    BaseColor: {r: 0.59744275, g: 0.45329654, b: 0.2719775, a: 1}
     SnapToGrid: 1
   - SpawnablePrefab: {fileID: 4507862839474419013, guid: c51777c417238c34982c63b1f857f70e,
       type: 3}

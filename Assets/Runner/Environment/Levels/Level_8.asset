@@ -42,6 +42,15 @@ MonoBehaviour:
   OffsetBetweenTheGates: {x: 3, y: 0, z: 0}
   StartGateRotation: {x: 0, y: 90, z: 0}
   PlayerSpeed: 10
+  GatesMovment:
+    Duration: 0
+    WaitTime: 0
+    NumberOfGatesMoving: 0
+    IsTheGatesCentrade: 1
+    IsTheMovingGatesAreInRandomOrder: 0
+    MaxAndMinStartTimeRange: {x: 0, y: 0}
+    Directions: []
+    ProbabilityToChabgeDirectionInProcent: 0
   Spawnables:
   - SpawnablePrefab: {fileID: 5580896082165009579, guid: 4cd7b2eea1162de40a78185bb7e4d7ee,
       type: 3}

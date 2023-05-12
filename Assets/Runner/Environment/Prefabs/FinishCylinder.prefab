@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3122451149106829862}
   - component: {fileID: 8885511700550141054}
   - component: {fileID: 5708597085447921366}
-  - component: {fileID: 7387432704519700685}
   - component: {fileID: 5010258258257758700}
+  - component: {fileID: 6874624297919720823}
   m_Layer: 0
   m_Name: FinishCylinder
   m_TagString: Untagged
@@ -94,20 +94,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7387432704519700685
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865139757532878011}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 7.84
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 4.29, z: 0}
 --- !u!114 &5010258258257758700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,8 +125,19 @@ MonoBehaviour:
     m_Event: {fileID: 11400000, guid: b892538bd49f3487bbedf5106c094739, type: 2}
   m_BackEvent:
     m_Event: {fileID: 11400000, guid: 58f804667e2cb4eb789b6d2dfb3c4ce3, type: 2}
-  m_StartGameEvent:
-    m_Event: {fileID: 0}
+--- !u!65 &6874624297919720823
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865139757532878011}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 100, y: 30, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3184851743525254229
 GameObject:
   m_ObjectHideFlags: 0
