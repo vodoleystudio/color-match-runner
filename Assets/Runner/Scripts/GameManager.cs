@@ -38,8 +38,6 @@ namespace HyperCasual.Runner
 
         private LevelDefinition m_CurrentLevel;
 
-        private const int k_NumberOfGates = 4;
-
         /// <summary>
         /// Returns true if the game is currently active.
         /// Returns false if the game is paused, has not yet begun,

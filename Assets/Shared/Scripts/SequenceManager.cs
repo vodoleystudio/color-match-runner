@@ -30,6 +30,9 @@ namespace HyperCasual.Gameplay
         private AbstractGameEvent m_ContinueEvent;
 
         [SerializeField]
+        private AbstractGameEvent m_PlayAgainEvent;
+
+        [SerializeField]
         private AbstractGameEvent m_BackEvent;
 
         [SerializeField]
@@ -144,8 +147,8 @@ namespace HyperCasual.Gameplay
             //Create states
             m_LevelStates.Add(loadLevelState);
             var gameplayState = new State(() => OnGamePlayStarted(loadLevelState));
-            var winState = new PauseState(() => OnWinScreenDisplayed(loadLevelState));
-            var loseState = new State(() => OnGameOverScreenDisplayed(loadLevelState));
+            var winState = new State(() => OnEndGameDisplayed(loadLevelState));
+            var loseState = new State(() => OnEndGameDisplayed(loadLevelState));
             var pauseState = new PauseState(ShowUI<PauseMenu>);
             var unloadLose = new UnloadLastSceneState(m_SceneController);
             var unloadPause = new UnloadLastSceneState(m_SceneController);
@@ -157,6 +160,9 @@ namespace HyperCasual.Gameplay
             gameplayState.AddLink(new EventLink(m_WinEvent, winState));
             gameplayState.AddLink(new EventLink(m_LoseEvent, loseState));
             gameplayState.AddLink(new EventLink(m_PauseEvent, pauseState));
+
+            winState.AddLink(new EventLink(m_PlayAgainEvent, loadLevelState));
+            winState.AddLink(new EventLink(m_BackEvent, unloadLose));
 
             loseState.AddLink(new EventLink(m_ContinueEvent, loadLevelState));
             loseState.AddLink(new EventLink(m_BackEvent, unloadLose));
@@ -194,7 +200,7 @@ namespace HyperCasual.Gameplay
             FindObjectOfType<UIGameOnSimulator>(true).gameObject.SetActive(true);
         }
 
-        private void OnGameOverScreenDisplayed(IState currentLevel)
+        private void OnEndGameDisplayed(IState currentLevel)
         {
             ShowUI<GameoverScreen>();
             SaveLevel(currentLevel);

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PopUp : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class PopUp : MonoBehaviour
         private string m_PopUpMessage;
 
         public string PopUpMessage => m_PopUpMessage;
+
+        [SerializeField]
+        private Color m_Color;
+
+        public Color Color => m_Color;
     }
 
     [SerializeField]
@@ -30,17 +36,14 @@ public class PopUp : MonoBehaviour
     [SerializeField]
     private RectTransform m_LabelTransform;
 
-    private const float k_PunchAnimationTime = 0.8f;
-    private const float k_PunchAnimationSize = -0.1f;
+    [SerializeField]
+    private Image m_Background;
+
+    private const float k_PunchAnimationTime = 1.5f;
+    private const float k_PunchAnimationSize = 0.2f;
     private const int k_PunchAnimationVibrtion = 3;
-    private const int k_PunchAnimationElasticy = 5;
-    private const float k_ScaleAnimationTime = 0.6f;
-
-    private const float k_StartBackGroundScaleAnimationTime = 0f;
-    private const float k_StartMessagePunchAnimationTime = 0.7f;
-    private const float k_StartBackGroundPunchAnimationTime = 0.8f;
-
-    private const float k_StartBackGroundCloseAnimationTime = 2.7f;
+    private const float k_ScaleInAnimationTime = 0.75f;
+    private const float k_ScaleOutAnimationTime = 0.5f;
 
     public void Active(bool state)
     {
@@ -52,10 +55,10 @@ public class PopUp : MonoBehaviour
         var punchSize = new Vector3(k_PunchAnimationSize, k_PunchAnimationSize, k_PunchAnimationSize);
         var tweenFlow = DOTween.Sequence();
 
-        tweenFlow.Insert(k_StartBackGroundScaleAnimationTime, gameObject.transform.DOScale(1f, k_ScaleAnimationTime));
-        tweenFlow.Insert(k_StartMessagePunchAnimationTime, m_LabelTransform.DOPunchScale(-punchSize, k_PunchAnimationTime, k_PunchAnimationVibrtion, k_PunchAnimationElasticy));
-        tweenFlow.Insert(k_StartBackGroundPunchAnimationTime, gameObject.transform.DOPunchScale(punchSize, k_PunchAnimationTime, k_PunchAnimationVibrtion, k_PunchAnimationElasticy));
-        tweenFlow.Insert(k_StartBackGroundCloseAnimationTime + k_PunchAnimationTime, gameObject.transform.DOScale(0f, k_ScaleAnimationTime));
+        tweenFlow.Insert(0f, gameObject.transform.DOScale(1f, k_ScaleInAnimationTime).SetEase(Ease.OutBack));
+        tweenFlow.Insert(0f, m_LabelTransform.DOPunchScale(punchSize, k_PunchAnimationTime, k_PunchAnimationVibrtion).SetEase(Ease.InBack));
+        tweenFlow.Insert(0f, m_Background.transform.DOPunchScale(-punchSize, k_PunchAnimationTime, k_PunchAnimationVibrtion).SetEase(Ease.OutBack));
+        tweenFlow.Insert(k_ScaleInAnimationTime + k_PunchAnimationTime, gameObject.transform.DOScale(0f, k_ScaleOutAnimationTime).SetEase(Ease.InBack));
         tweenFlow.Play();
     }
 
@@ -64,13 +67,14 @@ public class PopUp : MonoBehaviour
         gameObject.transform.localScale = Vector3.zero;
     }
 
-    public void MatchMassage(MatchState matchState)
+    public void MatchMessage(MatchState matchState)
     {
         foreach (var message in m_MessageData)
         {
             if (message.MatchState == matchState)
             {
                 m_Label.text = message.PopUpMessage;
+                m_Background.color = message.Color;
             }
         }
     }
