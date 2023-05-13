@@ -22,7 +22,7 @@ namespace HyperCasual.Runner
         private const float k_SliderTextAnimationTime = 2.3f;
 
         private GameoverScreen m_GameOverScreen;
-        private PopUp m_PopUpMassage;
+        private PopUp m_PopUpMessage;
 
         public Transform TargetPosition => m_TargetPosition;
 
@@ -47,6 +47,9 @@ namespace HyperCasual.Runner
         [SerializeField]
         private GenericGameEventListener m_BackEvent;
 
+        [SerializeField]
+        private GenericGameEventListener m_PlayAgainEvent;
+
         private Target Target => (Target)LevelManager.Instance.ActiveSpawnables.FirstOrDefault(s => s is Target);
 
         private Tween m_IncreeseBarProcentTween;
@@ -62,12 +65,14 @@ namespace HyperCasual.Runner
             base.OnEnable();
             m_EndGameEvent?.Subscribe();
             m_BackEvent?.Subscribe();
+            m_PlayAgainEvent?.Subscribe();
         }
 
         protected void OnDisable()
         {
             m_EndGameEvent?.Unsubscribe();
             m_BackEvent?.Unsubscribe();
+            m_PlayAgainEvent?.Unsubscribe();
         }
 
         private void Start()
@@ -80,8 +85,12 @@ namespace HyperCasual.Runner
             {
                 m_BackEvent.EventHandler = ResetCameras;
             }
+            if (m_BackEvent != null)
+            {
+                m_PlayAgainEvent.EventHandler = ResetCameras;
+            }
             m_GameOverScreen = UIManager.Instance.GetView<GameoverScreen>();
-            m_PopUpMassage = m_GameOverScreen.PopUpMassage;
+            m_PopUpMessage = m_GameOverScreen.PopUpMessage;
         }
 
         private void OnTriggerEnter(Collider col)
@@ -124,8 +133,8 @@ namespace HyperCasual.Runner
             yield return new WaitForSeconds(k_AnimationTime / 2);
             AudioManager.Instance.StopMusic();
             AudioManager.Instance.PlayEffect(SoundID.ProgressBarFill);
-            m_PopUpMassage.Active(true);
-            m_PopUpMassage.MatchMassage(matchData.MatchState);
+            m_PopUpMessage.Active(true);
+            m_PopUpMessage.MatchMassage(matchData.MatchState);
             m_GameOverScreen.SliderMask.anchorMax = new Vector2(matchData.MatchInPercentage / 100f, 1f);
             m_IncreeseBarProcentTween = DOTween.To((t) => m_GameOverScreen.MatchInProcentText = (int)t, 0f, matchData.MatchInPercentage, k_SliderTextAnimationTime).OnComplete(() =>
             {
@@ -133,7 +142,7 @@ namespace HyperCasual.Runner
                 m_GameOverScreen.ShowControlButtons(true);
             });
             StartCoroutine(PlayParticleSystem(matchData));
-            GameManager.Instance.Lose();
+            GameManager.Instance.Win();
         }
 
         private IEnumerator PlayParticleSystem(MatchData matchData)

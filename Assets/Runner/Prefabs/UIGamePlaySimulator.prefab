@@ -506,18 +506,14 @@ MonoBehaviour:
   m_endCameraPosition: {fileID: 4095337574878513971}
   m_miniCamera: {fileID: 0}
   m_TargetPosition: {fileID: 4251904603829482200}
-  m_prticleSystemService:
-    m_ParticleSystem:
-    - m_MatchState: 1
-      m_ParticleSystem: {fileID: 0}
-    - m_MatchState: 2
-      m_ParticleSystem: {fileID: 0}
-    - m_MatchState: 3
-      m_ParticleSystem: {fileID: 0}
+  m_ParticleSystemService:
+    m_ParticleSystem: []
   m_EndGameEvent:
     m_Event: {fileID: 11400000, guid: b892538bd49f3487bbedf5106c094739, type: 2}
   m_BackEvent:
     m_Event: {fileID: 11400000, guid: 58f804667e2cb4eb789b6d2dfb3c4ce3, type: 2}
+  m_PlayAgainEvent:
+    m_Event: {fileID: 11400000, guid: 1b92665cb937e5e43bd9ec00b3e404ab, type: 2}
 --- !u!1001 &6017395838065082712
 PrefabInstance:
   m_ObjectHideFlags: 0
