@@ -51,9 +51,9 @@ MonoBehaviour:
     MaxAndMinStartTimeRange: {x: 0.5, y: 0}
     Directions:
     - MovmentOffset: {x: 1, y: 0, z: 0}
-      Ease: 1
+      Ease: 29
     - MovmentOffset: {x: 0, y: 0, z: 5}
-      Ease: 1
+      Ease: 33
     ProbabilityToChabgeDirectionInProcent: 60
   Spawnables:
   - SpawnablePrefab: {fileID: 0}

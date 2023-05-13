@@ -53,7 +53,7 @@ MonoBehaviour:
     - MovmentOffset: {x: 1, y: 0, z: 0}
       Ease: 1
     - MovmentOffset: {x: 0, y: 0, z: 3}
-      Ease: 1
+      Ease: 17
     ProbabilityToChabgeDirectionInProcent: 55
   Spawnables:
   - SpawnablePrefab: {fileID: 0}
