@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SnapToGrid: 1
-  m_SkinnedMeshRenderer: {fileID: 0}
+  m_SkinnedMeshRenderer: {fileID: 2100627677947132659}
 --- !u!1001 &4009396094680903746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,6 +153,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d53218649bda924ba746cf74c4b26a8, type: 3}
+--- !u!137 &2100627677947132659 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3063240765987572401, guid: 1d53218649bda924ba746cf74c4b26a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 4009396094680903746}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2100627677952306115 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3063240766000749441, guid: 1d53218649bda924ba746cf74c4b26a8,

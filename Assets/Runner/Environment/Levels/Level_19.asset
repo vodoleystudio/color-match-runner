@@ -41,7 +41,7 @@ MonoBehaviour:
   NumberOfGates: 6
   OffsetBetweenTheGates: {x: 6, y: 0, z: 0}
   StartGateRotation: {x: 0, y: 90, z: 0}
-  PlayerSpeed: 12
+  PlayerSpeed: 16
   GatesMovment:
     Duration: 0
     WaitTime: 0
