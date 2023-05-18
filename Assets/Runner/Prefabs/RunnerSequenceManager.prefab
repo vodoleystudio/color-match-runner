@@ -83,6 +83,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 71820f0efdc54f342893e9150d597294, type: 2}
   - {fileID: 11400000, guid: cf3502ea5b9df3741a0d6bb994c6efb7, type: 2}
   - {fileID: 11400000, guid: a7e13e1228a5a5a47ba1cc2d3d8a366e, type: 2}
+  - {fileID: 11400000, guid: ffee08c6b30dfee449a8d554141dbc37, type: 2}
+  - {fileID: 11400000, guid: 39d635c294bab8d42b4d695eb167b39d, type: 2}
+  - {fileID: 11400000, guid: 017f2f8568db02f4c91d60563b7d7ca5, type: 2}
+  - {fileID: 11400000, guid: 74bc1c2d87e70a84791fabf699aa4e94, type: 2}
+  - {fileID: 11400000, guid: b209108fc94c7194e871399abd6c516c, type: 2}
+  - {fileID: 11400000, guid: 7451450a09da6e8488230ef73de72718, type: 2}
   m_LevelManagers:
   - {fileID: 1149431042505363540, guid: 48b124d8811e909448c87ee90c8834bf, type: 3}
   - {fileID: 9183922748988270725, guid: cdf45adc9574e4d54bb0716214b8f1c6, type: 3}

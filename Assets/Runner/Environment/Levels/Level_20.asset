@@ -15,7 +15,7 @@ MonoBehaviour:
   LevelLength: 238
   LevelLengthBufferStart: 9
   LevelLengthBufferEnd: 5
-  LevelWidth: 30
+  LevelWidth: 27
   LevelThickness: 0.1
   SnapToGrid: 1
   GridSize: 0.5
@@ -24,7 +24,7 @@ MonoBehaviour:
     type: 3}
   EndPrefab: {fileID: 1865139757532878011, guid: 979b2618b08ac20459dd7568017d0c90,
     type: 3}
-  Offset: {x: 3.9, y: 0, z: 7}
+  Offset: {x: 3, y: 0, z: 7}
   LevelColors:
   - {r: 0, g: 0.65882355, b: 1, a: 1}
   - {r: 0.54901963, g: 0.47843137, b: 0.9019608, a: 1}
@@ -39,7 +39,7 @@ MonoBehaviour:
   NumberOfColors: 8
   IsRandomOrder: 1
   NumberOfGates: 4
-  OffsetBetweenTheGates: {x: 8, y: 0, z: 0}
+  OffsetBetweenTheGates: {x: 6.5, y: 0, z: 0}
   StartGateRotation: {x: 0, y: 90, z: 0}
   PlayerSpeed: 18
   GatesMovment:
@@ -140,5 +140,5 @@ MonoBehaviour:
     Position: {x: 0, y: 0.3299997, z: 239.5}
     EulerAngles: {x: -0, y: 180, z: -0}
     Scale: {x: 1, y: 1, z: 1}
-    BaseColor: {r: 0.6013049, g: 0.5316658, b: 0.56345147, a: 1}
+    BaseColor: {r: 0.722978, g: 0.7466642, b: 0.5903555, a: 1}
     SnapToGrid: 1
