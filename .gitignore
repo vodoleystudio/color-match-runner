@@ -73,3 +73,4 @@ crashlytics-build.properties
 color-match-runner.sln_*
 Color-match-runner -first -build/*
 Documents/*
+Assets/JMO Assets*

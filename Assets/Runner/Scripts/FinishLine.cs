@@ -158,6 +158,7 @@ namespace HyperCasual.Runner
                 case MatchState.Heart:
                     play(AnimationType.Jump);
                     AudioManager.Instance.PlayMusic(SoundID.MatchSound);
+                    VFXModule.Instance.Play(VFXType.SpecialWin, m_endCameraPosition.position);
                     break;
 
                 case MatchState.Like:
