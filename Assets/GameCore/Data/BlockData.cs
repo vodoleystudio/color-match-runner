@@ -8,6 +8,7 @@ namespace GameCore.Data
     {
         public List<Color> GateColors = new();
         public List<Vector3> PositionOffsets = new();
+        public List<bool> WhichGatesShouldBeMoving = new();
         public Color CorrectColor;
         public float MixValue = 0.8f;
     }

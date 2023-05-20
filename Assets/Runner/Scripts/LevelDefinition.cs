@@ -1,5 +1,6 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using HyperCasual.Core;
 using UnityEngine;
 
@@ -80,6 +81,36 @@ namespace HyperCasual.Runner
 
         public float PlayerSpeed = 100f;
 
+        public Movment GatesMovment;
+
+        [Serializable]
+        public class Movment
+        {
+            public float Duration = 0.0f;
+
+            public float WaitTime = 0.0f;
+
+            public int NumberOfGatesMoving = 0;
+
+            public bool IsTheGatesCentrade = true;
+
+            public bool IsTheMovingGatesAreInRandomOrder = false;
+
+            public Vector2 MaxAndMinStartTimeRange = Vector2.zero;
+
+            [Serializable]
+            public class MovmentDirections
+            {
+                public Vector3 MovmentOffset = Vector3.zero;
+
+                public Ease Ease = Ease.Linear;
+            }
+
+            public List<MovmentDirections> Directions = new();
+
+            public int ProbabilityToChabgeDirectionInProcent = 50;
+        }
+
         /// <summary>
         /// An array of all SpawnableObjects that exist in this level.
         /// </summary>
@@ -150,6 +181,7 @@ namespace HyperCasual.Runner
             OffsetBetweenTheGates = updatedLevel.OffsetBetweenTheGates;
             StartGateRotation = updatedLevel.StartGateRotation;
             PlayerSpeed = updatedLevel.PlayerSpeed;
+            GatesMovment = updatedLevel.GatesMovment;
         }
     }
 }

@@ -203,6 +203,11 @@ namespace HyperCasual.Runner
                             var pos = block.Gates[j].transform.position;
                             var offset = blockData.PositionOffsets[j];
                             block.Gates[j].transform.position = new Vector3(pos.x + offset.x, pos.y + offset.y, pos.z + offset.z);
+
+                            if (blockData.WhichGatesShouldBeMoving[j])
+                            {
+                                block.Gates[j].Movment(levelDefinition);
+                            }
                         }
 
                         targetColor = Color.Lerp(blockData.CorrectColor, targetColor, blockData.MixValue);
@@ -211,7 +216,6 @@ namespace HyperCasual.Runner
                     {
                         spawnable.SetBaseColor(spawnableObject.BaseColor);
                     }
-
                     spawnable.SetScale(scale);
                     s_LevelManager.AddSpawnable(spawnable);
                 }
@@ -378,6 +382,23 @@ namespace HyperCasual.Runner
                 gateData.PositionOffsets.Add(new Vector3(Random.Range(-levelDefinition.Offset.x, levelDefinition.Offset.x), Random.Range(-levelDefinition.Offset.y, levelDefinition.Offset.y), Random.Range(-levelDefinition.Offset.z, levelDefinition.Offset.z)));
             }
 
+            for (int i = 0; i < levelDefinition.NumberOfGates; i++)
+            {
+                if (i < levelDefinition.GatesMovment.NumberOfGatesMoving)
+                {
+                    gateData.WhichGatesShouldBeMoving.Add(true);
+                }
+                else
+                {
+                    gateData.WhichGatesShouldBeMoving.Add(false);
+                }
+            }
+
+            if (levelDefinition.GatesMovment.IsTheMovingGatesAreInRandomOrder)
+            {
+                ScarmbleABooleanList(gateData.WhichGatesShouldBeMoving);
+            }
+
             gateData.CorrectColor = gateData.GateColors[Random.Range(0, gateData.GateColors.Count)];
             return gateData;
         }
@@ -387,6 +408,23 @@ namespace HyperCasual.Runner
             var index = Random.Range(0, listToAddFrom.Count);
             listToAdd.Add(listToAddFrom[index]);
             listToAddFrom.RemoveAt(index);
+        }
+
+        private static void ScarmbleABooleanList(List<bool> list)
+        {
+            bool temp;
+            int index1;
+            int index2;
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                index1 = Random.Range(0, list.Count);
+                index2 = Random.Range(0, list.Count);
+
+                temp = list[index1];
+                list[index1] = list[index2];
+                list[index2] = temp;
+            }
         }
     }
 }
