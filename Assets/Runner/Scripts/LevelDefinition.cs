@@ -77,6 +77,8 @@ namespace HyperCasual.Runner
 
         public Vector3 OffsetBetweenTheGates = new(3f, 0f, 0f);
 
+        public Vector3 AddToEachGateStartPosition = new(0f, 0.5f, 0f);
+
         public Vector3 StartGateRotation = new(0f, 90f, 0f);
 
         public float PlayerSpeed = 100f;
@@ -182,6 +184,7 @@ namespace HyperCasual.Runner
             StartGateRotation = updatedLevel.StartGateRotation;
             PlayerSpeed = updatedLevel.PlayerSpeed;
             GatesMovment = updatedLevel.GatesMovment;
+            AddToEachGateStartPosition = updatedLevel.AddToEachGateStartPosition;
         }
     }
 }
