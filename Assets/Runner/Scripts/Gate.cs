@@ -41,6 +41,7 @@ namespace HyperCasual.Runner
         {
             if (col.CompareTag(k_PlayerTag))
             {
+                VFXModule.Instance.Play(VFXType.CloudKilled, transform.position);
                 transform.DOScale(Vector3.zero, HideDuration);
                 transform.SetParent(PlayerController.Instance.transform);
                 var currentPlayerColor = PlayerController.Instance.GetColor();
