@@ -16,21 +16,30 @@ namespace HyperCasual.Gameplay
     public class Hud : View
     {
         [SerializeField]
-        TextMeshProUGUI m_GoldText;
+        private TextMeshProUGUI m_GoldText;
+
         [SerializeField]
-        Slider m_XpSlider;
+        private Slider m_XpSlider;
+
         [SerializeField]
-        HyperCasualButton m_PauseButton;
+        private Tutorial m_Tutorial;
+
         [SerializeField]
-        AbstractGameEvent m_PauseEvent;
+        private HyperCasualButton m_PauseButton;
+
+        [SerializeField]
+        private AbstractGameEvent m_PauseEvent;
+
+        [SerializeField]
+        private AbstractGameEvent m_HudEnableEvent;
 
         /// <summary>
-        /// The slider that displays the XP value 
+        /// The slider that displays the XP value
         /// </summary>
         public Slider XpSlider => m_XpSlider;
 
-        int m_GoldValue;
-        
+        private int m_GoldValue;
+
         /// <summary>
         /// The amount of gold to display on the hud.
         /// The setter method also sets the hud text.
@@ -48,8 +57,8 @@ namespace HyperCasual.Gameplay
             }
         }
 
-        float m_XpValue;
-        
+        private float m_XpValue;
+
         /// <summary>
         /// The amount of XP to display on the hud.
         /// The setter method also sets the hud slider value.
@@ -67,17 +76,23 @@ namespace HyperCasual.Gameplay
             }
         }
 
-        void OnEnable()
+        public void ShowTutorial()
         {
-            m_PauseButton.AddListener(OnPauseButtonClick);
+            m_Tutorial.ShowTutorial();
         }
 
-        void OnDisable()
+        private void OnEnable()
+        {
+            m_PauseButton.AddListener(OnPauseButtonClick);
+            m_HudEnableEvent.Raise();
+        }
+
+        private void OnDisable()
         {
             m_PauseButton.RemoveListener(OnPauseButtonClick);
         }
 
-        void OnPauseButtonClick()
+        private void OnPauseButtonClick()
         {
             m_PauseEvent.Raise();
         }
