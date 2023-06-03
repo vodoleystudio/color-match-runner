@@ -329,6 +329,66 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5280667181393737275}
     m_Modifications:
+    - target: {fileID: 137330032893340289, guid: 3c7a51309061d411eb5591ed1fd837f3,
+        type: 3}
+      propertyPath: m_MessageData.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 137330032893340289, guid: 3c7a51309061d411eb5591ed1fd837f3,
+        type: 3}
+      propertyPath: m_MessageData.Array.data[0].m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 137330032893340289, guid: 3c7a51309061d411eb5591ed1fd837f3,
+        type: 3}
+      propertyPath: m_MessageData.Array.data[1].m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 137330032893340289, guid: 3c7a51309061d411eb5591ed1fd837f3,
+        type: 3}
+      propertyPath: m_MessageData.Array.data[2].m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 137330032893340289, guid: 3c7a51309061d411eb5591ed1fd837f3,
+        type: 3}
+      propertyPath: m_MessageData.Array.data[2].m_Color.b
+      value: 0.39035243
+      objectReference: {fileID: 0}
+    - target: {fileID: 137330032893340289, guid: 3c7a51309061d411eb5591ed1fd837f3,
+        type: 3}
+      propertyPath: m_MessageData.Array.data[2].m_Color.g
+      value: 0.6415094
+      objectReference: {fileID: 0}
+    - target: {fileID: 137330032893340289, guid: 3c7a51309061d411eb5591ed1fd837f3,
+        type: 3}
+      propertyPath: m_MessageData.Array.data[2].m_Color.r
+      value: 0.5482826
+      objectReference: {fileID: 0}
+    - target: {fileID: 137330032893340289, guid: 3c7a51309061d411eb5591ed1fd837f3,
+        type: 3}
+      propertyPath: m_MessageData.Array.data[0].m_Position.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 137330032893340289, guid: 3c7a51309061d411eb5591ed1fd837f3,
+        type: 3}
+      propertyPath: m_MessageData.Array.data[1].m_Position.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 137330032893340289, guid: 3c7a51309061d411eb5591ed1fd837f3,
+        type: 3}
+      propertyPath: m_MessageData.Array.data[2].m_Position.y
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 137330032893340289, guid: 3c7a51309061d411eb5591ed1fd837f3,
+        type: 3}
+      propertyPath: m_MessageData.Array.data[2].m_StartSecond
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 137330032893340289, guid: 3c7a51309061d411eb5591ed1fd837f3,
+        type: 3}
+      propertyPath: m_MessageData.Array.data[2].m_PopUpMessage
+      value: kujyf
+      objectReference: {fileID: 0}
     - target: {fileID: 2418144165573983334, guid: 3c7a51309061d411eb5591ed1fd837f3,
         type: 3}
       propertyPath: m_Name
@@ -339,6 +399,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2418144165573983336, guid: 3c7a51309061d411eb5591ed1fd837f3,
+        type: 3}
+      propertyPath: m_Tutorial
+      value: 
+      objectReference: {fileID: 86957684337769702}
     - target: {fileID: 2418144165573983337, guid: 3c7a51309061d411eb5591ed1fd837f3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -446,6 +511,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c7a51309061d411eb5591ed1fd837f3, type: 3}
+--- !u!114 &86957684337769702 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 137330032893340289, guid: 3c7a51309061d411eb5591ed1fd837f3,
+    type: 3}
+  m_PrefabInstance: {fileID: 59403737481401959}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd292edefd35c0499ad38548017b59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2404344050809350670 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2418144165573983337, guid: 3c7a51309061d411eb5591ed1fd837f3,
@@ -463,6 +540,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PauseWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 864111321475162454, guid: 159a6cc7f4f464a5bbeb1410c075eed1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 864111321475162457, guid: 159a6cc7f4f464a5bbeb1410c075eed1,
         type: 3}
