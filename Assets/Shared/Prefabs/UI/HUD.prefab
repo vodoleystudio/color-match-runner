@@ -624,7 +624,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15, y: -5}
+  m_AnchoredPosition: {x: -15, y: 0}
   m_SizeDelta: {x: 525, y: 275}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &559822598608084154
@@ -839,7 +839,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 890, y: 680}
+  m_SizeDelta: {x: 750, y: 650}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9119615026557179211
 CanvasRenderer:
@@ -862,7 +862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7647059}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -900,7 +900,7 @@ MonoBehaviour:
     m_Position: {x: 0, y: 130}
   - m_StartSecond: 8.5
     m_PopUpMessage: Be like a target color on the end.
-    m_Position: {x: 60, y: 290}
+    m_Position: {x: 130, y: 390}
   m_Label: {fileID: 1031539329046021902}
   m_LabelTransform: {fileID: 8503356516028853919}
 --- !u!1001 &8736698884397132229

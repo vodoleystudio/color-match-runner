@@ -78,7 +78,7 @@ namespace HyperCasual.Gameplay
 
         public void ShowTutorial()
         {
-            m_Tutorial.ShowTutorial();
+            m_Tutorial.ShowTheTutorial();
         }
 
         private void OnEnable()

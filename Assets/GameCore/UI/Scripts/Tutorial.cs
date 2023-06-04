@@ -53,7 +53,7 @@ public class Tutorial : MonoBehaviour
         m_RectTransform = GetComponent<RectTransform>();
     }
 
-    public IEnumerator Tatorial()
+    public IEnumerator ShowTutorial()
     {
         float programRuningTime = 0.0f;
         for (int i = 0; i < m_MessageDatas.Count; i++)
@@ -82,8 +82,8 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    public void ShowTutorial()
+    public void ShowTheTutorial()
     {
-        StartCoroutine(Tatorial());
+        StartCoroutine(ShowTutorial());
     }
 }

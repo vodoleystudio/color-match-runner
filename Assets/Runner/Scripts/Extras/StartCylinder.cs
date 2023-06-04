@@ -30,11 +30,11 @@ public class StartCylinder : MonoBehaviour
     {
         if (m_HudEnableEvent != null)
         {
-            m_HudEnableEvent.EventHandler = OnHudEntered;
+            m_HudEnableEvent.EventHandler = OnHudEnable;
         }
     }
 
-    private void OnHudEntered()
+    private void OnHudEnable()
     {
         if (m_FirstLevelDefinitionName == k_FirstLevelName)
         {
