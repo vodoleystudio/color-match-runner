@@ -252,7 +252,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: E:/Projects/Keys/colorMatchRunnner/user.keystore
+  AndroidKeystoreName: '{inproject}: Documents/user.keystore'
   AndroidKeyaliasName: color match runner
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
