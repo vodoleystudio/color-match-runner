@@ -50,15 +50,11 @@ namespace HyperCasual.Runner
         [SerializeField]
         private GenericGameEventListener m_PlayAgainEvent;
 
+        private Coroutine m_endAnimationSequenceCoroutine = null;
+
         private Target Target => (Target)LevelManager.Instance.ActiveSpawnables.FirstOrDefault(s => s is Target);
 
         private Tween m_IncreeseBarProcentTween;
-
-        private void ResetCameras()
-        {
-            CameraManager.Instance.Activate();
-            EndAnimationSequence.Instance.HideCamera();
-        }
 
         protected override void OnEnable()
         {
@@ -79,15 +75,15 @@ namespace HyperCasual.Runner
         {
             if (m_EndGameEvent != null)
             {
-                m_EndGameEvent.EventHandler = OnGameEnd;
+                m_EndGameEvent.EventHandler = ResetAll;
             }
             if (m_BackEvent != null)
             {
-                m_BackEvent.EventHandler = ResetCameras;
+                m_BackEvent.EventHandler = ResetAll;
             }
             if (m_BackEvent != null)
             {
-                m_PlayAgainEvent.EventHandler = ResetCameras;
+                m_PlayAgainEvent.EventHandler = ResetAll;
             }
             m_GameOverScreen = UIManager.Instance.GetView<GameoverScreen>();
             m_PopUpMessage = m_GameOverScreen.PopUpMessage;
@@ -97,17 +93,8 @@ namespace HyperCasual.Runner
         {
             if (col.CompareTag(k_PlayerTag))
             {
-                StartCoroutine(runEndAnimationSequence());
+                m_endAnimationSequenceCoroutine = StartCoroutine(runEndAnimationSequence());
             }
-        }
-
-        private void OnGameEnd()
-        {
-            ResetCameras();
-            m_IncreeseBarProcentTween?.Kill(false);
-            AudioManager.Instance.StopEffect();
-            AudioManager.Instance.StopMusic();
-            m_GameOverScreen.ShowControlButtons(false);
         }
 
         private void SetupMainCameras()
@@ -141,8 +128,8 @@ namespace HyperCasual.Runner
                 PlayAnimations(matchData);
                 m_GameOverScreen.ShowControlButtons(true);
             });
-            StartCoroutine(PlayParticleSystem(matchData));
             GameManager.Instance.Win();
+            yield return PlayParticleSystem(matchData);
         }
 
         private IEnumerator PlayParticleSystem(MatchData matchData)
@@ -185,6 +172,38 @@ namespace HyperCasual.Runner
             {
                 AnimationEntityService.Instance.Play(animation, PlayerController.Instance.Animator);
                 AnimationEntityService.Instance.Play(animation, Target.Animator);
+            }
+        }
+
+        private void ResetAll()
+        {
+            m_IncreeseBarProcentTween?.Kill(false);
+            if (m_endAnimationSequenceCoroutine != null)
+            {
+                StopCoroutine(m_endAnimationSequenceCoroutine);
+                m_endAnimationSequenceCoroutine = null;
+            }
+
+            ResetCameras();
+            StopAnimations();
+
+            AudioManager.Instance.StopEffect();
+            AudioManager.Instance.StopMusic();
+            m_GameOverScreen.ShowControlButtons(false);
+        }
+
+        private void ResetCameras()
+        {
+            CameraManager.Instance.Activate();
+            EndAnimationSequence.Instance.HideCamera();
+        }
+
+        private void StopAnimations()
+        {
+            if (PlayerController.Instance != null)
+            {
+                AnimationEntityService.Instance.Play(AnimationType.Idle, PlayerController.Instance.Animator);
+                AnimationEntityService.Instance.Play(AnimationType.Idle, Target.Animator);
             }
         }
     }

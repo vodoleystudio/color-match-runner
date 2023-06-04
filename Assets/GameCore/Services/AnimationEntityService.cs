@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameCore.Services
 {
-    public class AnimationEntityService : IAnimationEntityService 
+    public class AnimationEntityService : IAnimationEntityService
     {
         private static readonly AnimationEntityService _instance = new AnimationEntityService();
 
@@ -19,6 +19,7 @@ namespace GameCore.Services
             animator.SetInteger(animationName, (int)animationType);
         }
 
-        private AnimationEntityService() { }
+        private AnimationEntityService()
+        { }
     }
 }

@@ -1,7 +1,3 @@
-using DG.Tweening;
-using log4net.Core;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -98,9 +94,9 @@ namespace HyperCasual.Runner
 
             for (int i = 0; i < level.NumberOfGates; i++)
             {
-                m_Gates.Add(InstntiateWithParent(new Vector3((level.OffsetBetweenTheGates.x * i) - startOffsetForCenterizeAllBlocks.x,
-                    (level.OffsetBetweenTheGates.y * i) - startOffsetForCenterizeAllBlocks.y,
-                    (level.OffsetBetweenTheGates.z * i) - startOffsetForCenterizeAllBlocks.z),
+                m_Gates.Add(InstntiateWithParent(new Vector3((level.OffsetBetweenTheGates.x * i) - startOffsetForCenterizeAllBlocks.x + level.AddToEachGateStartPosition.x,
+                    (level.OffsetBetweenTheGates.y * i) - startOffsetForCenterizeAllBlocks.y + level.AddToEachGateStartPosition.y,
+                    (level.OffsetBetweenTheGates.z * i) - startOffsetForCenterizeAllBlocks.z + level.AddToEachGateStartPosition.z),
                     level.StartGateRotation));
             }
         }
