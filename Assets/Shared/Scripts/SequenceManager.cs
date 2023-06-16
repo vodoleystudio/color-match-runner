@@ -54,6 +54,7 @@ namespace HyperCasual.Gameplay
         private IState m_LevelSelectState;
         private readonly List<IState> m_LevelStates = new();
         public IState m_CurrentLevel;
+        private const int k_TargetFrameRate = 60;
 
         private SceneController m_SceneController;
 
@@ -62,6 +63,7 @@ namespace HyperCasual.Gameplay
         /// </summary>
         public void Initialize()
         {
+            Application.targetFrameRate = k_TargetFrameRate;
             m_SceneController = new SceneController(SceneManager.GetActiveScene());
 
             InstantiatePreloadedAssets();
