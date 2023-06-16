@@ -42,8 +42,8 @@ public class Tutorial : MonoBehaviour
     private const float k_ScaleOutAnimationTime = 0.5f;
     private const float k_StartScaleOutTime = 1.5f;
     private const float k_DelayBeforeTimeSlows = 1f;
-    private const float k_DelayAfterTimeSlows = 0.1f;
-    private const float k_TimeScaleOnTutorialShow = 0.1f;
+    private const float k_DelayAfterTimeSlows = 1.5f;
+    private const float k_TimeScaleOnTutorialShow = 0.05f;
     private const float k_NormalTimeScale = 1f;
 
     private RectTransform m_RectTransform;
@@ -80,10 +80,5 @@ public class Tutorial : MonoBehaviour
             programRuningTime += k_ScaleOutAnimationTime;
             Time.timeScale = k_NormalTimeScale;
         }
-    }
-
-    public void ShowTheTutorial()
-    {
-        StartCoroutine(ShowTutorial());
     }
 }
